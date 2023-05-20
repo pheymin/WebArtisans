@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/public/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="../styles/tailwind.css">
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../less/create-quiz.less">
+    <script src="/js/jquery-3.6.4.min.js"></script>
+</head>
+
+<body class="h-full">
+    <form class="flex flex-col justify-center items-center w-2/3 m-auto">
+        <h2 class="text-2xl font-bold my-14">Create a new quiz</h2>
+        <div class="form-control w-full">
+            <input class="input input-ghost w-full" type="text"
+                placeholder='Enter a title, like "HTML - Lesson 1: Introduction of HTML"'>
+            <label class="label mt-2 mb-10">
+                <span class="label-text-alt text-primary">TITLE</span>
+            </label>
+        </div>
+
+        <div class="card w-full glass mb-10">
+            <div class="card-body">
+                <div class="card-title flex justify-between text-sm font-thin opacity-80">
+                    <h6>Question 1</h6>
+                    <img class="w-6 cursor-pointer delete-icon" src="/icons/delete.svg" alt="delete icon">
+                </div>
+                <div class="form-control w-full mt-2">
+                    <textarea class="input input-ghost w-full autoresize-textarea resize-none"
+                        placeholder="Enter a question" maxlength="1000"></textarea>
+                    <label class="label my-2">
+                        <span class="label-text-alt text-primary">QUESTION</span>
+                    </label>
+                </div>
+
+                <div class="options-container"></div>
+            </div>
+        </div>
+
+        <div class="card w-full glass mb-10">
+            <div class="card-body">
+                <button class="btn btn-ghost text-lg hover:bg-transparent hover:text-primary"> + Add Card</button>
+            </div>
+        </div>
+
+        <div class="flex justify-end w-full">
+            <button class="btn btn-primary mb-14">Create</button>
+        </div>
+    </form>
+    </div>
+
+    <script src="/js/create-quiz.js"></script>
+</body>
+
+</html>

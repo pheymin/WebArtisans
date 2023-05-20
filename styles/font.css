@@ -1,0 +1,31 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css);
+
+@font-face {
+    font-family: 'Poppins';
+    src: url(../fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Poppins-Medium';
+    src: url(../fonts/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url(../fonts/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../fonts/Inter.ttf);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../fonts/Montserrat.ttf);
+}
+
+@font-face {
+    font-family: 'ReemKufi';
+    src: url(../fonts/ReemKufi.ttf);
+}

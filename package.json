@@ -1,0 +1,21 @@
+{
+  "name": "webartisans",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "daisyui": "^2.51.6",
+    "jquery": "^3.7.0",
+    "less": "^4.1.3",
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}

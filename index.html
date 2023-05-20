@@ -11,40 +11,360 @@
     <link rel="stylesheet" href="./styles/tailwind.css">
     <link rel="stylesheet" href="./less/main.less">
     <link rel="stylesheet" href="./styles/font.css">
+
+    <style type="text/tailwindcss">
+        @layer components{
+            .landing-card{
+                @apply px-8 py-10 bg-white rounded-xl shadow-lg xl:h-72 h-auto;
+            }
+        }
+    </style>
 </head>
 
-<body class="h-screen">
-    <nav></nav>
-    <h1 class="text-blue-600 text-center">
-        This is Home Page
-    </h1>
-    <a href="./pages/404.html">404</a>
-    <script src="./js/template.js"></script>
+<body>
+    <div id="nav"></div>
+    <div id="content" class="mx-auto w-auto">
+        <div class="py-10 px-6 mt-16 mb-8 mx-auto">
+            <h1 class="text-[#272e3b] text-8xl text-center my-4 font-semibold">
+                <span>Bècome A </sapn><span class="text-secondary-purple text-opacity-75">Professionāl</span>
+            </h1>
+            <h1 class="text-[#1d2129] text-8xl text-center my-4 font-semibold">
+                <span>In Y<span class="text-opacity-75 text-[#3c108f]">ö</span>ur Sector</span>
+            </h1>
+        </div>
+        <div class="py-10 px-6 mx-auto">
+            <div class="flex justify-center">
+                <div class="basis-3/4">
+                    <div class="flex flex-row lg:flex-nowrap flex-wrap justify-between">
+                        <div class="justify-center flex flex-col py-2">
+                            <h3 class="my-2 font-medium text-2xl text-[#a9aeb8] tracking-wide cursor-pointer">UI UX DESIGN</h3>
+                            <h3 class="my-2 font-medium text-2xl text-[#a9aeb8] tracking-wide cursor-pointer">WEB DEVELOPMENT</h3>
+                            <h3 class="my-2 font-medium text-2xl text-[#1d2129] tracking-wide cursor-pointer hover:text-tertiary-purple">DIGITAL MARKETING</h3>
+                            <h3 class="my-2 font-medium text-2xl text-[#a9aeb8] tracking-wide cursor-pointer">PRACTICAL LEARNING</h3>
+                            <button class="w-2/3 py-3 px-6 bg-primary-purple rounded-xl font-medium shadow-primary-purple shadow-md hover:bg-tertiary-purple my-auto text-white">Explore More</button>
+                        </div>
+                        <div class="flex">
+                            <img src="./images/apple.png" alt="apple-book" />
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex justify-end my-4">
+                                <div class="flex flex-col">
+                                    <strong class="flex justify-end text-xl">4.6</strong>
+                                    <span>Overall Rating</span>
+                                </div>
+                                <div class="bg-[#ffa800] rounded-full flex items-center justify-center w-12 h-12 shadow-lg shadow-[#ffa800] mx-4">
+                                    <i class="fa-regular fa-star text-white text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-end my-4">
+                                <div class="flex flex-col">
+                                    <strong class="flex justify-end text-xl">7.8M+</strong>
+                                    <span>Students</span>
+                                </div>
+                                <div class="bg-[#63d2f1] rounded-full flex items-center justify-center w-12 h-12 shadow-lg shadow-[#63d2f1] mx-4">
+                                    <i class="fa-regular fa-user text-white text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-end my-4">
+                                <div class="flex flex-col">
+                                    <strong class="flex justify-end text-xl">246</strong>
+                                    <span>Instructor</span>
+                                </div>
+                                <div class="bg-[#ff4b85] rounded-full flex items-center justify-center w-12 h-12 shadow-lg shadow-[#ff4b85] mx-4">
+                                    <i class="fa-solid fa-chalkboard-user text-white text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-end my-6">
+                                <div class="flex flex-row gap-x-1.5 mx-2 mb-auto">
+                                    <indicator class="bg-[#efebff] h-1.5 w-14 rounded"></indicator>
+                                    <indicator class="bg-[#9c87fd] h-1.5 w-14 rounded"></indicator>
+                                    <indicator class="bg-[#efebff] h-1.5 w-14 rounded"></indicator>
+                                    <indicator class="bg-[#efebff] h-1.5 w-14 rounded"></indicator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-10 px-6 mt-16 mb-8 mx-auto">
+            <div class="flex justify-center">
+                <div class="basis-3/4 grid grid-flow-row grid-cols-1 lg:grid-cols-2 gap-6 mx-auto">
+                    <div class="flex flex-col py-6">
+                        <h2 class="font-semibold text-4xl my-1">Our Online Education</h2>
+                        <h2 class="font-semibold text-4xl my-1">Is <span class="italic">Smart</span> & <span class="italic">Effective</span></h2>
+                        <p class="my-4 text-[#86909c]">Online education can be a convenient and flexible option for students who are unable attend traditional in-person classes due to their location, schedule.</p>
+                        <button class="xl:w-1/3 w-3/5 py-3 px-6 bg-primary-purple rounded-xl font-medium shadow-primary-purple shadow-md hover:bg-tertiary-purple my-auto text-white">Let's Started</button>
+                    </div>
+                    <div class="w-4/5 mx-auto lg:ml-auto lg:w-3/4">
+                        <img class="h-auto w-auto" src="./images/illustration.png" alt="illustration" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto my-10 px-6 py-8 bg-[#f6f4ff]">
+            <div class="flex justify-center">
+                <div class="basis-3/4 grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 mx-10">
+                    <div class="md:col-span-2 landing-card">
+                        <div class="flex xl:flex-row flex-col">
+                            <div class="basis-2/4 flex flex-col">
+                                <h3 class="font-semibold text-4xl text-[#1d2129]">Why You Choose</h3>
+                                <h3 class="font-semibold text-4xl text-[#1d2129]">Our Program</h3>
+                                <p class="my-4 text-[#86909c] text-sm">I was designed to assist users with a wide range of tasks and answer questios to the best of my ability.</p>
+                                <button class="xl:my-auto mt-auto w-2/5 py-3 px-6 bg-primary-purple rounded-xl font-medium shadow-primary-purple shadow-md hover:bg-tertiary-purple my-auto text-white">Learn More</button>
+                            </div>
+                            <div class="basis-1/4 mx-auto"><img class="h-10/12 w-10/12 xl:block hidden object-cover object-center" src="./images/brain.png" alt="brain"/></div>
+                        </div>
+                    </div>
+                    <div class="landing-card">
+                        <div class="flex flex-row flex-wrap md:flex-col md:flex-nowrap">
+                            <div class="bg-[#63d2f1] rounded-lg flex items-center justify-center w-14 h-14 shadow-lg shadow-[#9ee3f7]">
+                                <i class="fa-regular fa-clock text-[#f7f8fa] text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-2xl text-[#1d2129] ml-4 my-3 md:my-2 md:mt-5 md:ml-0">Flexible Time</h3>
+                            <p class="text-[#86909c] text-sm mt-4 md:mt-0">Flexible time, also known as flextime or flexi-time, refers to a work schedule that allows employees to have some control over their starting and ending times.</p>
+                        </div>
+                    </div>
+                    <div class="landing-card">
+                        <div class="flex flex-row flex-wrap md:flex-col md:flex-nowrap">
+                            <div class="bg-primary-purple rounded-lg flex items-center justify-center w-14 h-14 shadow-lg shadow-[#b8a9fe]">
+                                <i class="fa-solid fa-mobile-screen text-[#f7f8fa] text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-2xl text-[#1d2129] ml-4 my-3 md:my-2 md:mt-5 md:ml-0">Access Any Where</h3>
+                            <p class="text-[#86909c] text-sm mt-4 md:mt-0">Linked world gives users access to information, tools, and platforms everywhere. Internet-enabled devices provide remote work, communication, and consumption.</p>
+                        </div>
+                    </div>
+                    <div class="landing-card">
+                        <div class="flex flex-row flex-wrap md:flex-col md:flex-nowrap">
+                            <div class="bg-[#ff4b85] rounded-lg flex items-center justify-center w-14 h-14 shadow-lg shadow-[#ff94b7]">
+                                <i class="fa-solid fa-layer-group text-[#f7f8fa] text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-2xl text-[#1d2129] ml-4 my-3 md:my-2 md:mt-5 md:ml-0">Organize Program</h3>
+                            <p class="text-[#86909c] text-sm mt-4 md:mt-0">Organised programmes achieve deadlines and engage participants. Scheduling, logistics, and support may make courses memorable.</p>
+                        </div>
+                    </div>
+                    <div class="landing-card">
+                        <div class="flex flex-row flex-wrap md:flex-col md:flex-nowrap">
+                            <div class="bg-[#ffa800] rounded-lg flex items-center justify-center w-14 h-14 shadow-lg shadow-[#ffc148]">
+                                <i class="fa-solid fa-certificate text-[#f7f8fa] text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-2xl text-[#1d2129] ml-4 my-3 md:my-2 md:mt-5 md:ml-0">Certificate</h3>
+                            <p class="text-[#86909c] text-sm mt-4 md:mt-0">A certificate confirms a person's course, programme, or skill completion. Educational institutions and professional organisations award certificates for field knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-10 px-6 mt-16 mb-8 mx-auto">
+            <div class="flex justify-center">
+                <div class="basis-3/4">
+                    <div class="flex flex-col text-center w-full mb-16">
+                        <h1 class="text-4xl font-semibold mb-4 text-[#1d2129]">Our Team</h1>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.</p>
+                    </div>
+                    <div class="flex flex-wrap -m-4">
+                        <div class="p-4 lg:w-1/2">
+                            <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                                <div class="flex-grow sm:pl-8">
+                                    <h2 class="title-font font-medium text-lg text-[#1d2129]">Foo Phey Min</h2>
+                                    <h3 class="text-[#86909c] mb-3">UI Developer</h3>
+                                    <p class="mb-4 text-[#4e5969]">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                    <span class="inline-flex">
+                                        <a class="text-[#86909c]">
+                                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.2-1.8-1.2-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3.1.9.1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.5 3.2-1.2 3.2-1.2.7 1.5.2 2.7.1 3 1.1.7 1.1 1.8 1.1 3.1 0 4.6-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 0z" />
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 lg:w-1/2">
+                            <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                                <div class="flex-grow sm:pl-8">
+                                    <h2 class="title-font font-medium text-lg text-[#1d2129]">Leng Zhi Yan</h2>
+                                    <h3 class="text-[#86909c] mb-3">UI Developer</h3>
+                                    <p class="mb-4 text-[#4e5969]">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                    <span class="inline-flex">
+                                        <a class="text-[#86909c]">
+                                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.2-1.8-1.2-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3.1.9.1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.5 3.2-1.2 3.2-1.2.7 1.5.2 2.7.1 3 1.1.7 1.1 1.8 1.1 3.1 0 4.6-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 0z" />
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 lg:w-1/2">
+                            <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                                <div class="flex-grow sm:pl-8">
+                                    <h2 class="title-font font-medium text-lg text-[#1d2129]">Tyu Kai Kiat</h2>
+                                    <h3 class="text-[#86909c] mb-3">UI Developer</h3>
+                                    <p class="mb-4 text-[#4e5969]">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                    <span class="inline-flex">
+                                        <a class="text-[#86909c]">
+                                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.2-1.8-1.2-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3.1.9.1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.5 3.2-1.2 3.2-1.2.7 1.5.2 2.7.1 3 1.1.7 1.1 1.8 1.1 3.1 0 4.6-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 0z" />
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 lg:w-1/2">
+                            <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                                <div class="flex-grow sm:pl-8">
+                                    <h2 class="title-font font-medium text-lg text-[#1d2129]">Lennon Tan Yong Chi</h2>
+                                    <h3 class="text-[#86909c] mb-3">UI Developer</h3>
+                                    <p class="mb-4 text-[#4e5969]">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                    <span class="inline-flex">
+                                        <a class="text-[#86909c]">
+                                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.2-1.8-1.2-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3.1.9.1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.5 3.2-1.2 3.2-1.2.7 1.5.2 2.7.1 3 1.1.7 1.1 1.8 1.1 3.1 0 4.6-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 0z" />
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 lg:w-1/2">
+                            <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                                <div class="flex-grow sm:pl-8">
+                                    <h2 class="title-font font-medium text-lg text-[#1d2129]">ChatGPT</h2>
+                                    <h3 class="text-[#86909c] mb-3">Development Assistant</h3>
+                                    <p class="mb-4 text-[#4e5969]">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                    <span class="inline-flex">
+                                        <a class="text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                                            </svg>
+                                        </a>
+                                        <a class="ml-2 text-[#86909c]">
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-10 px-6 mt-16 mb-8 mx-auto">
+            <div class="flex justify-center">
+                <div class="basis-3/4">
+                    <h1 class="text-3xl font-semibold text-[#1d2129] mb-12 text-center">What Our Students Say</h1>
+                    <div class="flex flex-wrap -m-4">
+                        <div class="p-4 md:w-1/2 w-full">
+                            <div class="h-full bg-[#f6f4ff] p-8 rounded flex flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                                    <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                                </svg>
+                                <p class="leading-relaxed mb-6">The instructor was knowledgeable and engaging, and I learned a lot in this course.</p>
+                                <a class="inline-flex items-center mt-auto">
+                                    <img alt="testimonial" src="https://dummyimage.com/106x106" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                                    <span class="flex-grow flex flex-col pl-4">
+                                        <span class="font-medium text-[#1d2129]">Holden Caulfield</span>
+                                        <span class="text-[#86909c] text-sm">WEB DEVELOPER</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-4 md:w-1/2 w-full">
+                            <div class="h-full bg-[#f6f4ff] p-8 rounded flex flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                                    <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                                </svg>
+                                <p class="leading-relaxed mb-6">The instructor was knowledgeable and engaging, and I learned a lot in this course.</p>
+                                <a class="inline-flex items-center mt-auto">
+                                    <img alt="testimonial" src="https://dummyimage.com/106x106" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                                    <span class="flex-grow flex flex-col pl-4">
+                                        <span class="font-medium text-[#1d2129]">Atticus Finch</span>
+                                        <span class="text-[#86909c] text-sm">UI UX DESIGNER</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+
+    <script type="module" src="./main.js"></script>
 </body>
 
 <script>
-    $(document).ready(function () {
-        $("#submit").click(function () {
-            let name = $("#name").val();
-            let email = $("#email").val();
-            let message = $("#message").val();
-            $.ajax({
-                url: "./php/database.php",
-                type: "POST",
-                data: {
-                    "save": 1,
-                    "name": name,
-                    "email": email,
-                    "message": message
-                },
-                success: function (res) {
-                    alert(res);
+    tailwind.config = {
+        theme: {
+            fontFamily: {
+                inter: ['Inter', 'sans-serif'],
+                reemkufi: ['ReemKufi', 'sans-serif'],
+                poppins: ['Poppins', 'sans-serif'],
+                montserrat: ['Montserrat', 'sans-serif'],
+            },
+            extend: {
+                colors: {
+                    'primary-purple': '#a38ffd',
+                    'secondary-purple': '#4d2ec8',
+                    'tertiary-purple': '#805be8',
                 }
-            })
+            },
         }
-        )
-    })
-
+    }
 </script>
 
 </html>

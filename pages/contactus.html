@@ -6,13 +6,148 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Artisans</title>
+    <link rel="stylesheet" href="../styles/tailwind.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../styles/contactus.css">
+    <link rel="stylesheet" href="/node_modules/daisyui/dist/full.css">
 </head>
 <body class="h-full">
-<h1 class="text-blue-600 text-center">
-    Contact Us
-</h1>
+    <div class="flex justify-around mx-auto w-auto my-6">
+        <div class="p-3.5 text-xl font-bold tracking-wider">WèbArtisáns</div>
+        <div>
+            <div class="flex justify-between">
+                <a router href="/contactus" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple mx-3">
+                    Contact Us
+                </a>
+                <a router href="/explore" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple mx-3">
+                    Explore
+                </a>
+                <a router href="/forum" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple mx-3">
+                    Forum
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="flex justify-between relative">
+                <a router href="/login" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple mx-2 ">Log In</a>
+                <button class="py-4 px-6 bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">
+                    Register
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <div id="content">
+        <div id="content__design">
+            <div id="design-container">
+                <div id="slogan">We're listening! Reach out and share your thoughts.</div>
+                <div id="img-bg"><img src="../images/BoyPlayPhone.png" alt="BoyPlayPhone" ></div>
+                <div id="noti-container">
+                    <div id="noti1" class="noti">
+                        <div class="w-9 h-9"><img src="../images/instagram.png" alt="logo" class="object-cover"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Instagram</div>
+                            <div class="ig-msg">Notification</div>
+                        </div>
+                    </div>
+                    <div id="noti2" class="noti">
+                        <div class="w-9 h-9"><img src="../images/facebook.png" alt="logo" class="object-cover"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Facebook</div>
+                            <div class="fb-msg">Notification</div>
+                        </div>
+                    </div>
+                    <div id="noti3" class="noti">
+                        <div class="w-9 h-9"><img src="../images/twitter .png" alt="logo" class="object-cover"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Twitter</div>
+                            <div class="tw-msg">Notification</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content__input">
+            <div id="input__container">
+                <form class="w-4/5 h-5/6">
+                    <div id="input__content">
+                        <div id="input__title">
+                            <h3>Drop us a Message</h1>
+                            <p>Looking forward to hear yout soon!</p>
+                        </div>
+                        <div class="">
+                            <label class="label">
+                            <div class="label-text">Your name</div>
+                            </label>
+                            <input type="text" name="name" id="txt-name" placeholder="Enter your name" class="" />
+                        </div>
+                        <input type="text" placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs" />
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                            <div class="label-text">Email address</div>
+                            </label>
+                            <input type="email" name="email" id="email" placeholder="Enter your email address" class="input input-bordered w-full max-w-xs" />
+                        </div>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                            <div class="label-text">Phone number</div>
+                            </label>
+                            <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" class="input input-bordered w-full max-w-xs" />
+                        </div>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                            <div class="label-text">Your message</div>
+                            </label>
+                            <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter your message" class="input input-bordered w-full max-w-xs" ></textarea>
+                        </div>
+                        <button class="btn btn-wide">Send your message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("document").ready(function() {
+            let noti2 = $('#noti2');
+            let noti3 = $('#noti3');
+            let notiContainer = $('#noti-container');
+            let fbMsg = $('.fb-msg');
+            let igMsg = $('.ig-msg');
+            let twMsg = $('.tw-msg');
+
+            let msg = {
+                "fbMsg": "Follow us on Facebook",
+                "igMsg": "Follow us on Instagram",
+                "twMsg": "Follow us on Twitter",
+            }
+
+            let msgs = [fbMsg, igMsg, twMsg];
+
+            let getMsg = (message) => {
+                return msg[message];
+            }
+
+            notiContainer.hover(function() {
+                noti2.addClass('animate');
+                noti3.addClass('animate');
+                fbMsg.text(getMsg('fbMsg'));
+                igMsg.text(getMsg('igMsg'));
+                twMsg.text(getMsg('twMsg'));
+                return;
+            })
+
+            notiContainer.mouseleave(function() {
+                noti2.removeClass('animate');
+                noti3.removeClass('animate');
+                for (let i = 0; i < msgs.length; i++){
+                    msgs[i].text("Notification");
+                }
+                return;
+            })
+        });
+    </script>
 </body>
 </html>

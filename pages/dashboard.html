@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../public/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="./styles/tailwind.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+</head>
+
+<body>
+    <nav class="sidebar fixed top-0 left-0 h-full w-64 bg-[#f8faff] z-50 py-4 px-6">
+        <header class="relative">
+            <div class="flex flex-row items-center">
+                <span class="flex items-center">
+                    <img class="w-10 h-10 rounded-md" src="../public/vite.svg" alt="logo">
+                </span>
+
+                <div class="text-base font-medium flex flex-col ml-4">
+                    <span class="font-semibold">WebArtisans</span>
+                    <span class="mt-1">Web developer</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class=" mt-8">
+                    <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 menu-item-active">
+                        <a href="#" class="">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="ml-2">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 ">
+                        <a href="#" class="">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="ml-2">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 ">
+                        <a href="#" class="">
+                            <i class="fa-solid fa-house"></i>
+                            <span class="ml-2">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+
+<script>
+    //get all the menu items
+    const menuItems = $('.menu-item');
+
+    //loop through the menu items
+    menuItems.each(function() {
+        //add click event listener to each menu item
+        $(this).click(function() {
+            //remove the active class from all the menu items
+            menuItems.removeClass('menu-item-active');
+            //add the active class to the clicked menu item
+            $(this).addClass('menu-item-active');
+        });
+    });
+
+
+
+</script>
+
+</html>

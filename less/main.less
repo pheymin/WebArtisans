@@ -38,3 +38,68 @@ button:hover {
         transform: translateX(0);
     }
 }
+
+.font-reemkufi{
+    font-family: 'ReemKufi';
+}
+
+#login-form, #register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 500px;
+    min-width: 380px;
+    padding: 20px;
+}
+
+.textbox{
+    font-family: 'Inter';
+    font-size: 16px;
+    width: 290px;
+    height: 50px;
+    max-width: 290px;
+    max-height: 50px;
+    box-sizing: border-box;
+    border: 1.5px solid #c9cdd4;
+    outline: none;
+    margin: 10px 0;
+    padding: 0 18px;
+    border-radius: 8px;
+    transition: border-color 0.25s;
+    color: #4e5969;
+
+    &:focus{
+        border: 2px solid #165dff;
+    }
+}
+
+.btn-purple{
+    font-family: 'Inter';
+    font-size: 16px;
+    width: 290px;
+    height: 50px;
+    max-width: 290px;
+    max-height: 50px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 0;
+    margin: 15px 0;
+    color: white;
+    background-color: #805be8;
+    transition: background-color 0.25s;
+
+    &:hover{
+        background-color: #4d2ec8 !important;
+    }
+}
+
+.menu-item-active{
+    background-color: #4d2ec8 !important;
+    color: white !important;
+} 
+
+#courseChart{
+    width: 100%;
+    height: 100%;
+}

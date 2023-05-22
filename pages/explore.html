@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/public/vite.svg" />
@@ -11,10 +12,17 @@
     <link rel="stylesheet" href="../styles/font.css">
     <script src="/js/jquery-3.6.4.min.js"></script>
 </head>
-<body class="h-full">
-<h1 class="text-blue-600 text-center">
-    explore
-</h1>
 
+<body>
+    <div id="nav"></div>
+    <div class="mx-auto bg-[#f6f4ff] min-h-screen">
+        <div class="flex justify-center">
+            <div id="card-container" class="p-5 grid grid-cols-4 gap-6 mx-10"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="../js/explore.js"></script>
 </body>
+
 </html>

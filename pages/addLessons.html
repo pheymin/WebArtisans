@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/public/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Artisans</title>
+    <link rel="stylesheet" href="../styles/tailwind.css">
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+    <script src="/js/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <div id="nav"></div>
+
+    <form class="flex flex-col justify-between" enctype="multipart/form-data">
+        <input type="text" placeholder="title" id="title" class="input input-bordered input-primary w-full max-w-xs" />
+        <textarea class="textarea textarea-bordered" id="description" placeholder="Description"></textarea>
+        <input type="text" placeholder="lecturer" id="lecturer" class="input input-bordered input-primary w-full max-w-xs" />
+        <input type="file" name="cover" id="cover" class="file-input w-full max-w-xs" />
+        <div id="sectionContainer"></div>
+        <button id="addSectionButton" class="btn btn-secondary">Add Section</button>
+
+        <button class="btn btn-primary" id="submit">Button</button>
+    </form>
+
+    <script>
+        // Add Section
+        const sectionContainer = document.getElementById('sectionContainer');
+        const addSectionButton = document.getElementById('addSectionButton');
+
+        let sectionCount = 1; // Initial section count
+
+        addSectionButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            const sectionDiv = document.createElement('div');
+            sectionDiv.innerHTML = `
+            <input type="text" placeholder="Section Title" id="sectionTitle_${sectionCount}" class="input input-bordered input-primary w-full max-w-xs" />
+            <input type="text" placeholder="URL" id="url_${sectionCount}" class="input input-bordered input-primary w-full max-w-xs" />
+          `;
+            sectionContainer.appendChild(sectionDiv);
+            sectionCount++;
+        });
+
+        // Submit
+        $(document).ready(function () {
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                const title = $("#title").val();
+                const description = $("#description").val();
+                const lecturer = $("#lecturer").val();
+                const videoUrl = JSON.stringify(getSectionData());
+
+                // Create a FormData object
+                const formData = new FormData();
+
+                // Get the file input element
+                const fileInput = document.getElementById('cover');
+
+                // Check if a file was selected
+                if (fileInput.files.length > 0) {
+                    // Append the file to the FormData object
+                    formData.append('cover', fileInput.files[0]);
+                }
+
+                formData.append('title', title);
+                formData.append('description', description);
+                formData.append('lecturer', lecturer);
+                formData.append('videoUrl', videoUrl);
+
+                // const data = {
+                //     title: title,
+                //     description: description,
+                //     videoUrl: videoUrl
+                // };
+                
+                $.ajax({
+                    url: "../php/addLesson.php",
+                    type: "POST",
+                    data: formData,
+                    processData: false, // Set processData to false
+                    contentType: false, // Set contentType to false
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        })
+
+        // Get the section data
+        function getSectionData() {
+            var sectionData = [];
+            var sectionCount = 1;
+
+            // Loop through each section input
+            while (true) {
+                var sectionTitle = $("#sectionTitle_" + sectionCount).val();
+                var sectionUrl = $("#url_" + sectionCount).val();
+
+                // Check if the section input exists
+                if (sectionTitle && sectionUrl) {
+                    var section = {
+                        title: sectionTitle,
+                        url: sectionUrl
+                    };
+
+                    sectionData.push(section);
+                    sectionCount++;
+                } else {
+                    break;
+                }
+            }
+
+            return sectionData;
+        }
+    </script>
+</body>
+
+</html>

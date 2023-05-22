@@ -1,7 +1,7 @@
 {
   "name": "webartisans",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "postcss tailwind.css -o ./styles/tailwind.css --watch"
   },

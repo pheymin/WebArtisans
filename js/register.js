@@ -1,4 +1,4 @@
-import { validateInput } from "./Tools";
+// import { validateInput } from "./Tools";
 
 function handleToggleIcon(){
     const icon = $('#input-area span i')
@@ -17,7 +17,8 @@ function handleRegister(){
     const data = {
         name: name.val(),
         email: email.val(),
-        password: password.val()
+        password: password.val(),
+        role: 0
     }
 
     if(data.username === '' || data.email === '' || data.password === '') {
@@ -35,8 +36,19 @@ function handleRegister(){
     }
 
     console.log("data: ", data);
+    
+    const query = `INSERT INTO users (NAME, EMAIL, PASSWORD, ROLE) VALUES ('${data.name}', '${data.email}', '${data.password}', '${data.role}')`
 
     //TODO: send data to server
+    $.ajax({
+        url: "../php/register.php",
+        type: "POST",
+        data: JSON.stringify(query),
+        success: function (data) {
+            alert("Register successfully!");
+        }
+    });
+
 }
 
 

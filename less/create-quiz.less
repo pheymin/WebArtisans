@@ -6,7 +6,7 @@ span {
     font-size: 0.8rem !important;
 }
 
-input,
+select,
 textarea {
     border: none !important;
     border-radius: 0 !important;
@@ -14,12 +14,24 @@ textarea {
     padding-left: 0 !important;
 }
 
+select {
+    height: 3rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
 textarea {
     padding-top: 1rem;
 }
 
-input:focus,
+select:focus,
 textarea:focus {
     outline: none !important;
     border-bottom: 0.185rem solid #570df8 !important;
+}
+
+.icon-hover {
+    &:hover {
+        opacity: 80%;
+    }
 }

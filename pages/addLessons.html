@@ -49,7 +49,6 @@
         $(document).ready(function () {
             $("#submit").click(function (e) {
                 e.preventDefault();
-                const save = 1;
                 const title = $("#title").val();
                 const description = $("#description").val();
                 const lecturer = $("#lecturer").val();
@@ -67,21 +66,19 @@
                     formData.append('cover', fileInput.files[0]);
                 }
 
-                formData.append('save', save);
                 formData.append('title', title);
                 formData.append('description', description);
                 formData.append('lecturer', lecturer);
                 formData.append('videoUrl', videoUrl);
 
                 // const data = {
-                //     save: save,
                 //     title: title,
                 //     description: description,
                 //     videoUrl: videoUrl
                 // };
-                console.log(formData);
+                
                 $.ajax({
-                    url: "../php/database.php",
+                    url: "../php/addLesson.php",
                     type: "POST",
                     data: formData,
                     processData: false, // Set processData to false

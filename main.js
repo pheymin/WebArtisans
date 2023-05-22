@@ -4,7 +4,7 @@ const nav = `
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <div class="w-10 h-10">
-                <img src="./public/vite.svg"/>
+                <img class="logo-img" src="./public/vite.svg"/>
             </div>
             <div class="p-3.5 text-xl font-bold tracking-wider">WèbArtisáns</div>
         </a>
@@ -35,7 +35,7 @@ const footer = `
         <div class="px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                 <div class="w-10 h-10">
-                    <img src="./public/vite.svg"/>
+                    <img class="logo-img" src="./public/vite.svg"/>
                 </div>
                 <span class="ml-3 text-2xl tracking-wider font-semibold">WèbArtisáns</span>
             </a>

@@ -15,7 +15,7 @@
 
 <body>
     <div id="nav"></div>
-    <div class="mx-auto w-auto my-10">
+    <div id="content" class="mx-auto w-auto my-10">
         <div class="flex justify-center">
             <div class="basis-3/4 flex flex-col">
                 <h2 class="font-semibold text-2xl tracking-wider">Welcome, <span class="text-[#4d2ec8]">James.</span></h2>
@@ -24,35 +24,55 @@
                     <div class="inline-flex items-start">
                         <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
                             class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
-                        <textarea placeholder="Share your question here" class="ml-4 px-5 py-4 rounded-3xl text-sm box-border grow focus:outline-[#7f5be7] h-28 resize-none overflow-hidden"></textarea>
+                        <textarea id="txt-create-post" placeholder="Share your question here" class="ml-4 px-5 py-4 rounded-3xl text-sm box-border grow focus:outline-[#7f5be7] h-28 resize-none overflow-hidden"></textarea>
                     </div>
                     <div class="flex flex-row mt-4 justify-end">
                         <button id="btn-create-post" class="bg-[#a38ffd] px-5 py-2 text-white hover:bg-[#805be8] cursor-pointer rounded-md">+ New Post</button>
                     </div>
                 </div>
-                <h4 class="mt-4 mb-2 text-[#a38ffd] text-lg">Recent posts</h4>
+                <h4 class="my-4 text-[#a38ffd] text-lg">Recent posts</h4>
                 <div class="forum-card-container">
-                    <div class="forum-card flex flex-col box-border my-4 py-5 px-7 rounded-lg shadow-lg bg-[#f5e8ff]">
-                        <div class="inline-flex">
-                            <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
-                                class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
-                            <div class="flex flex-col ml-4">
-                                <h3 class="text-sm text-[#272e3b] font-semibold">Robert Fox</h3>
-                                <span class="text-xs text-[#4e5969]">May 22, 2023 05:17AM</span>
-                                <h5 class="font-semibold text-lg my-2 text-[#1d2129]">Database design structure should need to be incorporated.</h5>
-                                <p class="text-sm">To trigger the transition and display the element from right to left, you can dynamically add or remove the translate-x-full class using JavaScript or by toggling a CSS class. By using these utility classes in Tailwind CSS, you can easily create transition effects and animate elements with predefined durations and transformations.</p>
+                    <div class="forum-card" data-id="1">
+                        <div class="flex flex-col box-border mb-6 py-5 px-7 rounded-lg shadow-lg bg-[#f5e8ff]">
+                            <div class="inline-flex">
+                                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                                    class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                                <div class="flex flex-col ml-4">
+                                    <h3 class="text-sm text-[#272e3b] font-semibold">Robert Fox</h3>
+                                    <span class="text-xs text-[#4e5969]">May 22, 2023 05:17AM</span>
+                                    <h5 class="font-semibold text-lg my-2 text-[#1d2129]">Database design structure should need to be incorporated.</h5>
+                                    <p class="text-sm">To trigger the transition and display the element from right to left, you can dynamically add or remove the translate-x-full class using JavaScript or by toggling a CSS class. By using these utility classes in Tailwind CSS, you can easily create transition effects and animate elements with predefined durations and transformations.</p>
+                                </div>
+                            </div>
+                            <div class="inline-flex pl-16 pr-4 mt-4 justify-between">
+                                <div class="like-icon text-sm text-gray-500 cursor-pointer">
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    <span class="ml-1">48</span>
+                                </div>
+                                <span class="comment-icon cursor-pointer hover:text-[#6aa1ff] text-sm text-gray-500">
+                                    <i class="fa-regular fa-comment-dots ml-3"></i>
+                                    <span class="ml-1">8 comments</span>
+                                </span>
                             </div>
                         </div>
-                        <div class="inline-flex pl-16 pr-4 mt-4 justify-between">
-                            <div class="like-icon text-sm text-gray-500 cursor-pointer">
-                                <i class="fa-regular fa-thumbs-up"></i>
-                                <span class="ml-1">48</span>
+                    </div>
+                    <div class="forum-card" data-id="2">
+                        <div class="flex flex-col box-border mb-6 py-5 px-7 rounded-lg shadow-lg bg-[#f5e8ff]">
+                            <div class="inline-flex">
+                                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                                    class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                                <div class="flex flex-col ml-4">
+                                    <h3 class="text-sm text-[#272e3b] font-semibold">Robert Fox</h3>
+                                    <span class="text-xs text-[#4e5969]">May 22, 2023 05:17AM</span>
+                                    <h5 class="font-semibold text-lg my-2 text-[#1d2129]">Database design structure should need to be incorporated.</h5>
+                                    <p class="text-sm">To trigger the transition and display the element from right to left, you can dynamically add or remove the translate-x-full class using JavaScript or by toggling a CSS class. By using these utility classes in Tailwind CSS, you can easily create transition effects and animate elements with predefined durations and transformations.</p>
+                                </div>
                             </div>
-                            <div>
-                                <span class="views-icon text-sm text-gray-500">
-                                    <i class="fa-regular fa-eye"></i>
-                                    <span class="ml-1">100 views</span>
-                                </span>
+                            <div class="inline-flex pl-16 pr-4 mt-4 justify-between">
+                                <div class="like-icon text-sm text-gray-500 cursor-pointer">
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    <span class="ml-1">48</span>
+                                </div>
                                 <span class="comment-icon cursor-pointer hover:text-[#6aa1ff] text-sm text-gray-500">
                                     <i class="fa-regular fa-comment-dots ml-3"></i>
                                     <span class="ml-1">8 comments</span>
@@ -66,38 +86,7 @@
     </div>
     <div id="footer"></div>
     <script type="module" src="../main.js"></script>
+    <script src="../js/forum.js"></script>
 </body>
-
-<script>
-    var date = new Date();
-    var datetime = $("#forum-datetime");
-    var datestring = date.toDateString().replace(" ", ", ");
-    datetime.text(datestring);
-
-    var likeContainer = $(".like-icon");
-    likeContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-    likeContainer.on("click", function () {
-        $(this.children[0]).toggleClass("fa-solid");
-        $(this.children[0]).toggleClass("text-red-500");
-
-        //plus one or minus one to children[1]
-        var likeCount = $(this.children[1]).text();
-        var likeCountInt = parseInt(likeCount);
-        if ($(this.children[0]).hasClass("fa-solid")) {
-            $(this.children[1]).text(likeCountInt + 1);
-        } else {
-            $(this.children[1]).text(likeCountInt - 1);
-        }
-    });
-
-    var commentContainer = $(".comment-icon");
-    commentContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-</script>
 
 </html>

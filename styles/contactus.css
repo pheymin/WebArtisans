@@ -1,0 +1,128 @@
+#content{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+#content__design{
+    display: flex;
+    /* background-color: aqua; */
+    width: 60%;
+}
+
+#content__input{
+    width: 40%;
+}
+
+#design-container{
+    /* display: flex; */
+    position: relative;
+    height: 80%;
+    width: 80%;
+    margin: -40px 0px 0px 50px;
+}
+
+#slogan{
+    position: absolute;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: -100px;
+    margin-left: 5%;
+    font-size: 35px;
+}
+
+#img-bg{
+    position: absolute;
+    z-index: -1;
+}
+
+#noti-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 13% 0px 0px 25%;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.noti{
+    width: 286px;
+    height: 71px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#noti1{
+    font-size: 15.5px;
+    z-index: 3;
+}
+
+#noti2{
+    font-size: 14px;
+    width: 250px;
+    margin-top: -40px;
+    z-index: 2;
+    transition: margin-top 0.5s, width 0.5s, font-size 0.5s ease-in-out;
+}
+
+#noti3{
+    font-size: 13px;
+    width: 230px;
+    margin-top: -40px;
+    z-index: 1;
+    transition: margin-top 0.5s, width 0.5s, font-size 0.5s ease-in-out;
+}
+
+#noti2.animate{
+    font-size: 15px;
+    width: 286px;
+    margin-top: 10px;
+}
+
+#noti3.animate{
+    font-size: 15px;
+    width: 286px;
+    margin-top: 10px;
+}
+
+.noti__text{
+
+    width: 75%;
+}
+
+.noti-icon{
+    width: 40px;
+    margin-left: 15%;
+}
+
+#input__container{
+    width: 75%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(154.87deg, #FBDECE 1.99%, #FAC1FD 99.24%);
+    border-radius: 30px;
+}
+
+#input__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: auto;
+}
+
+#txt-message{
+    height: 100px;
+}
+
+
+@media screen and (min-width: 480px){
+    
+}

@@ -6,13 +6,128 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Artisans</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../styles/tailwind.css">
+    <!-- <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/font.css"> -->
+    <link rel="stylesheet" href="../styles/contactus.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body class="h-full">
-<h1 class="text-blue-600 text-center">
-    Contact Us
-</h1>
+    <div id="nav"></div>
+    <div id="content">
+        <div id="content__design">
+            <div id="design-container">
+                <div id="slogan">We're listening! Reach out and share your thoughts.</div>
+                <div id="img-bg"><img src="../images/BoyPlayPhone.png" alt="BoyPlayPhone" ></div>
+                <div id="noti-container">
+                    <!-- <div class="font-bold" style="margin: 0px 36% 1% 0px;">Follow us:</div> -->
+                    <div id="noti1" class="noti">
+                        <div class="w-9 h-9"><img src="../images/instagram.png" alt="logo" class="noti-icon"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Instagram</div>
+                            <div class="ig-msg">Notification</div>
+                        </div>
+                    </div>
+                    <div id="noti2" class="noti">
+                        <div class="w-9 h-9"><img src="../images/facebook.png" alt="logo" class="noti-icon"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Facebook</div>
+                            <div class="fb-msg">Notification</div>
+                        </div>
+                    </div>
+                    <div id="noti3" class="noti">
+                        <div class="w-9 h-9"><img src="../images/twitter .png" alt="logo" class="noti-icon"></div>
+                        <div class="noti__text">
+                            <div class="font-semibold">Twitter</div>
+                            <div class="tw-msg">Notification</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content__input">
+            <div id="input__container">
+                <form class="w-4/5 h-full">
+                    <div id="input__content">
+                        <div id="input__title" style="margin: 0px 0px -20px 0px;">
+                            <h3 class="text-2xl font-bold">Drop us a Message</h1>
+                            <p>Looking forward to hear you soon!</p>
+                        </div>
+                        <div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                <div class="label-text text-sm">Your name</div>
+                                </label>
+                                <input type="text" name="name" id="txt-name" placeholder="Enter your name" class="input input-bordered input-primary w-full max-w-xs" />
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                <div class="label-text text-sm">Email address</div>
+                                </label>
+                                <input type="email" name="email" id="txt-email" placeholder="Enter your email address" class="input input-bordered w-full max-w-xs" />
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                <div class="label-text text-sm">Phone number</div>
+                                </label>
+                                <input type="tel" name="phone" id="txt-phone" placeholder="Enter your phone number" class="input input-bordered w-full max-w-xs" />
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                <div class="label-text text-sm">Your message</div>
+                                </label>
+                                <textarea name="message" id="txt-message" cols="30" rows="10" placeholder="Enter your message" class="input input-bordered w-full max-w-xs resize-none" ></textarea>
+                            </div>
+                        </div>
+                        <div><button class="btn btn-wide rounded-3xl">Send your message</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
 
+    <script src="../main.js"></script>
+    <script>
+        $("document").ready(function() {
+            let noti2 = $('#noti2');
+            let noti3 = $('#noti3');
+            let notiContainer = $('#noti-container');
+            let fbMsg = $('.fb-msg');
+            let igMsg = $('.ig-msg');
+            let twMsg = $('.tw-msg');
+
+            let msg = {
+                "fbMsg": "Follow us on Facebook",
+                "igMsg": "Follow us on Instagram",
+                "twMsg": "Follow us on Twitter",
+            }
+
+            let msgs = [fbMsg, igMsg, twMsg];
+
+            let getMsg = (message) => {
+                return msg[message];
+            }
+
+            notiContainer.hover(function() {
+                noti2.addClass('animate');
+                noti3.addClass('animate');
+                fbMsg.text(getMsg('fbMsg'));
+                igMsg.text(getMsg('igMsg'));
+                twMsg.text(getMsg('twMsg'));
+                return;
+            })
+
+            notiContainer.mouseleave(function() {
+                noti2.removeClass('animate');
+                noti3.removeClass('animate');
+                for (let i = 0; i < msgs.length; i++){
+                    msgs[i].text("Notification");
+                }
+                return;
+            })
+        });
+    </script>
 </body>
 </html>

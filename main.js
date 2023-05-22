@@ -22,7 +22,7 @@ const nav = `
         <div>
             <div class="flex justify-between relative">
                 <a router href="/login" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
-                <button class="py-4 px-6 bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">
+                <button class="py-4 px-6 text-white bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">
                     Register
                 </button>
             </div>

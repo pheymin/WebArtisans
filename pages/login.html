@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../public/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="./styles/tailwind.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../less/login.less">
+</head>
+
+<body>
+    <div id="login-form" class="absolute left-1/2 top-1/2 transfrom -translate-x-1/2 -translate-y-1/2 h-screen my-10">
+        <div class="flex flex-col">
+            <h1 class="font-reemkufi text-4xl font-semibold text-[#1d2129]">Sign In</h1>
+            <h3 class="w-4/5 text-base font-normal my-4 self-center text-[#4e5969] font-inter">To Keep connected with please login with your personal info</h3>
+        </div>
+        <div id="input-area">
+            <div>
+                <input type="email" name="email" placeholder="Email" class='textbox'>
+            </div>
+            <div class="flex relative items-center">
+                <input type="password" name="password" placeholder="Password" class='textbox'>
+                <span class="right-0 p-3 absolute">
+                    <i class="fa-regular fa-eye cursor-pointer text-[#4e5969]"></i>
+                </span>
+            </div>
+            <div>
+                <div class="flex flex-row">
+                    <input type="checkbox" name="remember" id="remember" class="cursor-pointer mr-2">
+                    <label for="remember" class="cursor-pointer text-sm font-inter font-medium text-[#4e5969] hover:text-[#165dff]">Remember me</label>
+                </div>
+            </div>
+            <div>
+                <button id="btn-login" class="btn-purple cursor-pointer text-base font-medium">Sign in</button>
+            </div>
+        </div>
+        <div class="font-inter text-sm my-6">
+            <span class="mr-2 text-[#86909c]">Dont't have an account yet?</span>
+            <span><a href="" class="cursor-pointer font-medium text-[#4080FF] hover:text-[#165dff]">Sign up</a></span>
+        </div>
+    </div>
+
+    <script type="module" src="../js/login.js"></script>
+</body>
+
+</html>

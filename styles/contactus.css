@@ -11,7 +11,6 @@
 }
 
 #content__input{
-    background-color: aquamarine;
     width: 40%;
 }
 
@@ -20,7 +19,7 @@
     position: relative;
     height: 80%;
     width: 80%;
-    margin: -40px 0px 50px 50px;
+    margin: -40px 0px 0px 50px;
 }
 
 #slogan{
@@ -95,6 +94,11 @@
     width: 75%;
 }
 
+.noti-icon{
+    width: 40px;
+    margin-left: 15%;
+}
+
 #input__container{
     width: 75%;
     height: 80vh;
@@ -109,11 +113,16 @@
 #input__content{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     height: 100%;
     width: auto;
 }
 
-#txt-name{
+#txt-message{
+    height: 100px;
+}
+
+
+@media screen and (min-width: 480px){
     
 }

@@ -1,4 +1,4 @@
-import { validateInput } from "./Tools";
+import { validateInput } from "./Tools.js";
 
 function handleToggleIcon(){
     const icon = $('#input-area span i')
@@ -22,6 +22,7 @@ function handleRegister(){
     }
 
     if(data.username === '' || data.email === '' || data.password === '') {
+        alert("Don't leave any field blank!");
         // const modal = new Modal('warning','Warning', 'Don\'t leave any field blank');
         // modal.render();
         return false;
@@ -30,22 +31,27 @@ function handleRegister(){
     let isValid = validateInput('username', data.username) && validateInput('email', data.email) && validateInput('password', data.password);
 
     if(!isValid){
+        alert("Invalid input!");
         // const modal = new Modal('error','Error', 'Invalid input');
         // modal.render();
         return;
     }
 
-    console.log("data: ", data);
+    //console.log("data: ", data);
     
     const query = `INSERT INTO users (NAME, EMAIL, PASSWORD, ROLE) VALUES ('${data.name}', '${data.email}', '${data.password}', '${data.role}')`
 
     //TODO: send data to server
     $.ajax({
-        url: "../php/register.php",
+        url: "../php/create-user.php",
         type: "POST",
         data: JSON.stringify(query),
         success: function (data) {
             alert("Register successfully!");
+
+            name.val('');
+            email.val('');
+            password.val('');
         }
     });
 

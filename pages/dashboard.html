@@ -236,23 +236,13 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/dashboard.js"></script>
 </body>
 
 <script>
-    //get all the menu items
-    const menuItems = $('.menu-item');
-
-    //loop through the menu items
-    menuItems.each(function () {
-        //add click event listener to each menu item
-        $(this).click(function () {
-            //remove the active class from all the menu items
-            menuItems.removeClass('menu-item-active');
-            //add the active class to the clicked menu item
-            $(this).addClass('menu-item-active');
-        });
-    });
+    //add class to first menu item
+    $('.menu-item').first().addClass('menu-item-active');
 
 </script>
 

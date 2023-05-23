@@ -1,4 +1,4 @@
-//import $ from 'jquery'
+// import $ from 'jquery'
 
 const nav = `
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">

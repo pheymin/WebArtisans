@@ -1,4 +1,4 @@
-// import { validateInput } from "./Tools";
+import { validateInput } from "./Tools";
 
 function handleToggleIcon(){
     const icon = $('#input-area span i')

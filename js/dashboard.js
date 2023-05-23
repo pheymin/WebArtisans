@@ -1,3 +1,39 @@
+
+$(document).ready(function () {
+    const countQy = "SELECT COUNT(*) AS count FROM feedback";
+    $.ajax({
+        url: "../php/get-feedback.php",
+        type: "GET",
+        data: { query: countQy },
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            $('#total-feedback').text(data[0].count);
+        },
+        error: function (xhr, status, error) {
+            console.error('Request failed. Status:', xhr.status);
+        }
+    });
+    //console.log("dashboard.js ready!");
+    const query = "SELECT * FROM feedback ORDER BY POSTEDTIME DESC LIMIT 5";
+    $.ajax({
+        url: "../php/get-feedback.php",
+        type: "GET",
+        data: { query: query },
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                createFeedbackCard(data[i]);
+                //console.log(data[i].POSTEDTIME);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Request failed. Status:', xhr.status);
+        }
+    });
+});
+
 var sideNav = `
     <nav class="sidebar md:h-screen h-auto w-auto bg-[#f8faff] z-50 py-4 px-6">
         <header class="relative">
@@ -402,4 +438,19 @@ function chartSize(container, charts) {
 window.onresize = function () {
     chartSize(courseContainer[0], course[0]);
     chartSize(barContainer[0], bar[0]);
+}
+
+var feedbackBoard = $('#feedback-board');
+
+function createFeedbackCard(data){
+    if(data.MESSAGE.length > 50){
+        data.MESSAGE = data.MESSAGE.substring(0, 50) + "...";
+    }
+    var card = `
+        <div class="px-3 py-5 my-2 bg-white rounded-md shadow-md" data-id="${data.ID}">
+            <h4 class="font-semibold text-sm text-[#272e3b]">${data.MESSAGE}</h4>
+            <p class="text-right text-xs text-[#6b7785] text-medium font-semibold">By - ${data.NAME}</p>
+        </div>
+    `
+    feedbackBoard.append(card)
 }

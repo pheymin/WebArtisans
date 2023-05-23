@@ -25,7 +25,7 @@
                 <div class="p-3.5 text-xl font-bold tracking-wider text-white">WèbArtisáns</div>
             </a>
             <div class="text-white mr-2">|</div>
-            <h2 class="text-white">Fundamental Web Development</h2>
+            <h2 id="lesson-title" class="text-white"></h2>
         </div>
 
         <div>
@@ -38,14 +38,11 @@
     </div>
 
     <div class="flex flex-row">
-        <div>
-            <div class="flex flex-col">
-                <iframe
-                    src="https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=42b33bfe-ce53-43e8-bc0e-d434cbd4ec30&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Afalse%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create"
-                    width="1100" height="520" frameborder="0" scrolling="no" allowfullscreen
-                    title="CT117-3-2-FWDD-L-1-20230222_160303-Meeting Recording.mp4"></iframe>
+        <div class="flex flex-col">
+            <div id="lesson-video" class="flex flex-col">
+                <iframe src="" width="1100" height="520" frameborder="0" scrolling="no" allowfullscreen></iframe>
             </div>
-            <div>
+            <div class="max-w-[1100px]">
                 <!-- second nav bar -->
                 <div class="flex flex-row border-b-2">
                     <div class="flex items-center m-3 font-semibold cursor-pointer focus:border-b-black">
@@ -60,18 +57,20 @@
                 </div>
 
                 <!-- notification -->
-                <div id="notification" class="flex flex-row p-6 border m-3">
-                    <div>
-                        <img src="../images/subscribe.png" alt="subscribe">
-                    </div>
-                    <div class="pl-5">
-                        <h2 class="font-bold">Get Started</h2>
-                        <p class="my-2 text-sm">Learning a little each day adds up. Research shows that students who
-                            make learning a habit are more likely to reach their goals. Unlock all lessons by
-                            subscribing now!</p>
-                        <button
-                            class="p-3 bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">Subscibe</button>
-                        <button class="btn btn-ghost">Dismiss</button>
+                <div id="notification">
+                    <div class="flex flex-row p-6 border m-3">
+                        <div>
+                            <img src="../images/subscribe.png" alt="subscribe">
+                        </div>
+                        <div class="pl-5">
+                            <h2 class="font-bold">Get Started</h2>
+                            <p class="my-2 text-sm">Learning a little each day adds up. Research shows that students who
+                                make learning a habit are more likely to reach their goals. Unlock all lessons by
+                                subscribing now!</p>
+                            <button
+                                class="p-3 bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">Subscibe</button>
+                            <button class="btn btn-ghost">Dismiss</button>
+                        </div>
                     </div>
                 </div>
 
@@ -80,9 +79,7 @@
                         <div class="w-1/4">
                             <h2 class="font-semibold">Information</h2>
                         </div>
-                        <div class="w-3/4">
-                            <h2>Lecturer : </h2>
-                            <h2>Upload Time: </h2>
+                        <div id="lesson-info" class="w-3/4">
                             <h2>Language : English</h2>
                             <h2>Caption : Yes</h2>
                         </div>
@@ -94,35 +91,23 @@
                         <div class="w-1/4">
                             <h2 class="font-semibold">Description</h2>
                         </div>
-                        <div class="w-3/4">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione nisi error doloremque
-                                reiciendis, inventore quis saepe debitis est praesentium deserunt placeat similique
-                                magni necessitatibus nostrum veritatis at recusandae. Distinctio, iste!</p>
-                        </div>
+                        <div id="lesson-des" class="w-3/4"></div>
                     </div>
                 </div>
             </div>
             <div id="footer"></div>
         </div>
         <!-- side bar -->
-        <div class="w-full">
+        <div class="w-full" id="side-bar-content">
             <div class="border-b-2 px-4 py-3">
                 <h2 class="text-lg font-bold">Lesson Content</h2>
             </div>
-            <div class="px-4 py-3 space-y-2 border-b-2">
-                <h2 class="text-lg">Lesson Title</h2>
-                <span class="inline-flex items-center">
-                    <div class="w-5">
-                        <img src="../images/player.png" alt="player">
-                    </div>
-                    <p class="text-sm pl-2">52min</p>
-                </span>
-            </div>
+            <!-- <div id="side-bar-content" class="px-4 py-3 space-y-2 border-b-2"> </div> -->
         </div>
     </div>
 
     <script type="module" src="../main.js"></script>
-    <!-- <script type="module" src="../js/lesson.js"></script> -->
+    <script type="module" src="../js/lesson.js"></script>
 </body>
 
 </html>

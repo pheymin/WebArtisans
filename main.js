@@ -4,25 +4,25 @@ const nav = `
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <div class="w-10 h-10">
-                <img src="./public/vite.svg"/>
+                <img class="logo-img" src="./public/vite.svg"/>
             </div>
             <div class="p-3.5 text-xl font-bold tracking-wider">WèbArtisáns</div>
         </a>
         <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <a router href="/contactus" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="/contactus" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Contact Us
             </a>
-            <a router href="/explore" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="/explore" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Explore
             </a>
-            <a router href="/forum" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="/forum" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Forum
             </a>
         </nav>
         <div>
             <div class="flex justify-between relative">
-                <a router href="/login" class="p-4 cursor-pointer font-semibold hover:text-tertiary-purple hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
-                <button class="py-4 px-6 text-white bg-primary-purple rounded-xl font-semibold hover:bg-tertiary-purple">
+                <a router href="/login" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
+                <button class="py-4 px-6 text-white bg-[#a38ffd] rounded-xl font-semibold hover:bg-[#805be8]">
                     Register
                 </button>
             </div>
@@ -35,7 +35,7 @@ const footer = `
         <div class="px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                 <div class="w-10 h-10">
-                    <img src="./public/vite.svg"/>
+                    <img class="logo-img" src="./public/vite.svg"/>
                 </div>
                 <span class="ml-3 text-2xl tracking-wider font-semibold">WèbArtisáns</span>
             </a>

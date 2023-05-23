@@ -1,4 +1,4 @@
-import { validateInput } from "./Tools";
+import { validateInput } from "./Tools.js";
 // import Modal from '../components/Modal';
 // import Alert from '../components/Alert';
 
@@ -12,11 +12,11 @@ function handleToggleIcon(){
     });
 }
 
+const email = $('#input-area input[name="email"]');
+const password = $('#input-area input[name="password"]');
+const remember = $('#input-area input[name="remember"]');
+
 function handleLogin(){
-        
-    const email = $('#input-area input[name="email"]');
-    const password = $('#input-area input[name="password"]');
-    const remember = $('#input-area input[name="remember"]');
     const data = {
         email: email.val(),
         password: password.val(),
@@ -24,22 +24,43 @@ function handleLogin(){
     }
 
     if( data.email === '' || data.password === '') {
-        //const modal = new Modal('warning','Warning', 'Don\'t leave any field blank');
-        //modal.render();
         return false;
     }
 
     let isValid = validateInput('email', data.email) && validateInput('password', data.password);
 
     if(!isValid){
-        //const modal = new Modal('error','Error', 'Please check your email and password');
-        //modal.render();
         return;
     }
+    //console.log("data: ", data);
 
-    console.log("data: ", data);
+    const query = `SELECT * FROM users WHERE EMAIL = '${data.email}' AND PASSWORD = '${data.password}'`;
+    $.ajax({
+        url: "../php/authentication.php",
+        type: "GET",
+        data: {query: query},
+        success: function (data) {
+            if(data.length === 0){
+                alert("Email or password is incorrect!");
+                return;
+            }
 
-    //TODO: send data to server
+            //console.log(data);
+            clearInput();
+            if(data[0].ROLE == 1){
+                console.log('admin');
+                window.location.href = "./dashboard.html";
+            }else{
+                console.log('user');
+                window.location.href = "./explore.html";
+            }
+            //console.log(data[0]);
+            //TODO
+            
+            sessionStorage.setItem('currentUser', JSON.stringify(data[0]));
+
+        }
+    });
 }
 
 function handleEvents(){
@@ -51,3 +72,10 @@ function handleEvents(){
 }
 
 handleEvents();
+
+function clearInput()
+{
+    email.val('');
+    password.val('');
+    remember.prop('checked', false);
+}

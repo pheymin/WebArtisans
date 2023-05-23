@@ -37,7 +37,7 @@ function getCard(lesson) {
     let shortenDes = lesson.getShortenDes();
   
     let template = `
-      <div id="card" class="card card-compact w-80 cursor-pointer border border-solid border-gray bg-white hover:bg-white hover:drop-shadow-md">
+      <div id="card" class="card card-compact w-full cursor-pointer border border-solid border-gray bg-white hover:bg-white hover:drop-shadow-md">
           <figure><img src="${lesson.coverPic}" alt="cover_pic" class="object-cover"/></figure>
           <div class="card-body">
               <h4 class="card-title text-lg">${lesson.title}</h4>

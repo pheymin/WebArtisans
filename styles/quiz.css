@@ -1,0 +1,17 @@
+.btn-success {
+    border: none !important;
+    color: #003320 !important;
+    background-color: #36d399 !important;
+}
+
+.btn-error {
+    border: none !important;
+    color: #470000 !important;
+    background-color: #f87272 !important;
+}
+
+.btn-disabled {
+    border: none !important;
+    color: #eaebec !important;
+    background-color: #323742 !important;
+}

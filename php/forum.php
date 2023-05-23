@@ -10,7 +10,8 @@
     }
 
     if ($method === 'GET') {
-        getAllData('forum');
+        // getAllData('forum');
+        selectDataWithQuery($_GET['query']);
     }
 
 ?>

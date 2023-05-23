@@ -1,20 +1,20 @@
-var forumCount = 0;
 
 $(document).ready(function () {
 
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
     // console.log("forum.js ready!");
+    var query = `SELECT * FROM forum ORDER BY DATE ASC`;
     $.ajax({
         url: "../php/forum.php",
         type: "GET",
-        dataType: "json",
+        data: { query: query },
+        // dataType: "json",
         success: function (data) {
             // var data = JSON.parse(result);
-            //console.log(data);
+            console.log(data);
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i]);
                 appendPostOnTop(data[i]);
-                forumCount++;
             }
             handleIconEvents();
         },
@@ -28,6 +28,7 @@ datetime.text(datestring);
 
 function handleIconEvents()
 {
+    /*
     var likeContainer = $(".like-icon");
     likeContainer.hover(function () {
         $(this.children[0]).toggleClass("fa-bounce");
@@ -55,6 +56,39 @@ function handleIconEvents()
     commentContainer.on("click", function () {
         var data = $(this).parent().parent().parent().data("id");
         //appendCommentModal(data);
+        console.log(data);
+    });
+    */
+    $(document).on("mouseenter", ".like-icon", function() {
+        $(this).children().first().toggleClass("fa-bounce");
+    });
+
+    $(document).on("mouseleave", ".like-icon", function() {
+        $(this).children().first().toggleClass("fa-bounce");
+    });
+
+    $(document).on("click", ".like-icon", function() {
+        $(this).children().first().toggleClass("fa-solid text-red-500");
+
+        var likeCount = $(this).children().last().text();
+        var likeCountInt = parseInt(likeCount);
+        if ($(this).children().first().hasClass("fa-solid")) {
+            $(this).children().last().text(likeCountInt + 1);
+        } else {
+            $(this).children().last().text(likeCountInt - 1);
+        }
+    });
+
+    $(document).on("mouseenter", ".comment-icon", function() {
+        $(this).children().first().toggleClass("fa-bounce");
+    });
+
+    $(document).on("mouseleave", ".comment-icon", function() {
+        $(this).children().first().toggleClass("fa-bounce");
+    });
+
+    $(document).on("click", ".comment-icon", function() {
+        var data = $(this).closest("[data-id]").data("id");
         console.log(data);
     });
 }
@@ -107,18 +141,19 @@ function createNewPost(title, content) {
 
 function appendPostOnTop(post){
 
-    if (!post.ID) post.ID = forumCount+1;
+    if (!post.ID) post.ID = $('.forum-card').length+1;
 
     var datestring = new Date(post.DATE).toDateString().replace(" ", ", ");
+    var datetime = post.DATE.split(" ")[1];
+    datetime = datetime.substring(0, datetime.length-3);
+    
     datestring = datestring.substring(4);  
     if(datestring[0] == " ") datestring = datestring.substring(1);
     datestring = datestring.substring(0, datestring.length-5) + "," + datestring.substring(datestring.length-5);
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var ampm = hour >= 12 ? "PM" : "AM";
-    var time = hour + ":" + minute + " " + ampm;
-    post.DATE = datestring + " " + time;
 
+    var hour = datetime.split(":")[0];
+    var ampm = hour >= 12 ? "PM" : "AM";
+    post.DATE = datestring + " " + datetime + " " + ampm;
     
     var newPost = `
         <div class="forum-card" data-id="${post.ID}">

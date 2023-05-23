@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../public/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="content" class="mx-auto w-auto my-10">
+        <div class="flex justify-center">
+            <div class="basis-3/4 flex flex-col">
+                <h2 class="font-semibold text-2xl tracking-wider">Welcome, <span class="text-[#4d2ec8]">James.</span></h2>
+                <h6 id="forum-datetime" class="my-1 text-[#272e3b]"></h6>
+                <div class="py-5 px-7 rounded-xl shadow-lg bg-[#f5e8ff] flex flex-col box-border my-6">
+                    <div class="inline-flex items-start">
+                        <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                            class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                        <textarea id="txt-create-post" placeholder="Share your question here" class="ml-4 px-5 py-4 rounded-3xl text-sm box-border grow focus:outline-[#7f5be7] h-28 resize-none overflow-hidden"></textarea>
+                    </div>
+                    <div class="flex flex-row mt-4 justify-end">
+                        <button id="btn-create-post" class="bg-[#a38ffd] px-5 py-2 text-white hover:bg-[#805be8] cursor-pointer rounded-md">+ New Post</button>
+                    </div>
+                </div>
+                <h4 class="my-4 text-[#a38ffd] text-lg">Recent posts</h4>
+                <div class="forum-card-container">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script type="module" src="../main.js"></script>
+    <script src="../js/forum.js"></script>
+</body>
+
+</html>

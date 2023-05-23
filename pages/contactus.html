@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Artisans</title>
     <link rel="stylesheet" href="../styles/tailwind.css">
-    <!-- <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/font.css"> -->
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
     <link rel="stylesheet" href="../styles/contactus.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -80,7 +80,7 @@
                                 <textarea name="message" id="txt-message" cols="30" rows="10" placeholder="Enter your message" class="input input-bordered w-full max-w-xs resize-none" ></textarea>
                             </div>
                         </div>
-                        <div><button class="btn btn-wide rounded-3xl">Send your message</button></div>
+                        <div><button id="btn-send" class="btn btn-wide rounded-3xl">Send your message</button></div>
                     </div>
                 </form>
             </div>
@@ -88,46 +88,7 @@
     </div>
     <div id="footer"></div>
 
-    <script src="../main.js"></script>
-    <script>
-        $("document").ready(function() {
-            let noti2 = $('#noti2');
-            let noti3 = $('#noti3');
-            let notiContainer = $('#noti-container');
-            let fbMsg = $('.fb-msg');
-            let igMsg = $('.ig-msg');
-            let twMsg = $('.tw-msg');
-
-            let msg = {
-                "fbMsg": "Follow us on Facebook",
-                "igMsg": "Follow us on Instagram",
-                "twMsg": "Follow us on Twitter",
-            }
-
-            let msgs = [fbMsg, igMsg, twMsg];
-
-            let getMsg = (message) => {
-                return msg[message];
-            }
-
-            notiContainer.hover(function() {
-                noti2.addClass('animate');
-                noti3.addClass('animate');
-                fbMsg.text(getMsg('fbMsg'));
-                igMsg.text(getMsg('igMsg'));
-                twMsg.text(getMsg('twMsg'));
-                return;
-            })
-
-            notiContainer.mouseleave(function() {
-                noti2.removeClass('animate');
-                noti3.removeClass('animate');
-                for (let i = 0; i < msgs.length; i++){
-                    msgs[i].text("Notification");
-                }
-                return;
-            })
-        });
-    </script>
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="../js/contact-us.js"></script>
 </body>
 </html>

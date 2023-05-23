@@ -19,3 +19,29 @@ function validateInput(type, value){
 }
 
 export { validateInput };
+
+function getCurrentDateTime() { 
+    let currentTime = new Date();
+    
+    // Get the individual components of the current date
+    let year = currentTime.getFullYear();
+    let month = currentTime.getMonth() + 1; // Months are zero-based, so we add 1
+    let day = currentTime.getDate();
+    let hour = currentTime.getHours();
+    let minute = currentTime.getMinutes();
+    let second = currentTime.getSeconds();
+
+    // Formatting the date to display leading zeros
+    month = (month < 10 ? "0" : "") + month;
+    day = (day < 10 ? "0" : "") + day;
+    hour = (hour < 10 ? "0" : "") + hour;
+    minute = (minute < 10 ? "0" : "") + minute;
+    second = (second < 10 ? "0" : "") + second;
+
+    // Creating the formatted date string
+    let currentTimeString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+
+    return currentTimeString;
+ }
+
+ export { getCurrentDateTime };

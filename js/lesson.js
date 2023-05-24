@@ -21,9 +21,8 @@ $(document).ready(function () {
 
 function loadData(data) {
     const lesson = new Lesson(data);
-    console.log(data.videoUrl[0].url);
+    //console.log(data);
 
-    console.log(data);
     $('#lesson-title').text(lesson.title);
     $('#lesson-des').text(lesson.description);
     $('#lesson-info').prepend(`

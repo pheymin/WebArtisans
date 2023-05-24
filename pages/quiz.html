@@ -10,31 +10,20 @@
     <link rel="stylesheet" href="../styles/tailwind.css">
     <link rel="stylesheet" href="../less/main.less">
     <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../styles/quiz.css">
+    <script src="/js/jquery-3.6.4.min.js"></script>
 </head>
 
 <body class="h-full">
     <div class="flex flex-col justify-center items-center w-2/3 m-auto">
         <h2 class="text-2xl font-bold my-14">HTML - Lesson 1: Introduction to HTML</h2>
-        <div class="card w-full glass mb-10">
-            <div class="card-body">
-                <div class="card-title flex justify-between text-sm font-thin opacity-60">
-                    <h6>1</h6>
-                    <h6>20 of 20</h6>
-                </div>
-                <h3 class="text-xl my-3">Question</h3>
-                <h5>Choose matching option</h5>
-                <div class="md:grid md:grid-cols-2 md:gap-3 my-3">
-                    <button class="btn w-full h-auto my-2 py-5 normal-case">Option 1</button>
-                    <button class="btn w-full h-auto my-2 py-5 normal-case">Option 2</button>
-                    <button class="btn w-full h-auto my-2 py-5 normal-case">Option 3</button>
-                    <button class="btn w-full h-auto my-2 py-5 normal-case">Option 4</button>
-                </div>
-            </div>
-        </div>
-        <img class="w-48" src="/images/quiz.png" alt="done quiz">
+        <div class="cards-container"></div>
+        <img class="w-48" src="../images/quiz.png" alt="done quiz">
         <h2 class="text-2xl font-bold mb-9">All done! Ready to submit the quiz?</h2>
         <button class="btn btn-primary mb-14">Submit Quiz</button>
     </div>
+
+    <script src="../js/quiz.js"></script>
 </body>
 
 </html>

@@ -5,12 +5,10 @@
 
     if($method === 'POST'){
         $postData = json_decode(file_get_contents('php://input'), true);
-        //echo json_encode($postData);
         createData($postData);
     }
 
     if ($method === 'GET') {
-        // getAllData('forum');
         selectDataWithQuery($_GET['query']);
     }
 

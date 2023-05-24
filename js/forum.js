@@ -145,17 +145,7 @@ function appendPostOnTop(post){
 
     if (!post.ID) post.ID = $('.forum-card').length+1;
 
-    var datestring = new Date(post.DATE).toDateString().replace(" ", ", ");
-    var datetime = post.DATE.split(" ")[1];
-    datetime = datetime.substring(0, datetime.length-3);
-    
-    datestring = datestring.substring(4);  
-    if(datestring[0] == " ") datestring = datestring.substring(1);
-    datestring = datestring.substring(0, datestring.length-5) + "," + datestring.substring(datestring.length-5);
-
-    var hour = datetime.split(":")[0];
-    var ampm = hour >= 12 ? "PM" : "AM";
-    post.DATE = datestring + " " + datetime + " " + ampm;
+    var datestring = formatDate(post.DATE);
     
     var newPost = `
         <div class="forum-card" data-id="${post.ID}">
@@ -165,7 +155,7 @@ function appendPostOnTop(post){
                         class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
                     <div class="flex flex-col ml-4">
                         <h3 class="text-sm text-[#272e3b] font-semibold">${post.NAME}</h3>
-                        <span class="text-xs text-[#4e5969]">${post.DATE}</span>
+                        <span class="text-xs text-[#4e5969]">${datestring}</span>
                         <h5 class="font-semibold text-lg my-2 text-[#1d2129]">${post.TITLE}</h5>
                         <p class="text-sm">${post.CONTENT}</p>
                     </div>
@@ -204,9 +194,9 @@ function appendCommentModal(id,count){
                             <div class=" inline-flex items-start mt-4">
                                 <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
                                 <div class="overflow-hidden ml-4 flex-1">
-                                    <textarea rows="3" name="comment" class="w-full rounded-lg border-2 text-base border-gray-300 bg-white placeholder-gray-400 py-4 px-4 resize-none outline-none focus:border-blue-400" placeholder="Write a comment..."></textarea>
+                                    <textarea rows="3" id="txt-comment" name="comment" class="w-full rounded-lg border-2 text-base border-gray-300 bg-white placeholder-gray-400 py-4 px-4 resize-none outline-none focus:border-blue-400" placeholder="Write a comment..."></textarea>
                                     <div class="flex justify-end pb-2 ">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+                                        <button id="btn-post-comment" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
                                             Post comment
                                         </button>
                                     </div>
@@ -225,6 +215,34 @@ function appendCommentModal(id,count){
     $(document).on('click', '#icon-close', function () {
         closeCommentModal();
     }); 
+
+    $(document).on('click', '#btn-post-comment', function () {
+        var comment = $('#txt-comment').val();
+
+        if (comment == ""){
+            alert("Please write a comment");
+            return;
+        }
+
+        let date = new Date();
+        date.setHours(date.getHours() + 8);
+        let datestring = date.toISOString().slice(0, 19).replace("T", " ");
+
+        if (!comment == "") {
+            var data = {
+                FORUM_ID: id,
+                NAME: "Vite",
+                // Name: sessionStorage.getItem("currentUser"),
+                COMMENT: comment,
+                POSTEDTIME: datestring,
+                THUMB: 0
+            }
+            console.log(data.POSTEDTIME);
+            postComment(data);
+        }
+    });
+
+
 }
 
 function appendComment(data){
@@ -233,24 +251,14 @@ function appendComment(data){
 
     if (!data.ID) data.ID = $('.comment-card').length+1;
 
-    var datestring = new Date(data.POSTEDTIME).toDateString().replace(" ", ", ");
-    var datetime = data.POSTEDTIME.split(" ")[1];
-    datetime = datetime.substring(0, datetime.length-3);
-    
-    datestring = datestring.substring(4);  
-    if(datestring[0] == " ") datestring = datestring.substring(1);
-    datestring = datestring.substring(0, datestring.length-5) + "," + datestring.substring(datestring.length-5);
-
-    var hour = datetime.split(":")[0];
-    var ampm = hour >= 12 ? "PM" : "AM";
-    data.POSTEDTIME = datestring + " " + datetime + " " + ampm;
+    var datestring = formatDate(data.POSTEDTIME);
 
     var comment = `
         <div data-key="${data.ID}" class="comment-card py-6 px-5 bg-[#e8f3ff] rounded-lg flex flex-col items-start my-3">
             <div class="flex items-center">
                 <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
                 <h4 class="font-semibold text-base ml-4">${data.NAME}</h4>
-                <span class="text-base text-gray-500 ml-3">${data.POSTEDTIME}</span>
+                <span class="text-base text-gray-500 ml-3">${datestring}</span>
             </div>
             <p class="my-4 text-base">${data.COMMENT}</p>
             <div class="like-icon text-sm text-gray-500 cursor-pointer">
@@ -269,7 +277,7 @@ function closeCommentModal(){
 
 async function getComments(id)
 {
-    var query = `SELECT * FROM comments WHERE FORUM_ID = ${id} ORDER BY POSTEDTIME`
+    var query = `SELECT * FROM comments WHERE FORUM_ID = ${id} ORDER BY POSTEDTIME DESC`
     $.ajax({
         url: "../php/comments.php",
         type: "GET",
@@ -282,6 +290,36 @@ async function getComments(id)
             for (var i = 0; i < data.length; i++) {
                 appendComment(data[i]);
             }
+        }
+    })
+}
+
+function formatDate(date)
+{
+    var datestring = new Date(date).toDateString().replace(" ", ", ");
+    var datetime = date.split(" ")[1];
+    datetime = datetime.substring(0, datetime.length-3);
+    
+    datestring = datestring.substring(4);  
+    if(datestring[0] == " ") datestring = datestring.substring(1);
+    datestring = datestring.substring(0, datestring.length-5) + "," + datestring.substring(datestring.length-5);
+
+    var hour = datetime.split(":")[0];
+    var ampm = hour >= 12 ? "PM" : "AM";
+    return datestring + " " + datetime + " " + ampm;
+}
+
+async function postComment(commentData)
+{
+    var query = `INSERT INTO comments (NAME, COMMENT, FORUM_ID) VALUES (${commentData.NAME}, '${commentData.CONTENT}, ${commentData.FORUM_ID}')`
+    $.ajax({
+        url: "../php/comments.php",
+        type: "POST",
+        data: {query : query},
+        // data: JSON.stringify(query),
+        success: function (data) {
+            console.log('success');
+            appendComment(commentData);
         }
     })
 }

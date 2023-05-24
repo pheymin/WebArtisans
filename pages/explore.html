@@ -16,8 +16,22 @@
 <body>
     <div id="nav"></div>
     <div class="mx-auto bg-[#f6f4ff] min-h-screen">
-        <div class="flex justify-center">
-            <div id="card-container" class="p-5 grid grid-cols-4 gap-6 mx-10"></div>
+        <div class="flex flex-col justify-center">
+            <div class="md:min-w-[90%] p-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6 mx-10">
+                <div class="form-control col-span-full">
+                    <div class="input-group">
+                        <input id="search-bar" type="text" placeholder="Search by lesson title/lecturer" class="input input-bordered w-full" />
+                        <button id="search-btn" class="btn btn-square">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="card-container" class="md:min-w-[90%] p-5 grid lg:grid-cols-4 md:grid-cols-2 gap-6 mx-10"></div>
         </div>
     </div>
     <div id="footer"></div>

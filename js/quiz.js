@@ -122,7 +122,7 @@ $(document).ready(function () {
                     if (grade !== 'F') {
                         // If the student passed, show pass message and direct to the QR code page
                         alert('Congratulations! You passed the quiz.');
-                        window.location.href = '../pages/qr-code.html';
+                        window.location.href = '../pages/qr-code.html?id=' + lessonId + '&stuId=' + studentId + '&date=' + new Date().toISOString().slice(0, 10);
                     } else {
                         // If the student failed, prompt to reattempt quiz or go back to the home page
                         var retry = confirm('Unfortunately, you failed the quiz. Would you like to reattempt the quiz?');

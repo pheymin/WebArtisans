@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
     // console.log("forum.js ready!");
-    var query = `SELECT * FROM forum ORDER BY DATE ASC`;
+    var query = `SELECT f.*, COUNT(c.FORUM_ID) AS COMMENT_COUNT FROM forums AS f LEFT JOIN comments AS c ON f.ID = c.FORUM_ID GROUP BY f.ID ORDER BY f.DATE`;
     $.ajax({
         url: "../php/forum.php",
         type: "GET",
@@ -11,7 +11,7 @@ $(document).ready(function () {
         // dataType: "json",
         success: function (data) {
             // var data = JSON.parse(result);
-            console.log(data);
+            //console.log(data);
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i]);
                 appendPostOnTop(data[i]);
@@ -19,6 +19,7 @@ $(document).ready(function () {
             handleIconEvents();
         },
     });
+    appendCommentModal();
 });
 
 var date = new Date();
@@ -73,9 +74,9 @@ function handleIconEvents()
         var likeCount = $(this).children().last().text();
         var likeCountInt = parseInt(likeCount);
         if ($(this).children().first().hasClass("fa-solid")) {
-            $(this).children().last().text(likeCountInt + 1);
+            $(this).children().last().text((likeCountInt + 1) + " Likes");
         } else {
-            $(this).children().last().text(likeCountInt - 1);
+            $(this).children().last().text((likeCountInt - 1) + " Likes");
         }
     });
 
@@ -120,12 +121,11 @@ function createNewPost(title, content) {
         CONTENT: content,
         DATE: datestring,
         THUMB: 0,
-        COMMENT: 0,
     };
 
     //console.log(JSON.stringify(post));
 
-    const query = `INSERT INTO forum (NAME, TITLE, CONTENT, DATE, THUMB, COMMENT) VALUES ('${post.NAME}', '${post.TITLE}', '${post.CONTENT}', '${post.DATE}', ${post.THUMB}, ${post.COMMENT})`
+    const query = `INSERT INTO forums (NAME, TITLE, CONTENT, DATE, THUMB) VALUES ('${post.NAME}', '${post.TITLE}', '${post.CONTENT}', '${post.DATE}', ${post.THUMB})`
     
     $.ajax({
         url: "../php/forum.php",
@@ -171,11 +171,11 @@ function appendPostOnTop(post){
                 <div class="inline-flex pl-16 pr-4 mt-4 justify-between">
                     <div class="like-icon text-sm text-gray-500 cursor-pointer">
                         <i class="fa-regular fa-thumbs-up"></i>
-                        <span class="ml-1">${post.THUMB}</span>
+                        <span class="ml-1">${post.THUMB} Likes</span>
                     </div>
                     <span class="comment-icon cursor-pointer hover:text-[#6aa1ff] text-sm text-gray-500">
                         <i class="fa-regular fa-comment-dots ml-3"></i>
-                        <span class="ml-1">${post.COMMENT} comments</span>
+                        <span class="ml-1">${post.COMMENT_COUNT} comments</span>
                     </span>
                 </div>
             </div>
@@ -184,4 +184,81 @@ function appendPostOnTop(post){
 
     cardContainer.prepend(newPost);
     forumTextarea.val("");
+}
+
+function appendCommentModal(){
+    var modal = `
+    <div id="comment-modal-backdrop" class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 z-30 overflow-y-auto">
+            <div id="modal-panel" class="flex min-h-full justify-center p-4 items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:my-6 sm:w-full lg:max-w-4xl md:max-w-2xl max-w-xl py-8 px-6" >
+                    <div class="flex flex-col">
+                        <span class="flex justify-end"><i id="icon-close" class="fa-solid fa-xmark text-gray-500 hover:text-blue-500 text-lg cursor-pointer"></i></span>
+                        <h1 class="font-semibold text-xl text-center">20 Comments</h1>
+                        <div class=" inline-flex items-start mt-4">
+                            <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                            <div class="overflow-hidden ml-4 flex-1">
+                                <textarea rows="3" name="comment" class="w-full rounded-lg border-2 text-base border-gray-300 bg-white placeholder-gray-400 py-4 px-4 resize-none outline-none focus:border-blue-400" placeholder="Write a comment..."></textarea>
+                                <div class="flex justify-end pb-2 ">
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+                                        Post comment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="comment-board" class="flex flex-col mt-4">
+                            <div data-key="" class="py-6 px-5 bg-[#e8f3ff] rounded-lg flex flex-col items-start my-3">
+                                <div class="flex items-center">
+                                    <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
+                                    <h4 class="font-semibold text-base ml-4">John Doe</h4>
+                                    <span class="text-base text-gray-500 ml-3">May 21, 2022 11:48 AM</span>
+                                </div>
+                                <p class="my-4 text-base">These changes should fix the issues you mentioned and provide the desired behavior of opening and closing the modal.</p>
+                                <div class="like-icon text-sm text-gray-500 cursor-pointer">
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    <span class="ml-1">14 Likes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+
+    $("body").append(modal);
+
+    $(document).on('click', '#logout-modal-backdrop', function () {
+        closeCommentModal();
+    });
+
+    $(document).on('click', '#icon-close', function () {
+        closeCommentModal();
+    }); 
+}
+
+function appendComment(comment){
+
+    var comment = `
+        <div data-key="" class="py-6 px-5 bg-[#e8f3ff] rounded-lg flex flex-col items-start my-3">
+            <div class="flex items-center">
+                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
+                <h4 class="font-semibold text-base ml-4">John Doe</h4>
+                <span class="text-base text-gray-500 ml-3">May 21, 2022 11:48 AM</span>
+            </div>
+            <p class="my-4 text-base">These changes should fix the issues you mentioned and provide the desired behavior of opening and closing the modal.</p>
+            <div class="like-icon text-sm text-gray-500 cursor-pointer">
+                <i class="fa-regular fa-thumbs-up"></i>
+                <span class="ml-1">14 Likes</span>
+            </div>
+        </div>
+    `
+
+    $("#comment-board").append(comment);
+}
+
+function closeCommentModal(){
+    $("#comment-modal-backdrop").remove();
 }

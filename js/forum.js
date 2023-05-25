@@ -92,7 +92,7 @@ function handleIconEvents()
         var id = $(this).closest("[data-id]").data("id");
         var commentCount = $(this).children().last().text().split(" ")[0];
         var count = parseInt(commentCount);
-        appendCommentModal(id,count);
+        appendCommentModal(id,count,$(this).children().last());
     });
 }
 
@@ -123,6 +123,7 @@ function createNewPost(title, content) {
         CONTENT: content,
         DATE: datestring,
         THUMB: 0,
+        COMMENT_COUNT: 0
     };
 
     //console.log(JSON.stringify(post));
@@ -178,7 +179,7 @@ function appendPostOnTop(post){
     forumTextarea.val("");
 }
 
-function appendCommentModal(id,count){
+function appendCommentModal(id,count,ele){
 
     var data = getComments(id);
 
@@ -190,7 +191,7 @@ function appendCommentModal(id,count){
                     <div class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:my-6 sm:w-full lg:max-w-4xl md:max-w-2xl max-w-xl py-8 px-6" >
                         <div class="flex flex-col">
                             <span class="flex justify-end"><i id="icon-close" class="fa-solid fa-xmark text-gray-500 hover:text-blue-500 text-lg cursor-pointer"></i></span>
-                            <h1 class="font-semibold text-xl text-center">${count} Comments</h1>
+                            <h1 id="comment-modal-count" class="font-semibold text-xl text-center">${count} Comments</h1>
                             <div class=" inline-flex items-start mt-4">
                                 <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
                                 <div class="overflow-hidden ml-4 flex-1">
@@ -228,18 +229,17 @@ function appendCommentModal(id,count){
         date.setHours(date.getHours() + 8);
         let datestring = date.toISOString().slice(0, 19).replace("T", " ");
 
-        if (!comment == "") {
-            var data = {
-                FORUM_ID: id,
-                NAME: "Vite",
-                // Name: sessionStorage.getItem("currentUser"),
-                COMMENT: comment,
-                POSTEDTIME: datestring,
-                THUMB: 0
-            }
-            console.log(data.POSTEDTIME);
-            postComment(data);
+        var data = {
+            FORUM_ID: id,
+            NAME: "Vite",
+            // Name: sessionStorage.getItem("currentUser"),
+            COMMENT: comment,
+            POSTEDTIME: datestring,
+            THUMB: 0
         }
+        postComment(data);
+        $('#comment-modal-count').text(`${count+1} Comments`);
+        ele.text(`${count+1} comments`);
     });
 
 
@@ -268,7 +268,7 @@ function appendComment(data){
         </div>
     `
 
-    $("#comment-board").append(comment);
+    $("#comment-board").prepend(comment);
 }
 
 function closeCommentModal(){
@@ -277,13 +277,13 @@ function closeCommentModal(){
 
 async function getComments(id)
 {
-    var query = `SELECT * FROM comments WHERE FORUM_ID = ${id} ORDER BY POSTEDTIME DESC`
+    var query = `SELECT * FROM comments WHERE FORUM_ID = ${id} ORDER BY POSTEDTIME`
     $.ajax({
-        url: "../php/comments.php",
+        url: "../php/forum.php",
         type: "GET",
         data: {query : query},
         success: function (data) {
-            console.log(data);
+            // console.log(data);
 
             if (data.length == 0) return;
             // return data;
@@ -309,16 +309,17 @@ function formatDate(date)
     return datestring + " " + datetime + " " + ampm;
 }
 
-async function postComment(commentData)
+function postComment(commentData)
 {
-    var query = `INSERT INTO comments (NAME, COMMENT, FORUM_ID) VALUES (${commentData.NAME}, '${commentData.CONTENT}, ${commentData.FORUM_ID}')`
+    var query = `INSERT INTO comments (NAME, COMMENT, FORUM_ID) VALUES ('${commentData.NAME}', '${commentData.COMMENT}', '${commentData.FORUM_ID}')`
+    // console.log(query);
     $.ajax({
         url: "../php/comments.php",
         type: "POST",
-        data: {query : query},
-        // data: JSON.stringify(query),
-        success: function (data) {
-            console.log('success');
+        // data: {query : query},
+        data: JSON.stringify(query),
+        success: function () {
+            // console.log('success');
             appendComment(commentData);
         }
     })

@@ -4,9 +4,10 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if($method === 'POST'){
+        // echo "POST";
         $postData = json_decode(file_get_contents('php://input'), true);
         // createData($postData);
-        createData($_POST['query']);
+        createData($postData);
     }
 
     if ($method === 'GET') {

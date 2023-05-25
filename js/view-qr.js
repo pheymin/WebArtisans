@@ -31,7 +31,7 @@ $(document).ready(function () {
                                         <h5>${qrData.date}</h5>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary w-full md:w-fit md:absolute md:bottom-0 md:right-0 md:mb-5 md:mr-5">Download</button>
+                                <button id="downloadButton${index}" class="btn btn-primary w-full md:w-fit md:absolute md:bottom-0 md:right-0 md:mb-5 md:mr-5">Download</button>
                             </div>
                         </div>`;
 
@@ -43,6 +43,13 @@ $(document).ready(function () {
                         text: qrUrl,
                         width: 240,
                         height: 240
+                    });
+
+                    // Add click event listener to the download button
+                    $(document).on('click', `#downloadButton${index}`, function () {
+                        // Open a new window with the URL to download the PDF
+                        var pdfUrl = 'https://webartisans-4a3a2.web.app/certificate.html?name=' + qrData.studentName + '&lesson=' + qrData.lessonName + '&date=' + qrData.date;
+                        window.open(pdfUrl, '_blank');
                     });
                 });
             }

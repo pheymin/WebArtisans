@@ -51,7 +51,7 @@ $(document).ready(function () {
                 });
 
                 // Append the card to the HTML
-                $('img').before($card);
+                $('#imgb4card').before($card);
             });
         },
     });

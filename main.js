@@ -9,19 +9,19 @@ const nav = `
             <div class="p-3.5 text-xl font-bold tracking-wider">WèbArtisáns</div>
         </a>
         <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <a router href="./pages/contactus.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="contactus.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Contact Us
             </a>
-            <a router href="./pages/explore.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="explore.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Explore
             </a>
-            <a router href="./pages/forum.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="forum.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Forum
             </a>
         </nav>
         <div>
             <div class="flex justify-between relative">
-                <a router href="./pages/login.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
+                <a router href="login.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
                 <button id="btn-register" class="py-4 px-6 text-white bg-[#a38ffd] rounded-xl font-semibold hover:bg-[#805be8]">
                     Register
                 </button>
@@ -125,7 +125,8 @@ $('#nav').html(nav)
 $('#footer').html(footer)
 
 $('#btn-register').on('click', () => {
-    window.location.href = './pages/register.html'
+    // window.location.href = './pages/register.html'
+    replaceUrl('register.html')
 })
 
 $("#nav-profile-img").on('click', () => {
@@ -135,3 +136,22 @@ $("#nav-profile-img").on('click', () => {
 $("#sm-nav-menu-control").on('click', () => {
     $('#sm-nav-menu-dropdown').toggleClass('hidden');
 })
+
+$("a").on('click', (e) => {
+    e.preventDefault()
+    if(!e.target.attributes.href) return;
+    replaceUrl(e.target.attributes.href.value);
+})
+
+function getCurrentUrl(){
+    return window.location.href;
+}
+
+function curIsIndex(){
+    return getCurrentUrl() === "http://localhost/WebArtisans/" || getCurrentUrl() === "http://localhost/WebArtisans/index.html";
+}
+
+function replaceUrl(value){
+    const path = curIsIndex() ? `./pages/${value}` : `./${value}`;
+    window.location.href = path;
+}

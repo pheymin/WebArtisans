@@ -1,25 +1,20 @@
+import { getRandomImageUrl } from "./Tools.js";
 
 $(document).ready(function () {
 
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
-    // console.log("forum.js ready!");
     var query = `SELECT f.*, COUNT(c.FORUM_ID) AS COMMENT_COUNT FROM forums AS f LEFT JOIN comments AS c ON f.ID = c.FORUM_ID GROUP BY f.ID ORDER BY f.DATE`;
     $.ajax({
         url: "../php/forum.php",
         type: "GET",
         data: { query: query },
-        // dataType: "json",
         success: function (data) {
-            // var data = JSON.parse(result);
-            //console.log(data);
             for (var i = 0; i < data.length; i++) {
-                //console.log(data[i]);
                 appendPostOnTop(data[i]);
             }
             handleIconEvents();
         },
     });
-    // appendCommentModal();
 });
 
 var date = new Date();
@@ -29,37 +24,6 @@ datetime.text(datestring);
 
 function handleIconEvents()
 {
-    /*
-    var likeContainer = $(".like-icon");
-    likeContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-    likeContainer.on("click", function () {
-        $(this.children[0]).toggleClass("fa-solid");
-        $(this.children[0]).toggleClass("text-red-500");
-
-        //plus one or minus one to children[1]
-        var likeCount = $(this.children[1]).text();
-        var likeCountInt = parseInt(likeCount);
-        if ($(this.children[0]).hasClass("fa-solid")) {
-            $(this.children[1]).text(likeCountInt + 1);
-        } else {
-            $(this.children[1]).text(likeCountInt - 1);
-        }
-    });
-
-    var commentContainer = $(".comment-icon");
-    commentContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-    commentContainer.on("click", function () {
-        var data = $(this).parent().parent().parent().data("id");
-        //appendCommentModal(data);
-        console.log(data);
-    });
-    */
     $(document).on("mouseenter", ".like-icon", function() {
         $(this).children().first().toggleClass("fa-bounce");
     });
@@ -137,7 +101,6 @@ function createNewPost(title, content) {
         success: function (result) {
             //console.log(result);
             appendPostOnTop(post);
-            // handleIconEvents();
         }
     });
 }
@@ -152,7 +115,7 @@ function appendPostOnTop(post){
         <div class="forum-card" data-id="${post.ID}">
             <div class="flex flex-col box-border mb-6 py-5 px-7 rounded-lg shadow-lg bg-[#f5e8ff]">
                 <div class="inline-flex">
-                    <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                    <img src="${getRandomImageUrl()}" id="user-profile" alt="profile"
                         class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
                     <div class="flex flex-col ml-4">
                         <h3 class="text-sm text-[#272e3b] font-semibold">${post.NAME}</h3>
@@ -256,7 +219,7 @@ function appendComment(data){
     var comment = `
         <div data-key="${data.ID}" class="comment-card py-6 px-5 bg-[#e8f3ff] rounded-lg flex flex-col items-start my-3">
             <div class="flex items-center">
-                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
+                <img src="${getRandomImageUrl()}" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
                 <h4 class="font-semibold text-base ml-4">${data.NAME}</h4>
                 <span class="text-base text-gray-500 ml-3">${datestring}</span>
             </div>
@@ -283,10 +246,8 @@ async function getComments(id)
         type: "GET",
         data: {query : query},
         success: function (data) {
-            // console.log(data);
-
             if (data.length == 0) return;
-            // return data;
+            
             for (var i = 0; i < data.length; i++) {
                 appendComment(data[i]);
             }
@@ -314,12 +275,10 @@ function postComment(commentData)
     var query = `INSERT INTO comments (NAME, COMMENT, FORUM_ID) VALUES ('${commentData.NAME}', '${commentData.COMMENT}', '${commentData.FORUM_ID}')`
     // console.log(query);
     $.ajax({
-        url: "../php/comments.php",
+        url: "../php/forum.php",
         type: "POST",
-        // data: {query : query},
         data: JSON.stringify(query),
         success: function () {
-            // console.log('success');
             appendComment(commentData);
         }
     })

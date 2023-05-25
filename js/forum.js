@@ -29,37 +29,6 @@ datetime.text(datestring);
 
 function handleIconEvents()
 {
-    /*
-    var likeContainer = $(".like-icon");
-    likeContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-    likeContainer.on("click", function () {
-        $(this.children[0]).toggleClass("fa-solid");
-        $(this.children[0]).toggleClass("text-red-500");
-
-        //plus one or minus one to children[1]
-        var likeCount = $(this.children[1]).text();
-        var likeCountInt = parseInt(likeCount);
-        if ($(this.children[0]).hasClass("fa-solid")) {
-            $(this.children[1]).text(likeCountInt + 1);
-        } else {
-            $(this.children[1]).text(likeCountInt - 1);
-        }
-    });
-
-    var commentContainer = $(".comment-icon");
-    commentContainer.hover(function () {
-        $(this.children[0]).toggleClass("fa-bounce");
-    });
-
-    commentContainer.on("click", function () {
-        var data = $(this).parent().parent().parent().data("id");
-        //appendCommentModal(data);
-        console.log(data);
-    });
-    */
     $(document).on("mouseenter", ".like-icon", function() {
         $(this).children().first().toggleClass("fa-bounce");
     });
@@ -108,6 +77,15 @@ createButton.on("click", function (e) {
     createNewPost(title, content);
 });
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getRandomImageUrl() {
+    var randomInt = getRandomInt(50);
+    return `../public/random/avatar-${randomInt}.svg`;
+}
+
 const cardContainer = $(".forum-card-container");
 var cardNum = cardContainer.children().length;
 
@@ -152,7 +130,7 @@ function appendPostOnTop(post){
         <div class="forum-card" data-id="${post.ID}">
             <div class="flex flex-col box-border mb-6 py-5 px-7 rounded-lg shadow-lg bg-[#f5e8ff]">
                 <div class="inline-flex">
-                    <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                    <img src="${getRandomImageUrl()}" id="user-profile" alt="profile"
                         class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
                     <div class="flex flex-col ml-4">
                         <h3 class="text-sm text-[#272e3b] font-semibold">${post.NAME}</h3>
@@ -256,7 +234,7 @@ function appendComment(data){
     var comment = `
         <div data-key="${data.ID}" class="comment-card py-6 px-5 bg-[#e8f3ff] rounded-lg flex flex-col items-start my-3">
             <div class="flex items-center">
-                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
+                <img src="${getRandomImageUrl()}" id="user-profile" alt="profile" class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
                 <h4 class="font-semibold text-base ml-4">${data.NAME}</h4>
                 <span class="text-base text-gray-500 ml-3">${datestring}</span>
             </div>

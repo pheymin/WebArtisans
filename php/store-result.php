@@ -26,10 +26,10 @@ $result = mysqli_query($db, $insertQuery);
 
 // Check if the insertion was successful
 if ($result) {
-    // Return a success response
-    echo json_encode(['success' => true]);
+  // Return a success response
+  echo json_encode(['success' => true]);
 } else {
-    // Return an error response
-    echo json_encode(['success' => false]);
+  // Return an error response
+  echo json_encode(['success' => false]);
 }
 ?>

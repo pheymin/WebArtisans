@@ -10,11 +10,17 @@ $lessonNameResult = mysqli_query($db, $lessonNameQuery);
 $lessonNameRow = mysqli_fetch_assoc($lessonNameResult);
 $lessonName = $lessonNameRow['lesson_name'];
 
+// Retrieve the last quiz id from the database
+$quizIdQuery = "SELECT id FROM quiz WHERE lesson_id = " . $lessonId . " ORDER BY id DESC LIMIT 1";
+$quizIdResult = mysqli_query($db, $quizIdQuery);
+$quizIdRow = mysqli_fetch_assoc($quizIdResult);
+$quizId = $quizIdRow['id'];
+
 // Retrieve the quiz questions and answers from the database
 $questionsQuery = "SELECT q.id, q.question_text, o.id AS option_id, o.option_text, o.is_answer
                   FROM questions q
                   INNER JOIN options o ON q.id = o.question_id
-                  WHERE q.quiz_id = " . $lessonId;
+                  WHERE q.quiz_id = " . $quizId;
 $questionsResult = mysqli_query($db, $questionsQuery);
 
 $quizData = array();

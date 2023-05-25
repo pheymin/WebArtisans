@@ -87,6 +87,12 @@ $(document).ready(function () {
         // Handle the response from the PHP script
         alert(response.split('<br>')[0]);
         // Optionally, you can redirect to another page or perform any other actions
+        // Clear select and textarea fields
+        $('select[name="title"]').val('');
+        $('.autoresize-textarea').val('');
+
+        // Clear options fields
+        $('.delete-option-icon').attr('src', '../images/tick.svg');
       },
       error: function (xhr, status, error) {
         // Handle the error

@@ -22,7 +22,7 @@ function createCard(data){
     var datestring = formatPosttime(data.POSTEDTIME);
 
     var card = `
-        <div class="xl:w-1/3 md:w-1/2 p-4" data-id="${data.ID}">
+        <div class="xl:w-1/3 md:w-1/2 w-full p-4" data-id="${data.ID}">
             <div class="border border-gray-200 p-6 rounded-lg shadow-lg">
             <div class="inline-flex items-start mb-4">
                 <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"

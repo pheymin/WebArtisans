@@ -25,7 +25,6 @@ $(document).ready(function () {
             //console.log(data);
             for (var i = 0; i < data.length; i++) {
                 createFeedbackCard(data[i]);
-                //console.log(data[i].POSTEDTIME);
             }
         },
         error: function (xhr, status, error) {

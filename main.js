@@ -9,20 +9,20 @@ const nav = `
             <div class="p-3.5 text-xl font-bold tracking-wider">WèbArtisáns</div>
         </a>
         <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <a router href="/contactus" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="./pages/contactus.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Contact Us
             </a>
-            <a router href="/explore" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="./pages/explore.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Explore
             </a>
-            <a router href="/forum" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
+            <a router href="./pages/forum.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">
                 Forum
             </a>
         </nav>
         <div>
             <div class="flex justify-between relative">
-                <a router href="/login" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
-                <button class="py-4 px-6 text-white bg-[#a38ffd] rounded-xl font-semibold hover:bg-[#805be8]">
+                <a router href="./pages/login.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-2 ">Log In</a>
+                <button id="btn-register" class="py-4 px-6 text-white bg-[#a38ffd] rounded-xl font-semibold hover:bg-[#805be8]">
                     Register
                 </button>
             </div>
@@ -67,3 +67,7 @@ const footer = `
 
 $('#nav').html(nav)
 $('#footer').html(footer)
+
+$('#btn-register').on('click', () => {
+    window.location.href = './pages/register.html'
+})

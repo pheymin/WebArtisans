@@ -1,5 +1,7 @@
+import { getRandomImageUrl } from "./Tools.js";
+
 $(document).ready(function () {
-    console.log("view-feedback.js ready!");
+    // console.log("view-feedback.js ready!");
 
     const query = `SELECT * FROM feedback ORDER BY POSTEDTIME DESC`;
 
@@ -8,7 +10,7 @@ $(document).ready(function () {
         type: "GET",
         data: {query: query},
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i]);
                 createCard(data[i]);
@@ -25,7 +27,7 @@ function createCard(data){
         <div class="xl:w-1/3 md:w-1/2 w-full p-4" data-id="${data.ID}">
             <div class="border border-gray-200 p-6 rounded-lg shadow-lg">
             <div class="inline-flex items-start mb-4">
-                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile"
+                <img src="${getRandomImageUrl()}" id="user-profile" alt="profile"
                     class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center">
                 <div class="ml-2">
                     <h2 class="text-base text-gray-900 font-medium mb-1">${data.NAME}</h2>

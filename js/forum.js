@@ -1,25 +1,20 @@
+import { getRandomImageUrl } from "./Tools.js";
 
 $(document).ready(function () {
 
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
-    // console.log("forum.js ready!");
     var query = `SELECT f.*, COUNT(c.FORUM_ID) AS COMMENT_COUNT FROM forums AS f LEFT JOIN comments AS c ON f.ID = c.FORUM_ID GROUP BY f.ID ORDER BY f.DATE`;
     $.ajax({
         url: "../php/forum.php",
         type: "GET",
         data: { query: query },
-        // dataType: "json",
         success: function (data) {
-            // var data = JSON.parse(result);
-            //console.log(data);
             for (var i = 0; i < data.length; i++) {
-                //console.log(data[i]);
                 appendPostOnTop(data[i]);
             }
             handleIconEvents();
         },
     });
-    // appendCommentModal();
 });
 
 var date = new Date();
@@ -77,15 +72,6 @@ createButton.on("click", function (e) {
     createNewPost(title, content);
 });
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
-function getRandomImageUrl() {
-    var randomInt = getRandomInt(50);
-    return `../public/random/avatar-${randomInt}.svg`;
-}
-
 const cardContainer = $(".forum-card-container");
 var cardNum = cardContainer.children().length;
 
@@ -115,7 +101,6 @@ function createNewPost(title, content) {
         success: function (result) {
             //console.log(result);
             appendPostOnTop(post);
-            // handleIconEvents();
         }
     });
 }
@@ -261,10 +246,8 @@ async function getComments(id)
         type: "GET",
         data: {query : query},
         success: function (data) {
-            // console.log(data);
-
             if (data.length == 0) return;
-            // return data;
+            
             for (var i = 0; i < data.length; i++) {
                 appendComment(data[i]);
             }
@@ -292,12 +275,10 @@ function postComment(commentData)
     var query = `INSERT INTO comments (NAME, COMMENT, FORUM_ID) VALUES ('${commentData.NAME}', '${commentData.COMMENT}', '${commentData.FORUM_ID}')`
     // console.log(query);
     $.ajax({
-        url: "../php/comments.php",
+        url: "../php/forum.php",
         type: "POST",
-        // data: {query : query},
         data: JSON.stringify(query),
         success: function () {
-            // console.log('success');
             appendComment(commentData);
         }
     })

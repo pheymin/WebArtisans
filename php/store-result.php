@@ -2,27 +2,28 @@
 require('dbConfig.php');
 
 // Retrieve the data from the AJAX POST request
-$lessonId = $_POST['lessonId'];
-$studentId = $_POST['studentId'];
+$name = $_POST['name'];
+$lesson = $_POST['lessonName'];
 $score = $_POST['score'];
 $grade = $_POST['grade'];
 
 // Create the table if it doesn't exist
 $createTableQuery = "CREATE TABLE IF NOT EXISTS quiz_results (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  student_id INT NOT NULL,
-  lesson_id INT NOT NULL,
+  student_name VARCHAR(255) NOT NULL,
+  lesson_name VARCHAR(255) NOT NULL,
   result DECIMAL(5, 2) NOT NULL,
   grade CHAR(1) NOT NULL,
   submit_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )";
 
-$result = mysqli_query($db, $createTableQuery);
+mysqli_query($db, $createTableQuery);
 
-// Insert the result into the database
-$insertQuery = "INSERT INTO quiz_results (student_id, lesson_id, result, grade)
-                VALUES ($studentId, $lessonId, $score, '$grade')";
-$result = mysqli_query($db, $insertQuery);
+// Insert the result into the database using prepared statements
+$insertQuery = "INSERT INTO quiz_results (student_name, lesson_name, result, grade) VALUES (?, ?, ?, ?)";
+$insertStatement = mysqli_prepare($db, $insertQuery);
+mysqli_stmt_bind_param($insertStatement, 'ssds', $name, $lesson, $score, $grade);
+$result = mysqli_stmt_execute($insertStatement);
 
 // Check if the insertion was successful
 if ($result) {

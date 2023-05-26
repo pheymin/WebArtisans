@@ -1,6 +1,6 @@
 <?php
 // Retrieve the QR details from the URL parameters
-$studentName = $_POST['studentName'];
+$studentName = $_POST['name'];
 $lessonName = $_POST['lessonName'];
 $date = $_POST['date'];
 

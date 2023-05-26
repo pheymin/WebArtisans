@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 07:38 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 26, 2023 at 09:58 AM
+-- Server version: 8.0.32
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,14 +27,16 @@ SET time_zone = "+00:00";
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE `feedback` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `ID` int NOT NULL AUTO_INCREMENT,
   `MESSAGE` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `PHONE` varchar(255) DEFAULT NULL,
-  `POSTEDTIME` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `POSTEDTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `feedback`
@@ -56,15 +58,17 @@ INSERT INTO `feedback` (`ID`, `MESSAGE`, `NAME`, `EMAIL`, `PHONE`, `POSTEDTIME`)
 -- Table structure for table `forum`
 --
 
-CREATE TABLE `forum` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `forum`;
+CREATE TABLE IF NOT EXISTS `forum` (
+  `ID` int NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) DEFAULT NULL,
-  `TITLE` text DEFAULT NULL,
-  `CONTENT` text DEFAULT NULL,
+  `TITLE` text,
+  `CONTENT` text,
   `DATE` datetime DEFAULT NULL,
-  `THUMB` int(11) DEFAULT NULL,
-  `COMMENT` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `THUMB` int DEFAULT NULL,
+  `COMMENT` int DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `forum`
@@ -86,11 +90,14 @@ INSERT INTO `forum` (`ID`, `NAME`, `TITLE`, `CONTENT`, `DATE`, `THUMB`, `COMMENT
 -- Table structure for table `learner_lessons`
 --
 
-CREATE TABLE `learner_lessons` (
-  `user_id` int(11) NOT NULL,
-  `lesson_id` int(11) NOT NULL,
-  `completed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `learner_lessons`;
+CREATE TABLE IF NOT EXISTS `learner_lessons` (
+  `user_id` int NOT NULL,
+  `lesson_id` int NOT NULL,
+  `completed` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`user_id`,`lesson_id`),
+  KEY `lesson_id` (`lesson_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -98,22 +105,24 @@ CREATE TABLE `learner_lessons` (
 -- Table structure for table `lessons`
 --
 
-CREATE TABLE `lessons` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `lessons`;
+CREATE TABLE IF NOT EXISTS `lessons` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `videoUrl` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`videoUrl`)),
-  `upload_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `description` text,
+  `videoUrl` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `upload_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `coverPic` varchar(255) DEFAULT NULL,
-  `lecturer` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `lecturer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
 
 --
 -- Dumping data for table `lessons`
 --
 
 INSERT INTO `lessons` (`id`, `title`, `description`, `videoUrl`, `upload_time`, `coverPic`, `lecturer`) VALUES
-(1, 'Furter Web Design and Development', 'This module focuses on advancing students\' knowledge in web design and development. It covers HTML5, CSS3, and dynamic scripting technologies like JavaScript and server-side scripting. Students learn to create interactive and efficient web interfaces, incorporating responsive layouts, animations, and data-driven functionalities. Practical exercises and projects reinforce their understanding.\r\nCertainly! The module aims to provide students with a comprehensive understanding of various technologies and design concepts in web design and development. It goes beyond the basics and focuses on advanced techniques that can enhance the interactivity and efficiency of a web user interface.\r\nOne of the key technologies covered in this module is HTML5. Students will delve into the latest features and elements provided by HTML5, such as semantic tags, multimedia integration, and form enhancements. They will learn how to structure web pages effectively using HTML5, ensuring clean and accessible markup.\r\nCSS3 is another important technology that will be extensively explored. Students will learn advanced CSS3 properties and techniques for creating visually appealing and responsive web designs. They will gain expertise in utilizing CSS3 transitions, animations, and transformations to bring life and interactivity to web interfaces. Additionally, students will explore the concept of CSS frameworks and preprocessors, enabling them to streamline their CSS workflow and create modular and maintainable stylesheets.\r\nFurthermore, this module emphasizes the use of various dynamic scripting technologies to enhance web interactivity. JavaScript, being a fundamental scripting language, will be taught in-depth. Students will learn how to use JavaScript to manipulate the Document Object Model (DOM) dynamically, handle user events, and perform client-side form validation. They will also be introduced to popular JavaScript libraries and frameworks like jQuery, which can significantly simplify common tasks and provide additional functionality.\r\nMoreover, the module will cover the integration of server-side scripting technologies, such as PHP or Python, with HTML and CSS. Students will learn how to create dynamic web pages by generating content on the server and seamlessly integrating it with the client-side interface. They will gain insights into concepts like database connectivity, user authentication, and session management, enabling them to develop interactive and data-driven web applications.\r\nThroughout the module, students will engage in practical exercises and projects to reinforce their understanding of the concepts taught. They will work on real-world scenarios, implementing responsive layouts, interactive forms, and dynamic content updates. Additionally, they will be encouraged to explore emerging trends and best practices in web design and development, keeping them up-to-date with the ever-evolving industry.\r\nIn conclusion, this module provides an extensive exploration of HTML5, CSS3, and dynamic scripting technologies to equip students with the skills and knowledge necessary to create modern and efficient web user interfaces. By applying these technologies effectively, students will be able to enhance the interactivity and user experience of web applications they develop.', '[{\"title\":\"01 HTML 5\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=42b33bfe-ce53-43e8-bc0e-d434cbd4ec30&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"02 Web Form\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=e8fad8f5-a160-4a02-847e-56d3ebb37e00&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"03 CSS 3\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=5b8d5fd7-2a61-4ed8-b489-b502a802e88d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"04 Responsive Design\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=877e3bc1-3c51-47c7-a43e-e1d10106ea74&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"05 Multimedia & Geolocation\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=ff77333d-8625-42ff-befe-054f8f021a7a&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"06 PHP\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=d927ba5b-5a40-474b-a7ad-f8068f016b3a&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"07 MySQL\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=53704d75-5f82-41dd-9ebf-fb450f243fb7&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"08 User Interface Design Guideline\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=991b1e28-b862-4d3a-b209-9440b4e72d95&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"09 JQuery\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=d1d594c5-f925-4bed-b87f-27134a8b9587&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"10 AJAX\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=b3d5a948-5349-438c-8166-828c35846d67&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"}]', '2023-05-21 05:20:35', '../upload/646a14ce19766_fwdd.png', 'Mohamad Firdaus Bin Che Abdul Rani'),
+(1, 'Furter Web Design and Development', 'This module focuses on advancing students\' knowledge in web design and development. It covers HTML5, CSS3, and dynamic scripting technologies like JavaScript and server-side scripting. Students learn to create interactive and efficient web interfaces, incorporating responsive layouts, animations, and data-driven functionalities. Practical exercises and projects reinforce their understanding.\nCertainly! The module aims to provide students with a comprehensive understanding of various technologies and design concepts in web design and development. It goes beyond the basics and focuses on advanced techniques that can enhance the interactivity and efficiency of a web user interface.\nOne of the key technologies covered in this module is HTML5. Students will delve into the latest features and elements provided by HTML5, such as semantic tags, multimedia integration, and form enhancements. They will learn how to structure web pages effectively using HTML5, ensuring clean and accessible markup.\nCSS3 is another important technology that will be extensively explored. Students will learn advanced CSS3 properties and techniques for creating visually appealing and responsive web designs. They will gain expertise in utilizing CSS3 transitions, animations, and transformations to bring life and interactivity to web interfaces. Additionally, students will explore the concept of CSS frameworks and preprocessors, enabling them to streamline their CSS workflow and create modular and maintainable stylesheets.\nFurthermore, this module emphasizes the use of various dynamic scripting technologies to enhance web interactivity. JavaScript, being a fundamental scripting language, will be taught in-depth. Students will learn how to use JavaScript to manipulate the Document Object Model (DOM) dynamically, handle user events, and perform client-side form validation. They will also be introduced to popular JavaScript libraries and frameworks like jQuery, which can significantly simplify common tasks and provide additional functionality.\nMoreover, the module will cover the integration of server-side scripting technologies, such as PHP or Python, with HTML and CSS. Students will learn how to create dynamic web pages by generating content on the server and seamlessly integrating it with the client-side interface. They will gain insights into concepts like database connectivity, user authentication, and session management, enabling them to develop interactive and data-driven web applications.\nThroughout the module, students will engage in practical exercises and projects to reinforce their understanding of the concepts taught. They will work on real-world scenarios, implementing responsive layouts, interactive forms, and dynamic content updates. Additionally, they will be encouraged to explore emerging trends and best practices in web design and development, keeping them up-to-date with the ever-evolving industry.\nIn conclusion, this module provides an extensive exploration of HTML5, CSS3, and dynamic scripting technologies to equip students with the skills and knowledge necessary to create modern and efficient web user interfaces. By applying these technologies effectively, students will be able to enhance the interactivity and user experience of web applications they develop.', '[{\"title\":\"01 HTML 5\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=42b33bfe-ce53-43e8-bc0e-d434cbd4ec30&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"02 Web Form\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=e8fad8f5-a160-4a02-847e-56d3ebb37e00&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"03 CSS 3\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=5b8d5fd7-2a61-4ed8-b489-b502a802e88d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"04 Responsive Design\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=877e3bc1-3c51-47c7-a43e-e1d10106ea74&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"05 Multimedia & Geolocation\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=ff77333d-8625-42ff-befe-054f8f021a7a&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"06 PHP\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=d927ba5b-5a40-474b-a7ad-f8068f016b3a&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"07 MySQL\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=53704d75-5f82-41dd-9ebf-fb450f243fb7&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"08 User Interface Design Guideline\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=991b1e28-b862-4d3a-b209-9440b4e72d95&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"09 JQuery\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=d1d594c5-f925-4bed-b87f-27134a8b9587&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"10 AJAX\",\"url\":\"https://cloudmails.sharepoint.com/sites/CT117-3-2-FWDD-L-1565/_layouts/15/embed.aspx?UniqueId=b3d5a948-5349-438c-8166-828c35846d67&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"}]', '2023-05-21 05:20:35', '../upload/646a14ce19766_fwdd.png', 'Mohamad Firdaus Bin Che Abdul Rani'),
 (2, 'Data Structure', 'This module introduces fundamental data structures used in computing and emphasizes their implementation through a suitable programming language. It aims to empower students to select and utilize appropriate data structures for effective problem-solving, thereby enhancing their overall skills and understanding in the field of computer science.\r\nThis module serves as a gateway to understanding the significance of common data structures in the realm of computing. It provides students with a comprehensive introduction to essential data structures and their applications. Through practical implementation exercises using a suitable programming language, students gain hands-on experience in creating and manipulating these structures. By focusing on both theoretical concepts and practical implementation, the module equips students with the necessary skills to identify and choose appropriate data structures for solving various computational problems.\r\nThroughout the module, students explore a range of data structures, including arrays, linked lists, stacks, queues, trees, and graphs. They learn the underlying principles and characteristics of each data structure, such as their efficiency, memory usage, and suitability for specific scenarios. Additionally, students study algorithms associated with these data structures, examining how they enable efficient retrieval, insertion, deletion, and traversal operations.\r\nThe practical component of the module involves implementing data structures in a suitable programming language. Students are encouraged to apply their theoretical knowledge to solve real-world problems by designing and implementing data structures to efficiently manage and manipulate data. Through hands-on coding exercises, students develop their programming skills, enhance their logical thinking abilities, and gain proficiency in selecting the most appropriate data structures based on problem requirements.\r\nBy the end of the module, students are expected to have a deep understanding of various data structures and their associated algorithms. They should be capable of analyzing computational problems and determining the most effective data structure for solving them. Furthermore, students will have honed their programming skills and gained valuable experience in implementing and manipulating data structures, equipping them with a solid foundation for further studies and practical applications in computer science and related fields.\r\nIn conclusion, this module provides students with a comprehensive understanding of common data structures and their practical implementation. By exploring theoretical concepts and engaging in hands-on programming exercises, students develop the skills and knowledge necessary to select and apply appropriate data structures for problem-solving. ', '[{\"title\":\"01 Introduction\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=2be4e3ae-adc2-4a4b-b2be-945a3cd707a9&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"02 Overview of C++\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=b4bc4621-0538-4728-9c2a-8a744b7d691f&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"03 Bubble Sort\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=901d4634-3d76-45f3-b04b-adae7c94743a&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"04 Insertion Sort\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=094f10ad-8a01-42e0-8df4-0d41d234bc78&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"05 Linked List - 1\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=219f18e7-91e2-4d80-b2ef-3c28a461080e&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"06 Linked List - 2\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=1e191aa9-90cd-411c-bad9-88976d9dc1f3&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"07 Stacks\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=1896c764-ccf9-49e8-91c1-3bf357a75e96&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"08 Trees\",\"url\":\"https://cloudmails.sharepoint.com/sites/DataStructures022023-CMM/_layouts/15/embed.aspx?UniqueId=9cf4cc82-3e0b-4680-98ff-eef60d2a4740&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"}]', '2023-05-21 14:12:13', '../upload/646a26bdc2721_dstr.png', 'Chong Mien May'),
 (3, 'Research Methods for Computing and Technology', 'This module focuses on applying Design Science concepts to address problems by creating software artifacts. It equips computing and IT students with the necessary tools and techniques to successfully complete their final year investigation and project. Additionally, it fosters a comprehensive understanding of conducting effective research in the field.\r\nThe primary objective of this module is to introduce students to the practical application of Design Science concepts in the context of problem-solving through the creation of software artifacts. By combining theoretical knowledge with hands-on implementation, students gain a deeper understanding of how Design Science principles can be utilized to investigate and address real-world problems. Through various case studies and practical exercises, students learn to conceptualize, design, and develop software artifacts that offer innovative solutions to identified problems.\r\nIn addition to focusing on the application of Design Science, this module serves as a valuable resource for final year investigation and project work for computing and IT students. It provides them with essential tools, techniques, and methodologies to effectively plan, execute, and present their final year projects. Students learn project management skills, including requirements gathering, project scoping, and task scheduling. They also gain insights into software development methodologies, quality assurance practices, and project documentation, enabling them to deliver high-quality and well-structured final projects.', '[{\"title\":\"01 Introduction\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=f18fee95-2fff-4327-b3a1-38e6bd6baac6&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"02 Research & Literature Searches\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=f18fee95-2fff-4327-b3a1-38e6bd6baac6&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"03 Ethics in Research\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=d19b0e3f-97bb-4b14-8fb6-0f6ca3ac9c55&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"04 Formulating Research Questions\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=d214c1c3-7b5e-46e3-9bb8-7eada71cc7dc&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"05 Literature Review\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=8b093a87-c7a9-4e6a-9875-dbd55bc33562&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"06 Citing & Referencing\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=6d0d121f-4a20-43a4-8377-08b0c0c8c317&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"07 Sampling\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=150ba648-224a-4ab1-b8e6-9d91eca74dbc&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"08 Survey\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=c3df6510-a037-4455-bb3d-1b1849111ffc&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"09 Data Analysis\",\"url\":\"https://cloudmails.sharepoint.com/sites/RMCT-022023-SMR-L/_layouts/15/embed.aspx?UniqueId=a7d440d2-7817-4351-9ab5-7fef61032108&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"}]', '2023-05-21 14:35:29', '../upload/646a2c317979d_rmct.png', 'Dr. S.Mohanarajah'),
 (4, 'Software Architecture Testing', 'This module aims to enable students to expand their knowledge and skills in the areas of Software Architecture, Architecture-based testing, and software interconnection technologies, providing them with a comprehensive understanding of these crucial aspects of software development and testing.\r\nStudents explore various architectural styles and patterns, such as layered architecture, client-server architecture, and microservices architecture. They learn how to analyze system requirements, identify architectural drivers, and make informed decisions regarding system structure and component interactions. Through practical exercises and case studies, students gain hands-on experience in creating software architectures that align with specific design goals and meet functional and non-functional requirements.\r\nAnother key focus of the module is Architecture-based testing, which involves verifying and validating software systems based on their architectural design. Students learn techniques to define and execute tests that target specific architectural aspects, such as component interactions, data flows, and performance characteristics. They explore tools and frameworks that facilitate architecture-based testing and gain insights into the integration of testing activities throughout the software development lifecycle. By understanding how architectural decisions impact system behavior and quality attributes, students become proficient in designing comprehensive test strategies to ensure the reliability and efficiency of software systems.', '[{\"title\":\"01 Introduction\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=df828de9-4d56-4a6b-b3ae-55a0f63ee3a6&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"02 Quality Attribute\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=259d4cb0-a5b5-4df8-8f3c-5c4b603b2397&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"03 4+1 View Model\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=8ecaf99c-dd62-488a-a945-497cee424962&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"04 Software Architecture Pattern\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=2dd1b2ee-1fff-41d2-a7c3-d6a9dac6802d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"05 Principle of Software Architecture\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=8fc9240b-3310-4aea-827e-ec27b1db691d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"06 Evaluation Software Architecture\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=3f3a8cb4-8d2f-4a9f-8128-ff33d914c738&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"07 The Architecture Tradeoff Analysis Method (ATAM)\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=cf145aaa-ce10-478d-94de-4f6fd6b42fb3&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"},{\"title\":\"08 Active Review for Intermediate Design (ARID)\",\"url\":\"https://cloudmails.sharepoint.com/sites/SATFEB2023/_layouts/15/embed.aspx?UniqueId=44f9dcb5-59b8-422b-8bf8-f845341f8d53&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create\"}]', '2023-05-21 15:19:08', '../upload/646a366c540a7_sat.png', 'Halimaton Saadiah Binti Hakimi'),
@@ -123,30 +132,196 @@ INSERT INTO `lessons` (`id`, `title`, `description`, `videoUrl`, `upload_time`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Table structure for table `options`
 --
 
-CREATE TABLE `questions` (
-  `id` int(11) NOT NULL,
-  `quiz_id` int(11) DEFAULT NULL,
-  `question` varchar(255) DEFAULT NULL,
-  `option1` varchar(255) DEFAULT NULL,
-  `option2` varchar(255) DEFAULT NULL,
-  `option3` varchar(255) DEFAULT NULL,
-  `option4` varchar(255) DEFAULT NULL,
-  `correct_answer` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `options`;
+CREATE TABLE IF NOT EXISTS `options` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `question_id` int UNSIGNED DEFAULT NULL,
+  `option_text` varchar(500) NOT NULL,
+  `is_answer` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `question_id` (`question_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `options`
+--
+
+INSERT INTO `options` (`id`, `question_id`, `option_text`, `is_answer`) VALUES
+(25, 7, 'Break tag', 1),
+(26, 7, 'Bold tag', 0),
+(27, 7, 'Paragraph tag', 0),
+(28, 7, 'Header tag', 0),
+(29, 8, 'font-size', 0),
+(30, 8, 'background-color', 0),
+(31, 8, 'color', 1),
+(32, 8, 'text-align', 0),
+(33, 9, 'String', 0),
+(34, 9, 'Boolean', 0),
+(35, 9, 'Number', 0),
+(36, 9, 'Character', 1),
+(37, 10, 'Asynchronous JavaScript and XML', 1),
+(38, 10, 'Asynchronous Java and XML', 0),
+(39, 10, 'Asynchronous JavaScript and XHTML', 0),
+(40, 10, 'Asynchronous Java and XHTML', 0),
+(41, 11, 'mysqli_query()', 0),
+(42, 11, 'mysqli_fetch_assoc()', 0),
+(43, 11, 'mysqli_connect()', 1),
+(44, 11, 'mysqli_close()', 0),
+(65, 17, 'Queue', 0),
+(66, 17, 'Stack', 1),
+(67, 17, 'Linked List', 0),
+(68, 17, 'Tree', 0),
+(69, 18, 'Array', 0),
+(70, 18, 'Queue', 0),
+(71, 18, 'Stack', 0),
+(72, 18, 'Doubly Linked List', 1),
+(73, 19, 'Queue', 0),
+(74, 19, 'Stack', 0),
+(75, 19, 'Heap', 0),
+(76, 19, 'Binary Search Tree', 1),
+(77, 20, 'Queue', 1),
+(78, 20, 'Stack', 0),
+(79, 20, 'Linked List', 0),
+(80, 20, 'Hash Table', 0),
+(81, 21, 'Heap', 1),
+(82, 21, 'Queue', 0),
+(83, 21, 'Stack', 0),
+(84, 21, 'Binary Search Tree', 0),
+(85, 22, 'Data analysis', 0),
+(86, 22, 'Formulating research questions', 1),
+(87, 22, 'Literature review', 0),
+(88, 22, 'Data collection', 0),
+(89, 23, 'Cross-sectional study', 0),
+(90, 23, 'Case study', 0),
+(91, 23, 'Longitudinal study', 1),
+(92, 23, 'Experimental study', 0),
+(93, 24, 'Simple random sampling', 0),
+(94, 24, 'Convenience sampling', 1),
+(95, 24, 'Stratified sampling', 0),
+(96, 24, 'Cluster sampling', 0),
+(97, 25, 'To summarize the research findings', 0),
+(98, 25, 'To provide a detailed background of the study', 0),
+(99, 25, 'To guide the research process and make predictions', 1),
+(100, 25, 'To present statistical analyses of the data', 0),
+(101, 26, 'Survey research', 0),
+(102, 26, 'Experimental research', 0),
+(103, 26, 'Case study research', 1),
+(104, 26, 'Correlational research', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quizzes`
+-- Table structure for table `qr_details`
 --
 
-CREATE TABLE `quizzes` (
-  `id` int(11) NOT NULL,
-  `lesson_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `qr_details`;
+CREATE TABLE IF NOT EXISTS `qr_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `student_name` varchar(50) NOT NULL,
+  `lesson_name` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `qr_details`
+--
+
+INSERT INTO `qr_details` (`id`, `student_name`, `lesson_name`, `date`) VALUES
+(2, 'Lennon Tan', 'Furter Web Design and Development', '2023-05-26'),
+(3, 'Phey Min', 'Furter Web Design and Development', '2023-05-26'),
+(4, 'Innis Yu', 'Data Structure', '2023-05-26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `quiz_id` int UNSIGNED DEFAULT NULL,
+  `question_text` varchar(1000) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quiz_id` (`quiz_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `quiz_id`, `question_text`) VALUES
+(7, 3, 'What does the <br> tag represent in HTML?'),
+(8, 3, 'Which property is used to change the text color of an element in CSS?'),
+(9, 3, 'Which of the following is NOT a JavaScript data type?'),
+(10, 3, 'What does AJAX stand for?'),
+(11, 3, 'Which PHP function is used to establish a connection to a MySQL database?'),
+(17, 5, 'Which data structure follows the Last-In-First-Out (LIFO) principle?'),
+(18, 5, 'Which data structure allows efficient insertion and deletion at both ends?'),
+(19, 5, 'Which data structure organizes elements in a sorted manner?'),
+(20, 5, 'Which data structure uses a First-In-First-Out (FIFO) approach?'),
+(21, 5, 'Which data structure allows efficient retrieval of the maximum or minimum element?'),
+(22, 6, 'What is the first step in the research process?'),
+(23, 6, 'Which research design focuses on studying a group of participants over an extended period?'),
+(24, 6, 'Which sampling technique involves selecting participants based on their availability and willingness to participate?'),
+(25, 6, 'What is the purpose of a research hypothesis?'),
+(26, 6, 'Which of the following research methods focuses on gathering qualitative data through in-depth interviews or observations?');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz`
+--
+
+DROP TABLE IF EXISTS `quiz`;
+CREATE TABLE IF NOT EXISTS `quiz` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `lesson_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lesson_id` (`lesson_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `quiz`
+--
+
+INSERT INTO `quiz` (`id`, `lesson_id`) VALUES
+(3, 1),
+(5, 2),
+(6, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_results`
+--
+
+DROP TABLE IF EXISTS `quiz_results`;
+CREATE TABLE IF NOT EXISTS `quiz_results` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `student_name` varchar(255) NOT NULL,
+  `lesson_name` varchar(255) NOT NULL,
+  `result` decimal(5,2) NOT NULL,
+  `grade` char(1) NOT NULL,
+  `submit_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `quiz_results`
+--
+
+INSERT INTO `quiz_results` (`id`, `student_name`, `lesson_name`, `result`, `grade`, `submit_time`) VALUES
+(1, 'Lennon Tan', 'Furter Web Design and Development', '80.00', 'B', '2023-05-26 17:55:19'),
+(2, 'Lennon Tan', 'Data Structure', '40.00', 'F', '2023-05-26 17:55:48'),
+(3, 'Phey Min', 'Research Methods for Computing and Technology', '20.00', 'F', '2023-05-26 17:56:49'),
+(4, 'Phey Min', 'Furter Web Design and Development', '100.00', 'A', '2023-05-26 17:57:08'),
+(5, 'Innis Yu', 'Furter Web Design and Development', '20.00', 'F', '2023-05-26 17:57:59'),
+(6, 'Innis Yu', 'Data Structure', '60.00', 'D', '2023-05-26 17:58:16');
 
 -- --------------------------------------------------------
 
@@ -154,13 +329,15 @@ CREATE TABLE `quizzes` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
-  `ROLE` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ROLE` int DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -175,95 +352,6 @@ INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
 (6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1);
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `forum`
---
-ALTER TABLE `forum`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `learner_lessons`
---
-ALTER TABLE `learner_lessons`
-  ADD PRIMARY KEY (`user_id`,`lesson_id`),
-  ADD KEY `lesson_id` (`lesson_id`);
-
---
--- Indexes for table `lessons`
---
-ALTER TABLE `lessons`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `quiz_id` (`quiz_id`);
-
---
--- Indexes for table `quizzes`
---
-ALTER TABLE `quizzes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `lesson_id` (`lesson_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `forum`
---
-ALTER TABLE `forum`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `lessons`
---
-ALTER TABLE `lessons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `quizzes`
---
-ALTER TABLE `quizzes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Constraints for dumped tables
 --
 
@@ -275,16 +363,22 @@ ALTER TABLE `learner_lessons`
   ADD CONSTRAINT `learner_lessons_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`);
 
 --
+-- Constraints for table `options`
+--
+ALTER TABLE `options`
+  ADD CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
+
+--
 -- Constraints for table `questions`
 --
 ALTER TABLE `questions`
-  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`);
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`);
 
 --
--- Constraints for table `quizzes`
+-- Constraints for table `quiz`
 --
-ALTER TABLE `quizzes`
-  ADD CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`);
+ALTER TABLE `quiz`
+  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

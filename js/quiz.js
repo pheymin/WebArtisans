@@ -113,8 +113,8 @@ $(document).ready(function () {
                 url: '../php/store-result.php',
                 type: 'POST',
                 data: {
-                    lessonName: lessonName,
                     name: name,
+                    lessonName: lessonName,
                     score: percentageScore,
                     grade: grade
                 },

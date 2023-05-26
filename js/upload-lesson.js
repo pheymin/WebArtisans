@@ -13,6 +13,7 @@ function getCache() {
         $('#title').val(lessonObj.title);
         $('#description').val(lessonObj.description);
         $('#lecturer').val(lessonObj.lecturer);
+        $('#coverPic').val = "selected";
 
         cardPreview(lessonObj.coverPic);
     }
@@ -41,11 +42,12 @@ $('#lecturer').on('input', function () {
 });
 
 $('#coverPic').on('change', function () {
-    getFilePath(function (coverPic) {
-        cardPreview(coverPic);
-        sessionStorage.setItem('coverPicUrl', coverPic);
-    });
-
+    if (this.value !== "selected") {
+        getFilePath(function (coverPic) {
+            cardPreview(coverPic);
+            sessionStorage.setItem('coverPicUrl', coverPic);
+        });
+    }
 });
 
 function limitWordCount(max, input, displayElement) {
@@ -123,11 +125,14 @@ function validateData() {
 
 $('#btn-add-lesson').on('click', function (e) {
     e.preventDefault();
+    let lesson = sessionStorage.getItem('lesson');
+    lesson = JSON.parse(lesson);
+
     if (validateData()) {
         const title = $("#title").val();
         const description = $("#description").val();
         const lecturer = $("#lecturer").val();
-        const coverPic = sessionStorage.getItem('coverPicUrl') || "https://dummyimage.com/1280x720";
+        const coverPic = sessionStorage.getItem('coverPicUrl') || lesson.coverPic || "https://dummyimage.com/1280x720";
 
         // Retrieve lesson data from session storage
         const lessonData = JSON.parse(sessionStorage.getItem('lesson'));
@@ -154,8 +159,19 @@ $('#btn-add-lesson').on('click', function (e) {
             sessionStorage.setItem('lesson', JSON.stringify(data));
         }
 
-        window.location.href = "add-lesson.html";
+        pageRedirect();
+
     } else {
         alert("Please fill all the fields");
     }
 });
+
+function pageRedirect() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    if (id) {
+        window.location.href = `./add-lesson.html?id=${id}`;
+    } else {
+        window.location.href = "add-lesson.html";
+    }
+}

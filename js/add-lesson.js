@@ -114,7 +114,7 @@ $('#lesson-container').on('click', '.delete-icon', function () {
 
 $('#btn-return').on('click', function () {
     sessionStorage.setItem("lesson", JSON.stringify(getLessonData()));
-    window.location.href = 'upload-lesson.html';
+    pageRedirect("upload-lesson.html");
 });
 
 // Get the section data
@@ -149,5 +149,15 @@ function getLessonData() {
 
 $('#btn-add-lesson').on('click', function () {
     sessionStorage.setItem("lesson", JSON.stringify(getLessonData()));
-    window.location.href = 'create-quiz.html';
+    pageRedirect("create-quiz.html");
 });
+
+function pageRedirect(url) {
+    let urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    if (id) {
+        window.location.href = `${url}?id=${id}`;
+    } else {
+        window.location.href = `${url}`;
+    }
+}

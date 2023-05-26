@@ -50,36 +50,37 @@ $(document).ready(function () {
 
     // Collect form data
     var formData = collectFormData();
+    console.log(formData);
 
-    // Send AJAX request to PHP script
-    $.ajax({
-      url: '../php/create-quiz.php',
-      method: 'POST',
-      data: formData,
-      success: function (response) {
-        // Handle the response from the PHP script
-        alert(response.split('<br>')[0]);
+    // // Send AJAX request to PHP script
+    // $.ajax({
+    //   url: '../php/create-quiz.php',
+    //   method: 'POST',
+    //   data: formData,
+    //   success: function (response) {
+    //     // Handle the response from the PHP script
+    //     alert(response.split('<br>')[0]);
 
-        console.log(response.split('<br>')[0]);
-        // Clear select and textarea fields
-        $('.autoresize-textarea').val('');
+    //     console.log(response.split('<br>')[0]);
+    //     // Clear select and textarea fields
+    //     $('.autoresize-textarea').val('');
 
-        // Clear options fields
-        $('.answer-icon').attr('src', '../images/tick.svg');
+    //     // Clear options fields
+    //     $('.answer-icon').attr('src', '../images/tick.svg');
 
-        // Clear the session storage
-        sessionStorage.removeItem('coverPicUrl');
-        sessionStorage.removeItem('lesson');
-      },
-      error: function (xhr, status, error) {
-        // Handle the error
-        alert(error);
-      }
-    });
+    //     // Clear the session storage
+    //     sessionStorage.removeItem('coverPicUrl');
+    //     sessionStorage.removeItem('lesson');
+    //   },
+    //   error: function (xhr, status, error) {
+    //     // Handle the error
+    //     alert(error);
+    //   }
+    // });
   });
 
   $('#btn-return').on('click', function () {
-    window.location.href = 'add-lesson.html';
+    pageRedirect("add-lesson.html");
   });
 
   function autoResizeTextarea(textarea) {
@@ -178,10 +179,21 @@ $(document).ready(function () {
 
         question.options.push(option);
       });
-
+      console.log(question);
       formData.questions.push(question);
     });
 
     return formData;
   }
+
+  function pageRedirect(url) {
+    let urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    
+    if (id) {
+        window.location.href = `${url}?id=${id}`;
+    } else {
+        window.location.href = `${url}`;
+    }
+}
 });

@@ -42,14 +42,36 @@ function loadData(data) {
                 let redirectUrl = '';
                 if (pageContext === 'explore') {
                     redirectUrl = `./lesson.html?id=${card.id}`;
+                    window.location.href = redirectUrl;
                 } else if (pageContext === 'edit') {
                     redirectUrl = `./upload-lesson.html?id=${card.id}`;
+
+                    $.ajax({
+                        url: '../php/explore.php',
+                        method: 'GET',
+                        data: { id: card.id },
+                        dataType: 'json',
+                        success: function (response) {
+                            processData(response[0]);
+                            window.location.href = redirectUrl;
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Request failed. Status:', error);
+                        }
+                    });
                 }
 
-                window.location.href = redirectUrl;
+                
             });
         });
     }
+}
+
+function processData(data) {
+    let videoUrl = JSON.parse(data.videoUrl);
+    data.videoUrl = videoUrl;
+    console.log(data);
+    sessionStorage.setItem('lesson', JSON.stringify(data));
 }
 
 function getPageContext() {

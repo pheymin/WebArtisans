@@ -14,3 +14,10 @@ if(isset($_GET['search'])){
 
     selectDataWithQuery($sql);
 }
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM lessons WHERE id = $id";
+
+    selectDataWithQuery($sql);
+}

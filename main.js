@@ -148,7 +148,8 @@ function getCurrentUrl(){
 }
 
 function curIsIndex(){
-    return getCurrentUrl() === "http://localhost/WebArtisans/" || getCurrentUrl() === "http://localhost/WebArtisans/index.html";
+    return getCurrentUrl() === "http://localhost/WebArtisans/" || getCurrentUrl() === "http://localhost/WebArtisans/index.html" || 
+    getCurrentUrl() === "http://webartisans.com/" || getCurrentUrl() === "http://webartisans.com/index.html";
 }
 
 function replaceUrl(value){

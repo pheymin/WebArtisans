@@ -38,10 +38,30 @@ function loadData(data) {
 
             // Add click event
             cardElement.click(function () {
-                window.location.href = `./lesson.html?id=${card.id}`;
+                const pageContext = getPageContext();
+                let redirectUrl = '';
+                if (pageContext === 'explore') {
+                    redirectUrl = `./lesson.html?id=${card.id}`;
+                } else if (pageContext === 'edit') {
+                    redirectUrl = `./upload-lesson.html?id=${card.id}`;
+                }
+
+                window.location.href = redirectUrl;
             });
         });
     }
+}
+
+function getPageContext() {
+    const currentPath = window.location.pathname;
+    
+    // Check if the current path contains "edit-lesson.html"
+    if (currentPath.includes("edit-lesson.html")) {
+        return "edit";
+    }
+
+    // If not "edit-lesson.html", assume it's the explore page
+    return "explore";
 }
 
 $('#search-btn').click(function () {

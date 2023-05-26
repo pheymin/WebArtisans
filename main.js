@@ -120,7 +120,7 @@ const footer = `
     </div>
 `
 
-function getCurrentUser(){
+function getCurrentUser() {
     return JSON.parse(sessionStorage.getItem('currentUser'));
 }
 
@@ -128,47 +128,47 @@ $(document).ready(() => {
     var role = getCurrentUser() ? getCurrentUser().ROLE : null;
     console.log(role);
 
-    if(role === '0' || role === '1'){
+    if (role === '0' || role === '1') {
         $('#nav').html(userNav)
 
         $("#nav-profile-img").on('click', () => {
             $('#nav-dropdown').toggleClass('hidden');
         })
-        
+
         $("#sm-nav-menu-control").on('click', () => {
             $('#sm-nav-menu-dropdown').toggleClass('hidden');
         })
     }
-    else{
+    else {
         $('#nav').html(nav)
     }
+
+    // $('#nav').html(nav)
+    // $('#nav').html(userNav)
+    $('#footer').html(footer)
+
+    $('#btn-register').on('click', () => {
+        // window.location.href = './pages/register.html'
+        replaceUrl('register.html')
+    })
+
+    $("a").on('click', (e) => {
+        e.preventDefault()
+        if (!e.target.attributes.href) return;
+        replaceUrl(e.target.attributes.href.value);
+    })
 })
 
-// $('#nav').html(nav)
-// $('#nav').html(userNav)
-$('#footer').html(footer)
-
-$('#btn-register').on('click', () => {
-    // window.location.href = './pages/register.html'
-    replaceUrl('register.html')
-})
-
-$("a").on('click', (e) => {
-    e.preventDefault()
-    if(!e.target.attributes.href) return;
-    replaceUrl(e.target.attributes.href.value);
-})
-
-function getCurrentUrl(){
+function getCurrentUrl() {
     return window.location.href;
 }
 
-function curIsIndex(){
-    return getCurrentUrl() === "http://localhost/WebArtisans/" || getCurrentUrl() === "http://localhost/WebArtisans/index.html" || 
-    getCurrentUrl() === "http://webartisans.com/" || getCurrentUrl() === "http://webartisans.com/index.html";
+function curIsIndex() {
+    return getCurrentUrl() === "http://localhost/WebArtisans/" || getCurrentUrl() === "http://localhost/WebArtisans/index.html" ||
+        getCurrentUrl() === "http://webartisans.com/" || getCurrentUrl() === "http://webartisans.com/index.html";
 }
 
-function replaceUrl(value){
+function replaceUrl(value) {
     const path = curIsIndex() ? `./pages/${value}` : `./${value}`;
     window.location.href = path;
 }

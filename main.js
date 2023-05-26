@@ -51,9 +51,9 @@ const userNav = `
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                            <a href="#" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Contact Us</a>
-                            <a href="#" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Explore</a>
-                            <a href="#" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Forum</a>
+                            <a href="contactus.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Contact Us</a>
+                            <a href="explore.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Explore</a>
+                            <a href="forum.html" class="p-4 cursor-pointer font-semibold hover:text-[#805be8] hover:bg-[#f4f2ff] rounded-md mx-3">Forum</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ const userNav = `
                     <div class="relative ml-3">
                         <div>
                             <button id="nav-profile-img" type="button" class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <img class="h-10 w-10 rounded-full" src="./public/avatar-6.svg" alt="">
+                                <img class="h-10 w-10 rounded-full" src="./public/random/avatar-0.svg" alt="">
                             </button>
                         </div>
                         <div id="nav-dropdown" class="absolute hidden right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -120,21 +120,37 @@ const footer = `
     </div>
 `
 
-$('#nav').html(nav)
+function getCurrentUser(){
+    return JSON.parse(sessionStorage.getItem('currentUser'));
+}
+
+$(document).ready(() => {
+    var role = getCurrentUser() ? getCurrentUser().ROLE : null;
+    console.log(role);
+
+    if(role === '0' || role === '1'){
+        $('#nav').html(userNav)
+
+        $("#nav-profile-img").on('click', () => {
+            $('#nav-dropdown').toggleClass('hidden');
+        })
+        
+        $("#sm-nav-menu-control").on('click', () => {
+            $('#sm-nav-menu-dropdown').toggleClass('hidden');
+        })
+    }
+    else{
+        $('#nav').html(nav)
+    }
+})
+
+// $('#nav').html(nav)
 // $('#nav').html(userNav)
 $('#footer').html(footer)
 
 $('#btn-register').on('click', () => {
     // window.location.href = './pages/register.html'
     replaceUrl('register.html')
-})
-
-$("#nav-profile-img").on('click', () => {
-    $('#nav-dropdown').toggleClass('hidden');
-})
-
-$("#sm-nav-menu-control").on('click', () => {
-    $('#sm-nav-menu-dropdown').toggleClass('hidden');
 })
 
 $("a").on('click', (e) => {

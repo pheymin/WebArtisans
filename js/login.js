@@ -40,7 +40,8 @@ function handleLogin(){
         type: "GET",
         data: {query: query},
         success: function (data) {
-            if(data.length === 0){
+            // console.log(data);
+            if(data == '[]'){
                 alert("Email or password is incorrect!");
                 return;
             }
@@ -54,8 +55,6 @@ function handleLogin(){
                 console.log('user');
                 window.location.href = "./explore.html";
             }
-            //console.log(data[0]);
-            //TODO
             
             sessionStorage.setItem('currentUser', JSON.stringify(data[0]));
 

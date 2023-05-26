@@ -17,7 +17,7 @@ const cardHtml = `
 
 $(document).ready(function () {
     var lessonId = getLessonIdFromURL(); // Get the lesson ID from the URL
-
+    var lessonName;
     // AJAX request to retrieve the quiz data
     $.ajax({
         url: '../php/quiz.php?id=' + lessonId, // Pass the lesson ID as a query parameter
@@ -26,7 +26,8 @@ $(document).ready(function () {
         success: function (response) {
             console.log(response);
             // Update the lesson name
-            $('.flex.flex-col.justify-center.items-center.w-2\\/3.m-auto h2:first').text(response.lessonName);
+            lessonName = response.lessonName;
+            $('.flex.flex-col.justify-center.items-center.w-2\\/3.m-auto h2:first').text(lessonName);
 
             let questionNumber = 0;
             // Iterate over the quiz data and update the HTML for each question
@@ -105,14 +106,16 @@ $(document).ready(function () {
 
             // Get the student ID (you can modify this based on your actual implementation)
             var studentId = 1;
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            const email = currentUser.email;
 
             // AJAX request to store the quiz result in the database
             $.ajax({
                 url: '../php/store-result.php',
                 type: 'POST',
                 data: {
-                    lessonId: lessonId,
-                    studentId: studentId,
+                    lessonName: lessonName,
+                    email: email,
                     score: percentageScore,
                     grade: grade
                 },
@@ -122,7 +125,7 @@ $(document).ready(function () {
                     if (grade !== 'F') {
                         // If the student passed, show pass message and direct to the QR code page
                         alert('Congratulations! You passed the quiz.');
-                        window.location.href = '../pages/qr-code.html?id=' + lessonId + '&stuId=' + studentId + '&date=' + new Date().toISOString().slice(0, 10);
+                        window.location.href = '../pages/qr-code.html?lessonName=' + lessonName + '&email=' + email + '&date=' + new Date().toISOString().slice(0, 10);
                     } else {
                         // If the student failed, prompt to reattempt quiz or go back to the home page
                         var retry = confirm('Unfortunately, you failed the quiz. Would you like to reattempt the quiz?');

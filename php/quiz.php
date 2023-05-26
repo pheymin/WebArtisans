@@ -5,10 +5,10 @@ require('dbConfig.php');
 $lessonId = $_GET['id'];
 
 // Retrieve the lesson name from the database
-$lessonNameQuery = "SELECT lesson_name FROM lessons WHERE id = " . $lessonId;
+$lessonNameQuery = "SELECT title FROM lessons WHERE id = " . $lessonId;
 $lessonNameResult = mysqli_query($db, $lessonNameQuery);
 $lessonNameRow = mysqli_fetch_assoc($lessonNameResult);
-$lessonName = $lessonNameRow['lesson_name'];
+$lessonName = $lessonNameRow['title'];
 
 // Retrieve the last quiz id from the database
 $quizIdQuery = "SELECT id FROM quiz WHERE lesson_id = " . $lessonId . " ORDER BY id DESC LIMIT 1";

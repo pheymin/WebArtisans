@@ -1,22 +1,4 @@
 $(document).ready(function () {
-  $.ajax({
-    url: '../php/get-options.php',
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-      var selectElement = $('[name="title"]');
-      $.each(data, function (index, option) {
-        selectElement.append($('<option>', {
-          value: option,
-          text: option
-        }));
-      });
-    },
-    error: function (xhr, status, error) {
-      console.error(error);
-    }
-  });
-
   $('.autoresize-textarea').each(function () {
     autoResizeTextarea($(this));
   });
@@ -66,8 +48,8 @@ $(document).ready(function () {
 
   addOptionsToCard($('.options-container'));
 
-  $(document).on('click', '.delete-option-icon', function () {
-    var optionIcons = $(this).closest('.options-container').find('.delete-option-icon');
+  $(document).on('click', '.answer-icon', function () {
+    var optionIcons = $(this).closest('.options-container').find('.answer-icon');
     optionIcons.attr('src', '../images/tick.svg');
     $(this).attr('src', '../images/green-tick.svg');
   });
@@ -86,13 +68,11 @@ $(document).ready(function () {
       success: function (response) {
         // Handle the response from the PHP script
         alert(response.split('<br>')[0]);
-        // Optionally, you can redirect to another page or perform any other actions
         // Clear select and textarea fields
-        $('select[name="title"]').val('');
         $('.autoresize-textarea').val('');
 
         // Clear options fields
-        $('.delete-option-icon').attr('src', '../images/tick.svg');
+        $('.answer-icon').attr('src', '../images/tick.svg');
       },
       error: function (xhr, status, error) {
         // Handle the error
@@ -117,7 +97,7 @@ function addOptionsToCard(container, cardIndex) {
     const optionContent = `
       <div class="form-control w-full pl-5">
         <div class="flex items-start w-full">
-          <img class="w-6 mt-4 mr-3 cursor-pointer delete-option-icon icon-hover" src="../images/tick.svg" alt="tick icon">
+          <img class="w-6 mt-4 mr-3 cursor-pointer answer-icon icon-hover" src="../images/tick.svg" alt="tick icon">
           <div class="w-full">
             <textarea class="input input-ghost w-full autoresize-textarea resize-none" placeholder="Enter option ${optionIndex}" maxlength="500" name="questions[${cardIndex - 1}][options][${optionIndex}][text]"></textarea>
             <label class="label my-2">
@@ -132,9 +112,9 @@ function addOptionsToCard(container, cardIndex) {
     autoResizeTextarea(container.find('.autoresize-textarea').last());
   }
 
-  container.find('.delete-option-icon').on('click', function () {
+  container.find('.answer-icon').on('click', function () {
     // Remove the green color from all tick icons
-    container.find('.delete-option-icon').attr('src', '../images/tick.svg');
+    container.find('.answer-icon').attr('src', '../images/tick.svg');
     // Change the color of the clicked tick icon to green
     $(this).attr('src', '../images/green-tick.svg');
   });
@@ -149,8 +129,12 @@ function updateQuestionNumbers() {
 }
 
 function collectFormData() {
+  // Retrieve lesson ID and lesson name from URL parameters
+  var urlParams = new URLSearchParams(window.location.search);
+  var lessonName = urlParams.get('lessonName');
+
   var formData = {
-    title: $('select[name="title"]').val(),
+    title: lessonName,
     questions: []
   };
 
@@ -162,7 +146,7 @@ function collectFormData() {
 
     $(this).find('.options-container .form-control').each(function (index) {
       var optionText = $(this).find('textarea').val();
-      var isAnswer = $(this).find('.delete-option-icon').attr('src') === '../images/green-tick.svg';
+      var isAnswer = $(this).find('.answer-icon').attr('src') === '../images/green-tick.svg';
 
       var option = {
         text: optionText,

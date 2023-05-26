@@ -105,9 +105,8 @@ $(document).ready(function () {
             }
 
             // Get the student ID (you can modify this based on your actual implementation)
-            var studentId = 1;
             const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-            const email = currentUser.email;
+            const name = currentUser.NAME;
 
             // AJAX request to store the quiz result in the database
             $.ajax({
@@ -115,7 +114,7 @@ $(document).ready(function () {
                 type: 'POST',
                 data: {
                     lessonName: lessonName,
-                    email: email,
+                    name: name,
                     score: percentageScore,
                     grade: grade
                 },
@@ -125,7 +124,7 @@ $(document).ready(function () {
                     if (grade !== 'F') {
                         // If the student passed, show pass message and direct to the QR code page
                         alert('Congratulations! You passed the quiz.');
-                        window.location.href = '../pages/qr-code.html?lessonName=' + lessonName + '&email=' + email + '&date=' + new Date().toISOString().slice(0, 10);
+                        window.location.href = '../pages/qr-code.html?lessonName=' + lessonName + '&name=' + name + '&date=' + new Date().toISOString().slice(0, 10);
                     } else {
                         // If the student failed, prompt to reattempt quiz or go back to the home page
                         var retry = confirm('Unfortunately, you failed the quiz. Would you like to reattempt the quiz?');

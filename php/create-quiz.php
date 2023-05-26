@@ -1,63 +1,65 @@
 <?php
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
-    $title = $_POST['title'];
+    // Retrieve lesson data
+    $lessonTitle = $_POST['title'];
+    $description = $_POST['description'];
+    $lecturer = $_POST['lecturer'];
+    $coverPic = $_POST['coverPic'];
+    $videoUrl = json_encode($_POST['videoUrl']);
     $questions = $_POST['questions'];
 
     // Validate form data
     $errors = [];
 
-    // Validate questions
-    foreach ($questions as $index => $question) {
-        $questionText = $question['question'];
-        $options = $question['options'];
+    // Store the data into the database
+    require_once('dbConfig.php');
 
-        if (empty($questionText)) {
-            $errors[] = "Question " . ($index + 1) . " is required.";
-        }
+    // Insert the lesson data into the "lessons" table
+    $insertLessonSql = "INSERT INTO lessons (title, description, lecturer, coverPic, videoUrl) 
+                        VALUES ('$lessonTitle', '$description', '$lecturer', '$coverPic', '$videoUrl')";
+    if ($db->query($insertLessonSql) === TRUE) {
+        $lessonId = $db->insert_id;
+        // Validate questions
+        foreach ($questions as $index => $question) {
+            $questionText = $question['question'];
+            $options = $question['options'];
 
-        $hasCorrectAnswer = false; // Flag to check if there is at least one correct answer
-
-        foreach ($options as $optionIndex => $option) {
-            $optionText = $option['text'];
-
-            if (empty($optionText)) {
-                $errors[] = "Option " . ($optionIndex + 1) . " of Question " . ($index + 1) . " is required.";
+            if (empty($questionText)) {
+                $errors[] = "Question " . ($index + 1) . " is required.";
             }
 
-            if ($option['is_answer'] === "true") {
-                $hasCorrectAnswer = true;
+            $hasCorrectAnswer = false; // Flag to check if there is at least one correct answer
+
+            foreach ($options as $optionIndex => $option) {
+                $optionText = $option['text'];
+
+                if (empty($optionText)) {
+                    $errors[] = "Option " . ($optionIndex + 1) . " of Question " . ($index + 1) . " is required.";
+                }
+
+                if ($option['is_answer'] === "true") {
+                    $hasCorrectAnswer = true;
+                }
+            }
+
+            if ($hasCorrectAnswer === false) {
+                $errors[] = "Question " . ($index + 1) . " must have a correct answer.";
             }
         }
 
-        if ($hasCorrectAnswer === false) {
-            $errors[] = "Question " . ($index + 1) . " must have a correct answer.";
-        }
-    }
-
-    // If there are no errors, save the form data to the database
-    if (empty($errors)) {
-        require_once('dbConfig.php');
-        $lessonsTable = "lessons";
-        // Create the quiz table if it doesn't exist
-        $quizTable = "quiz";
-        $createQuizTableSql = "CREATE TABLE IF NOT EXISTS $quizTable (
-                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                lesson_id INT(11) NOT NULL,
-                FOREIGN KEY (lesson_id) REFERENCES $lessonsTable(id)
-            )";
-        if ($db->query($createQuizTableSql) === TRUE) {
-            // Get the lesson ID
-            $getlessonIdSql = "SELECT id FROM $lessonsTable WHERE title = '$title'";
-            $lessonResult = $db->query($getlessonIdSql);
-            if ($lessonResult && $lessonResult->num_rows > 0) {
-                $lessonRow = $lessonResult->fetch_assoc();
-                $lessonId = $lessonRow['id'];
-
+        // If there are no errors, save the form data to the database
+        if (empty($errors)) {
+            // Create the quiz table if it doesn't exist
+            $quizTable = "quiz";
+            $createQuizTableSql = "CREATE TABLE IF NOT EXISTS $quizTable (
+                    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    lesson_id INT(11) NOT NULL,
+                    FOREIGN KEY (lesson_id) REFERENCES lessons(id)
+                )";
+            if ($db->query($createQuizTableSql) === TRUE) {
                 // Save the form data to the quiz table
-                $insertSql = "INSERT INTO $quizTable (lesson_id) VALUES ('$lessonId')";
-                if ($db->query($insertSql) === TRUE) {
+                $insertQuizSql = "INSERT INTO $quizTable (lesson_id) VALUES ('$lessonId')";
+                if ($db->query($insertQuizSql) === TRUE) {
                     $quizId = $db->insert_id;
 
                     // Create the questions table if it doesn't exist
@@ -97,29 +99,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $db->query($optionSql);
                                     }
                                 } else {
-                                    echo "Error creating options table: " . $db->error;
+                                    $errors[] = "Error creating options table: " . $db->error;
                                 }
                             } else {
-                                echo "Error inserting question: " . $db->error;
+                                $errors[] = "Error inserting question: " . $db->error;
                             }
                         }
 
                         echo "Quiz created successfully.";
                     } else {
-                        echo "Error creating questions table: " . $db->error;
+                        $errors[] = "Error creating questions table: " . $db->error;
                     }
                 } else {
-                    echo "Error inserting quiz: " . $db->error;
+                    $errors[] = "Error inserting quiz: " . $db->error;
                 }
             } else {
-                echo "Error retrieving lesson ID: " . $db->error;
+                $errors[] = "Error creating quiz table: " . $db->error;
             }
-        } else {
-            echo "Error creating quiz table: " . $db->error;
         }
-        $db->close();
     } else {
-        // If there are validation errors, display them
+        $errors[] = "Error inserting lesson: " . $db->error;
+    }
+
+    $db->close();
+
+    // If there are validation errors, display them
+    if (!empty($errors)) {
         foreach ($errors as $error) {
             echo $error . "<br>";
         }

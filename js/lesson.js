@@ -17,6 +17,12 @@ $(document).ready(function () {
             console.error('Request failed. Status:', xhr.status);
         }
     });
+
+    // Generate the URL for the quiz.html with the 'id' parameter
+    const quizUrl = `quiz.html?id=${id}`;
+
+    // Set the href attribute of the 'Quizz' link
+    $('#quiz-link').attr('href', quizUrl);
 });
 
 function loadData(data) {

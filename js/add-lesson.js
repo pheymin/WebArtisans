@@ -3,7 +3,7 @@ let count = 1; // Initial section count
 // Add the initial lesson card on page load
 $(document).ready(function () {
     var lesson = JSON.parse(sessionStorage.getItem("lesson"));
-    console.log(lesson.videoUrl);
+
     if (lesson.videoUrl.length > 0) {
         // count = lesson.videoUrl.length;
         getCache(lesson);
@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function getCache(lessonInfo) {
     var videoUrl = lessonInfo.videoUrl;
-    console.log(videoUrl);
+
     // Loop through each lesson data and populate the lesson cards
     for (var i = 0; i < videoUrl.length; i++) {
         addLessonCard();
@@ -125,7 +125,6 @@ function getLessonData() {
 
     // Loop through each section input
     while (true) {
-        console.log(lessonCount);
         var lessonTitle = $("#title-" + lessonCount).val();
         var lessonUrl = $("#url-" + lessonCount).val();
 
@@ -150,30 +149,5 @@ function getLessonData() {
 
 $('#btn-add-lesson').on('click', function () {
     sessionStorage.setItem("lesson", JSON.stringify(getLessonData()));
+    window.location.href = 'create-quiz.html';
 });
-
-// // Submit
-// $(document).ready(function () {
-//     $("#submit").click(function (e) {
-//         e.preventDefault();
-//         const title = $("#title").val();
-//         const description = $("#description").val();
-//         const lecturer = $("#lecturer").val();
-//         const videoUrl = JSON.stringify(getSectionData());
-
-//         $.ajax({
-//             url: "../php/upload-lesson.php",
-//             type: "POST",
-//             data: formData,
-//             processData: false, // Set processData to false
-//             contentType: false, // Set contentType to false
-//             success: function (data) {
-//                 console.log(data);
-//             },
-//             error: function (xhr, status, error) {
-//                 console.log(xhr.responseText);
-//             }
-//         });
-//     });
-// })
-

@@ -62,7 +62,7 @@ function cardEventHandler(id) {
         $.ajax({
             url: '../php/explore.php',
             method: 'GET',
-            data: { id: card.id },
+            data: { id: id },
             dataType: 'json',
             success: function (response) {
                 processData(response[0]);

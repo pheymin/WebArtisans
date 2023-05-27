@@ -53,6 +53,7 @@ function loadData(data) {
                         dataType: 'json',
                         success: function (response) {
                             processData(response[0]);
+                            sessionStorage.removeItem('questions');
                             window.location.href = redirectUrl;
                         },
                         error: function (xhr, status, error) {
@@ -61,7 +62,7 @@ function loadData(data) {
                     });
                 }
 
-                
+
             });
         });
     }
@@ -76,7 +77,7 @@ function processData(data) {
 
 function getPageContext() {
     const currentPath = window.location.pathname;
-    
+
     // Check if the current path contains "edit-lesson.html"
     if (currentPath.includes("edit-lesson.html")) {
         return "edit";

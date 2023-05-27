@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/public/vite.svg" />
@@ -13,13 +14,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
+
 <body class="h-full">
     <div id="nav"></div>
     <div id="content">
         <div id="content__design">
             <div id="design-container">
                 <div id="slogan">We're listening! Reach out and share your thoughts.</div>
-                <div id="img-bg"><img src="../images/BoyPlayPhone.png" alt="BoyPlayPhone" ></div>
+                <div id="img-bg"><img src="../images/BoyPlayPhone.png" alt="BoyPlayPhone"></div>
                 <div id="noti-container">
                     <!-- <div class="font-bold" style="margin: 0px 36% 1% 0px;">Follow us:</div> -->
                     <div id="noti1" class="noti">
@@ -52,32 +54,41 @@
                     <div id="input__content">
                         <div id="input__title" style="margin: 0px 0px -20px 0px;">
                             <h3 class="text-2xl font-bold">Drop us a Message</h1>
-                            <p>Looking forward to hear you soon!</p>
+                                <p>Looking forward to hear you soon!</p>
                         </div>
                         <div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                <div class="label-text text-sm">Your name</div>
+                                    <div class="label-text text-sm">Your name</div>
+                                    <span id="name-alert" class="label-text-alt"></span>
                                 </label>
-                                <input type="text" name="name" id="txt-name" placeholder="Enter your name" class="input input-bordered input-primary w-full max-w-xs" />
+                                <input type="text" name="name" id="txt-name" placeholder="Enter your name"
+                                    class="input input-bordered input-primary w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                <div class="label-text text-sm">Email address</div>
+                                    <div class="label-text text-sm">Email address</div>
+                                    <span id="email-alert" class="label-text-alt"></span>
                                 </label>
-                                <input type="email" name="email" id="txt-email" placeholder="Enter your email address" class="input input-bordered w-full max-w-xs" />
+                                <input type="email" name="email" id="txt-email" placeholder="Enter your email address"
+                                    class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                <div class="label-text text-sm">Phone number</div>
+                                    <div class="label-text text-sm">Phone number</div>
+                                    <span id="phone-alert" class="label-text-alt"></span>
                                 </label>
-                                <input type="tel" name="phone" id="txt-phone" placeholder="Enter your phone number" class="input input-bordered w-full max-w-xs" />
+                                <input type="tel" name="phone" id="txt-phone" placeholder="Enter your phone number"
+                                    class="input input-bordered w-full max-w-xs" />
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                <div class="label-text text-sm">Your message</div>
+                                    <div class="label-text text-sm">Your message</div>
+                                    <span id="message-alert" class="label-text-alt"></span>
                                 </label>
-                                <textarea name="message" id="txt-message" cols="30" rows="10" placeholder="Enter your message" class="input input-bordered w-full max-w-xs resize-none" ></textarea>
+                                <textarea name="message" id="txt-message" cols="30" rows="10"
+                                    placeholder="Enter your message"
+                                    class="input input-bordered w-full max-w-xs resize-none"></textarea>
                             </div>
                         </div>
                         <div><button id="btn-send" class="btn btn-wide rounded-3xl">Send your message</button></div>
@@ -91,4 +102,181 @@
     <script type="module" src="../main.js"></script>
     <script type="module" src="../js/contact-us.js"></script>
 </body>
+
+<!-- <script type="module">
+
+    import { getCurrentDateTime, validateInput } from "../js/Tools.js";
+
+    $("document").ready(function () {
+        $('body').find('.logo-img').attr('src', '../public/vite.svg');
+
+        let noti2 = $('#noti2');
+        let noti3 = $('#noti3');
+        let notiContainer = $('#noti-container');
+        let fbMsg = $('.fb-msg');
+        let igMsg = $('.ig-msg');
+        let twMsg = $('.tw-msg');
+
+        let msg = {
+            "fbMsg": "Follow us on Facebook",
+            "igMsg": "Follow us on Instagram",
+            "twMsg": "Follow us on Twitter",
+        };
+
+        let msgs = [fbMsg, igMsg, twMsg];
+
+        let getMsg = (message) => {
+            return msg[message];
+        };
+
+        notiContainer.hover(function () {
+            noti2.addClass('animate');
+            noti3.addClass('animate');
+            fbMsg.text(getMsg('fbMsg'));
+            igMsg.text(getMsg('igMsg'));
+            twMsg.text(getMsg('twMsg'));
+            return;
+        });
+
+        notiContainer.mouseleave(function () {
+            noti2.removeClass('animate');
+            noti3.removeClass('animate');
+            for (let i = 0; i < msgs.length; i++) {
+                msgs[i].text("Notification");
+            }
+            return;
+        });
+
+        let btnSend = $('#btn-send');
+
+        btnSend.on('click', function (e) {
+            e.preventDefault()
+            handleSubmit();
+        })
+    });
+
+    let name = $('#txt-name');
+    let email = $('#txt-email');
+    let phone = $('#txt-phone');
+    let message = $('#txt-message');
+
+    function handleSubmit() {
+        console.log("submit");
+
+        let textAlert = [$('#name-alert'), $('#email-alert'), $('#phone-alert'), $('#message-alert')];
+        for (let i = 0; i < txtAlert.length; i++) {
+            textAlert[i].text("");
+        }
+
+        let isValid = true;
+        
+
+        let nameT = name.val();
+        let emailT = email.val();
+        let phoneT = phone.val();
+        let messageT = message.val();
+
+        //var isValid = validation(txtValue)
+        if(!validateInput("username", nameT)){
+            isValid = false;
+            textAlert[0].text("Invalid name");
+        }
+
+        if(!validateInput("email", emailT)){
+            isValid = false;
+            textAlert[1].text("Format: xxx@mail.com");
+        }
+
+        if(!validateInput("phone", phoneT)){
+            isValid = false;
+            textAlert[2].text("Invalid phone number");
+        }
+
+        if (messageT == "") {
+            $('#message-alert').text("Please fill in this field");
+            isValid = false;
+        }
+
+
+        if (isValid) {
+            let data = {
+                name: name.val(),
+                email: email.val(),
+                phone: phone.val(),
+                message: message.val(),
+            };
+
+            sendFeedback(data);
+            console.log('submit');
+        }
+    }
+
+    let txtAlert = [$('#name-alert'), $('#email-alert'), $('#phone-alert'), $('#message-alert')];
+    let txtBox = [name, email, phone, message];
+    let txtName = ["username", "email", "phone", "message"];
+
+    function validation(txtValue) {
+        let isValid = true;
+
+        const invalidPromt = {
+            "username": "Invalid name",
+            "email": "Format: xxx@mail.com",
+            "phone": "Invalid phone number",
+        };
+
+        if (message.val() == "") {
+            $('#message-alert').text("Please fill in this field");
+            isValid = false;
+        }
+
+        for (let i = 0; i < txtValue.length; i++) {
+            if (!validateInput(txtName[i], txtValue[i])) {
+                if (txtBox[i].val() == "") {
+                    txtAlert[i].text("Please fill in this field");
+                    console.log("added");
+                    isValid = false;
+                }else{
+                    txtAlert[i].text(invalidPromt[txtName[i]]);
+                    txtBox[i].val("");
+                    console.log("added");
+                    isValid = false;
+                }
+            }
+            else{
+                txtAlert[i].text("");
+            }
+        }
+
+        return isValid
+    }
+
+    function sendFeedback(data) {
+        console.log("data: ",data);
+        // const query = `INSERT INFO feedback (MESSAGE, NAME, EMAIL, PHONE) VALUES ('${data.message}', '${data.name}', '${data.email}', '${data.phone}')`
+        $.ajax({
+            url: "../php/contact-us.php",
+            type: "POST",
+            data: JSON.stringify(data),
+            success: function (response) {
+                alert("Message sent!");
+                clearInput(txtBox);
+                clearAlert(txtAlert);
+                return;
+            }
+        });
+    }
+
+    function clearInput(txtBox) {
+        for (let i = 0; i < txtBox.length; i++) {
+            txtBox[i].val("");
+        }
+    }
+
+    function clearAlert(alerts) { 
+        for (let i = 0; i < alerts.length; i++) {
+            alerts[i].text("");
+        }
+    }
+</script> -->
+
 </html>

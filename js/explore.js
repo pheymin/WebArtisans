@@ -44,9 +44,9 @@ function loadData(data) {
     }
 }
 
-function cardEventHandler(id){
+function cardEventHandler(id) {
 
-    if(!sessionStorage.getItem('currentUser')){
+    if (!sessionStorage.getItem('currentUser')) {
         alert("Please login to continue");
         return;
     }
@@ -59,24 +59,19 @@ function cardEventHandler(id){
     } else if (pageContext === 'edit') {
         redirectUrl = `./upload-lesson.html?id=${id}`;
 
-                    $.ajax({
-                        url: '../php/explore.php',
-                        method: 'GET',
-                        data: { id: card.id },
-                        dataType: 'json',
-                        success: function (response) {
-                            processData(response[0]);
-                            sessionStorage.removeItem('questions');
-                            window.location.href = redirectUrl;
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('Request failed. Status:', error);
-                        }
-                    });
-                }
-
-
-            });
+        $.ajax({
+            url: '../php/explore.php',
+            method: 'GET',
+            data: { id: card.id },
+            dataType: 'json',
+            success: function (response) {
+                processData(response[0]);
+                sessionStorage.removeItem('questions');
+                window.location.href = redirectUrl;
+            },
+            error: function (xhr, status, error) {
+                console.error('Request failed. Status:', error);
+            }
         });
     }
 }

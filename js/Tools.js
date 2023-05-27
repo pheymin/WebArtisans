@@ -4,10 +4,10 @@ let regexEmail = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/;
 let regexPhone = /^[0-9]{10,11}$/;
 
 //type: username, password, email
-function validateInput(type, value){
+function validateInput(type, value) {
     if (value === '') return false;
 
-    switch(type){
+    switch (type) {
         case 'username':
             return regexUsername.test(value);
         case 'password':
@@ -23,11 +23,9 @@ function validateInput(type, value){
     }
 }
 
-export { validateInput };
-
-function getCurrentDateTime() { 
+function getCurrentDateTime() {
     let currentTime = new Date();
-    
+
     // Get the individual components of the current date
     let year = currentTime.getFullYear();
     let month = currentTime.getMonth() + 1; // Months are zero-based, so we add 1
@@ -47,6 +45,16 @@ function getCurrentDateTime() {
     let currentTimeString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 
     return currentTimeString;
- }
+}
 
- export { getCurrentDateTime };
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getRandomImageUrl() {
+    var randomInt = getRandomInt(50);
+    return `../public/random/avatar-${randomInt}.svg`;
+}
+
+export { validateInput, getCurrentDateTime, getRandomImageUrl };

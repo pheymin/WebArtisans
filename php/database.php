@@ -2,7 +2,8 @@
 require ('dbConfig.php');
 
 //$data = table name
-function getAllData($data){
+function getAllData($data)
+{
     global $db;
     $sql = "SELECT * FROM $data";
     $result = $db->query($sql);
@@ -29,7 +30,8 @@ function getAllData($data){
 }
 
 //$data = table name
-function getDataById($data, $id){
+function getDataById($data, $id)
+{
     global $db;
     $sql = "SELECT * FROM $data WHERE id = $id";
     $result = $db->query($sql);
@@ -56,7 +58,8 @@ function getDataById($data, $id){
 }
 
 // create/update/delete
-function createData($sql){
+function createData($sql)
+{
     global $db;
 
     // Execute the query
@@ -72,7 +75,8 @@ function createData($sql){
     $db->close();
 }
 
-function selectDataWithQuery($cmd){
+function selectDataWithQuery($cmd)
+{
     global $db;
     $result = $db->query($cmd);
 
@@ -91,7 +95,9 @@ function selectDataWithQuery($cmd){
         // Send the JSON response
         echo json_encode($data);
     } else {
-        echo "No data found.";
+        $data = array(); // Create an empty array
+        $json = json_encode($data); // Encode the array as JSON
+        echo $json; // return empty json
     }
 
     $db->close();

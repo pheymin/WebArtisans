@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: May 26, 2023 at 09:58 AM
--- Server version: 8.0.32
--- PHP Version: 8.0.26
+-- Host: 127.0.0.1
+-- Generation Time: May 27, 2023 at 08:34 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,19 +24,87 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `COMMENT` varchar(255) DEFAULT NULL,
+  `POSTEDTIME` datetime NOT NULL DEFAULT current_timestamp(),
+  `FORUM_ID` int(255) DEFAULT NULL,
+  `THUMB` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`ID`, `NAME`, `COMMENT`, `POSTEDTIME`, `FORUM_ID`, `THUMB`) VALUES
+(1, 'Tomyam Mee', 'These changes should fix the issues you mentioned and provide the desired behavior of opening and closing the modal.', '2023-05-15 06:35:46', 1, 5),
+(2, 'Henry Iloka', 'Feel free to customize the sentence according to your specific requirements or branding.', '2023-05-15 06:28:12', 1, 2),
+(3, 'Marcus Lee', 'In the modified code, I added a modal-container div around the logoutModal HTML to easily remove the entire modal when closing it. ', '2023-05-15 13:24:37', 1, 1),
+(4, 'Halimathon', 'The closeLogoutModal function removes the modal-container element from the DOM when called.', '2023-05-15 14:14:51', 1, 0),
+(5, 'Mercury Ooi', 'Certainly! Here\'s an example of a logout confirmation sentence:', '2023-05-16 02:10:24', 1, 2),
+(6, 'Tomcat YB', 'The OpenBay system compiles the quotes into a list and displays them to the customer ', '2023-05-16 03:11:22', 1, 3),
+(7, 'Chew Peng', 'The system suggests the customer to select a different provider or contact OpenBay support.', '2023-05-16 03:10:35', 1, 6),
+(8, 'Lian Peng', 'here\'s an activity diagram that shows the steps involved in the process you described, including the roles of customer, system, and service provider:', '2023-05-16 03:24:03', 1, 0),
+(9, 'Mathew Goh', '\"Improving the Internet interface between Personal Privacy and Cybersecurity within the Context of Bank Account Fraud\":', '2023-05-16 04:53:13', 1, 8),
+(10, 'Pinky Liew', 'When searching for articles, make sure to use a combination of relevant keywords and phrases to narrow down your search results.', '2023-05-16 05:31:04', 1, 10),
+(11, 'Joshua Gan', 'By working together, we can reduce the risk of bank account fraud and ensure that personal privacy and cybersecurity are adequately protected in the digital age.', '2023-05-16 11:40:48', 1, 15),
+(12, 'Perry Tan', 'Cybersecurity awareness campaigns and education programs can help individuals better understand the risks and take proactive steps to protect themselves.', '2023-05-17 13:08:19', 1, 5),
+(13, 'Ferry Goh', 'Furthermore, financial institutions also play a critical role in improving the Internet interface between personal privacy and cybersecurity.', '2023-05-05 03:40:12', 2, 15),
+(14, 'Penny Lai', 'The Internet has brought significant improvements in the way people communicate, work, and transact.', '2023-05-05 08:08:46', 2, 3),
+(15, 'Goh Bee', 'The benefits and drawbacks of incorporating ChatGPT technology into literature review processes and its effect on academic integrity.', '2023-05-05 07:09:23', 2, 5),
+(16, '169 Twin Tower', 'Examining the role of ChatGPT technology in promoting or hindering academic integrity in literature research', '2023-05-05 08:12:46', 2, 0),
+(17, 'Water 100Plus', 'The ethical implications of using ChatGPT technology for literature review in relation to academic integrity', '2023-05-24 22:28:15', 2, 4),
+(18, 'Mineral Water', 'Mitigating the challenges posed by ChatGPT technology on academic integrity in literature research', '2023-05-24 22:28:15', 2, 5),
+(19, 'Peter Harry', 'The code contains several conditional statements that check the value of curPage and determine which pages should be displayed.', '2023-05-05 06:42:04', 2, 3),
+(20, 'Polo Shirt', 'Some of these conditionals can be simplified by combining them into a single expression.', '2023-05-05 11:05:04', 2, 12),
+(21, '169 Twin Tower', 'The code contains several instances of unnecessary parentheses that can be removed to simplify the code.', '2023-05-06 15:08:18', 2, 0),
+(22, '887 Elephant Bean', 'Some of these conditionals can be simplified by combining them into a single expression.', '2023-05-06 08:46:18', 2, 5),
+(23, 'Mathiew Goh', 'Instead of using the spread operator ([...Array(4)]) to create an array of a fixed length, you can use the Array.from() method. This can make the code more concise and easier to read.', '2023-05-01 07:48:13', 3, 5),
+(24, 'Peter Chew', 'Instead of passing the entire props object to the PaginationCard component, you can destructure the specific props that are needed. ', '2023-05-02 11:17:13', 3, 0),
+(25, 'Mary Ting', 'To further investigate the issue, you can try inspecting the server logs or enabling debug mode in your Flask app.', '2023-05-03 09:40:26', 3, 10),
+(26, 'Mercury Tan', 'Even a small syntax error can cause the server to reject the request. You can use a tool like JSONLint to validate your JSON data.', '2023-05-05 00:42:30', 3, 14),
+(27, 'Perry Kuan', 'Check the API documentation to make sure you are sending the correct headers and values.', '2023-05-15 01:06:17', 4, 3),
+(28, 'Forgery Pang', 'If the server is using Cross-Site Request Forgery (CSRF) protection, you may need to include a CSRF token in the request headers or as a query parameter.', '2023-05-15 04:01:54', 4, 1),
+(29, 'Bryan Pang', 'Double-check that you are using the correct HTTP method (POST in this case) for the API endpoint you are trying to access.', '2023-05-15 05:17:41', 4, 3),
+(30, 'Marcus Fox', 'The server may be validating the data in the request and rejecting it if it doesn\'t meet certain criteria.', '2023-05-15 07:17:35', 4, 3),
+(31, 'Yun Tian', 'Note that you can also configure the extension to only allow requests from specific origins, methods, headers, and more by passing additional parameters to CORS().', '2023-05-17 10:15:35', 4, 0),
+(32, 'Xian En', 'By initializing the Flask app with CORS(app), you allow the app to respond to CORS preflight requests (OPTIONS) and add the appropriate headers to allow cross-origin requests. ', '2023-05-18 20:12:35', 4, 10),
+(33, 'Author Oi', 'With these changes, your GET request from localhost:5173 to 127.0.0.1:5173 should now work without any CORS errors.', '2023-05-19 06:04:35', 4, 5),
+(34, 'Penny Tan', ' This should provide more information about what went wrong with the request.', '2023-05-19 11:17:35', 4, 0),
+(35, 'John Doe', 'If a file was sent, we extract the filename using file.filename, and save the file to the ./uploads directory using file.save(os.path.join(\'./uploads\', filename)).', '2023-05-19 16:46:30', 5, 17),
+(36, 'Tomboy GOD', 'We define an API endpoint at the URL /upload that accepts POST requests.', '2023-05-19 22:46:30', 5, 13),
+(37, 'KFC the Best', 'Note that this code is just an example and may need to be adapted to fit your specific use case. ', '2023-05-20 01:13:30', 5, 0),
+(38, 'MCD the Best', 'We check if a file was actually sent by checking if the file variable is not None.', '2023-05-20 06:39:30', 5, 4),
+(39, 'Guan Jie', 'Instead of using nested if-else statements, you can use early returns for error handling. ', '2023-05-18 17:48:58', 6, 6),
+(40, 'Perry Kuan', 'Checking the file type and size, and setting appropriate permissions on the upload directory.', '2023-05-18 07:48:58', 6, 7),
+(41, 'Suresh Yan', 'This makes it easier to change the requirements in the future if needed.', '2023-05-10 08:37:07', 9, 0),
+(42, 'Java Tomcat', 'Use constants for minimum lengths of name, email, contact number and password to avoid magic numbers.', '2023-05-24 07:51:48', 12, 4),
+(43, 'Marcus Foo', 'This makes it easier to change the requirements in the future if needed.', '2023-05-24 22:53:06', 12, 5),
+(44, 'Marry Liew', 'This can help identify any issues that may be causing slow response times and optimize the system\'s performance accordingly.', '2023-05-19 07:29:06', 11, 18),
+(45, 'Coding Python', 'You can write a separate function that takes in the user input and the minimum length required for that input, and returns the validated input. ', '2023-05-18 12:50:07', 9, 6),
+(46, 'NB Jason', 'Load testing can be conducted by simulating a high volume of user traffic to measure the system\'s performance under heavy load.', '2023-05-20 02:17:06', 11, 5),
+(47, 'Double Ayam', 'This can help identify any latency issues and optimize the system\'s performance accordingly.', '2023-05-01 09:40:03', 10, 4),
+(48, 'Maggie Goreng', 'To measure channel capacity, the system can be tested using tools like bandwidth testers.', '2023-05-04 08:06:31', 10, 0),
+(49, 'Robert Fox', 'To measure latency, the system can be monitored using tools like ping or traceroute to determine the time it takes for a request to be processed and returned to the user. ', '2023-05-12 08:39:03', 10, 13);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `feedback`
 --
 
-DROP TABLE IF EXISTS `feedback`;
-CREATE TABLE IF NOT EXISTS `feedback` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `feedback` (
+  `ID` int(11) NOT NULL,
   `MESSAGE` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `PHONE` varchar(255) DEFAULT NULL,
-  `POSTEDTIME` datetime DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `POSTEDTIME` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `feedback`
@@ -55,34 +123,37 @@ INSERT INTO `feedback` (`ID`, `MESSAGE`, `NAME`, `EMAIL`, `PHONE`, `POSTEDTIME`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forum`
+-- Table structure for table `forums`
 --
 
-DROP TABLE IF EXISTS `forum`;
-CREATE TABLE IF NOT EXISTS `forum` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `forums` (
+  `ID` int(11) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `TITLE` text,
-  `CONTENT` text,
-  `DATE` datetime DEFAULT NULL,
-  `THUMB` int DEFAULT NULL,
-  `COMMENT` int DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `TITLE` varchar(255) DEFAULT NULL,
+  `CONTENT` text DEFAULT NULL,
+  `DATE` datetime NOT NULL DEFAULT current_timestamp(),
+  `THUMB` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `forum`
+-- Dumping data for table `forums`
 --
 
-INSERT INTO `forum` (`ID`, `NAME`, `TITLE`, `CONTENT`, `DATE`, `THUMB`, `COMMENT`) VALUES
-(1, 'John Doe', 'Database design structure should need to be incorporated.', 'To trigger the transition and display the element from right to left, you can dynamically add or remove the translate-x-full class using JavaScript or by toggling a CSS class. By using these utility classes in Tailwind CSS, you can easily create transitio', '2023-05-14 21:05:48', 67, 21),
-(2, 'Robert Fox', 'document.getElementById(\'myChart\')', 'By setting the width and height of the canvas element, you can control the size of the chart on the page. Keep in mind that Chart.js will respect the dimensions you provide, so make sure to adjust the values to suit your layout requirements.', '2023-05-04 15:46:23', 8, 10),
-(3, 'Marcus Mock', 'The cutoutPercentage option determines the size of the hole in the center of the doughnut.', 'To display the percentage values on each segment, we\'re using the datalabels plugin. The formatter function calculates the percentage based on the provided data values and formats it with a % symbol. You can customize the styling of the data labels by modifying the datalabels configuration object.', '2023-04-19 05:47:03', 12, 4),
-(4, 'Willam May', 'By setting position: \'bottom\' for the yAxes, the labels will be positioned at the bottom of the chart.', '\r\nTo position the labels at the bottom of a Chart.js chart, you can use the scales configuration option and set the yAxes property\'s position to \"bottom\". Here\'s an example:', '2023-05-14 14:05:19', 5, 8),
-(5, 'Michael ', 'ATAM (Architecture Tradeoff Analysis Method), SAAM (Software Architecture Analysis Method)', 'ATAM: ATAM is primarily focused on analyzing and evaluating software architectures to identify potential risks, trade-offs, and quality attributes.\r\nSAAM: SAAM focuses on evaluating the software architecture in terms of multiple quality attributes and identifying potential trade-offs.', '2023-05-19 18:57:22', 17, 4),
-(6, 'Henry', 'What is advantage it we are choose ARID method?', 'Maintenance and repair: ARID assists in maintenance and repair tasks by overlaying step-by-step instructions, annotations, and visual cues onto physical objects. This simplifies complex procedures, reduces downtime, and improves accuracy.', '2023-05-17 07:12:56', 5, 2),
-(7, 'Vite', 'This is the test title.', 'This is the test contents.', '2023-05-22 23:13:46', 0, 0),
-(8, 'Marched', 'Improving the Internet interface between Personal Privacy and Cybersecurity within the Context of Bank Account Fraud', 'In the context of bank account fraud, there is a critical need to improve the Internet interface between personal privacy and cybersecurity to reduce the risk of unauthorized access to sensitive financial information.', '2023-05-05 10:00:59', 0, 0);
+INSERT INTO `forums` (`ID`, `NAME`, `TITLE`, `CONTENT`, `DATE`, `THUMB`) VALUES
+(1, 'John Doe', 'ATAM is commonly used for evaluating and selecting software architectures during the early stages of a project', 'ARID is applied in domains where augmented reality can enhance design, visualization, collaboration, training, marketing, maintenance, and user experience, such as architecture, engineering, training simulations, and marketing.', '2023-05-14 21:05:48', 67),
+(2, 'Robert Fox', 'If it doesn\'t exist, we return null indicating that the user is not authenticated.', 'localStorage.getItem(\"googleAuth\") retrieves the googleAuth object from the localStorage, and JSON.parse() converts the string representation of the object back to a JavaScript object.', '2023-05-04 15:49:23', 8),
+(3, 'William May', 'utils.ts:900 Matched leaf route at location \"/\" does not have an element. ', 'We then check if the current time is greater than the expiresAt time. If it is, the token has expired and we remove the googleAuth object from the localStorage and return null.', '2023-04-19 05:47:06', 12),
+(4, 'Marcus Mock', 'How do SOLS Energy, and UrbanMetry do their product packaging?', 'In terms of product packaging for SOLS Energy and UrbanMetry, it is best to contact the companies directly or refer to their official websites for specific information on their packaging practices.', '2023-05-14 14:05:19', 51),
+(5, 'Michael', 'As an AI language model, I do not have access to real-time information on the packaging practices of specific companies.', 'Product packaging typically serves multiple purposes, such as protecting the product during transportation, marketing the product to potential customers, and providing important information about the product to consumers. ', '2023-05-19 18:57:02', 17),
+(6, 'Henry Queen', 'Companies may use different materials and designs for packaging.', 'In terms of product packaging for SOLS Energy and UrbanMetry, it is best to contact the companies directly or refer to their official websites for specific information on their packaging practices.', '2023-05-17 07:12:56', 5),
+(7, 'Vite', 'When developing the e-Commerce system for BulanBintang.co', 'Response time can be measured using tools like Selenium or Chrome DevTools to monitor the time it takes for the system to load a page or execute a specific action. This can help identify any issues that may be causing slow response times and optimize the system\'s performance accordingly.', '2023-05-22 23:14:46', 3),
+(8, 'Mercury Lim', 'This can help identify potential bottlenecks and optimize the system\'s network configuration to improve performance.', 'To measure channel capacity, the system can be tested using tools like bandwidth testers or network analyzers to determine the maximum throughput of the system\'s communication channels. ', '2023-05-05 10:04:59', 0),
+(9, 'Halimathon', 'Load testing can be done using tools like Apache JMeter or LoadRunner.', 'Load testing can be conducted by simulating a high volume of user traffic to measure the system\'s performance under heavy load. This can help identify any performance issues related to latency or channel capacity, as well as other factors such as CPU and memory usage.', '2023-05-06 01:48:32', 5),
+(10, '169 Twin Tower', 'The website is built with the aim of making the process of doing assignments easier, less stressful, and more enjoyable for students.', 'The website provides tools and resources to help students plan and organize their study schedule, prioritize tasks, and set goals. This helps students to stay on track and avoid getting overwhelmed by the demands of their coursework.', '2023-04-13 05:26:18', 37),
+(11, 'Bryan Lai', 'OpenAI make it a unique and effective solution for students struggling with assignments and coursework.', 'The website also offers tools to help students check their work for plagiarism and grammar errors, ensuring that their work is of high quality and meets academic standards.', '2023-05-11 16:48:22', 23),
+(12, 'Mei Mei', '\r\n\"Ease your mind, simplify your workload - with Paper-Partner.\"', 'Paper-Partner is the perfect solution. Try it today and experience the peace of mind that comes with having a trusted partner by your side.', '2023-05-23 08:11:34', 10),
+(13, 'Mei Yan', 'The platform offers a range of resources and materials to help students improve their writing skills', 'The slogan \"Ease your mind, simplify your workload - with Paper-Partner\" suggests that Paper-Partner is a platform that can make the process of completing assignments easier and more manageable for students. ', '2023-05-05 09:41:16', 23),
+(14, 'Vite', 'Let me try to append a new post on the forum page.', 'Ultimately, Paper-Partner is a trusted partner for students looking to improve their academic performance and ease the stress and anxiety associated with coursework.', '2023-05-24 02:31:33', 0);
 
 -- --------------------------------------------------------
 
@@ -90,14 +161,31 @@ INSERT INTO `forum` (`ID`, `NAME`, `TITLE`, `CONTENT`, `DATE`, `THUMB`, `COMMENT
 -- Table structure for table `learner_lessons`
 --
 
-DROP TABLE IF EXISTS `learner_lessons`;
-CREATE TABLE IF NOT EXISTS `learner_lessons` (
-  `user_id` int NOT NULL,
-  `lesson_id` int NOT NULL,
-  `completed` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`user_id`,`lesson_id`),
-  KEY `lesson_id` (`lesson_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `learner_lessons` (
+  `user_id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `completed` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `learner_lessons`
+--
+
+INSERT INTO `learner_lessons` (`user_id`, `lesson_id`, `completed`) VALUES
+(1, 1, 1),
+(1, 2, 1),
+(2, 3, 0),
+(2, 4, 1),
+(3, 1, 1),
+(3, 2, 1),
+(3, 12, 0),
+(3, 13, 0),
+(4, 1, 1),
+(4, 4, 0),
+(5, 12, 1),
+(5, 13, 0),
+(6, 3, 1),
+(6, 13, 0);
 
 -- --------------------------------------------------------
 
@@ -105,17 +193,15 @@ CREATE TABLE IF NOT EXISTS `learner_lessons` (
 -- Table structure for table `lessons`
 --
 
-DROP TABLE IF EXISTS `lessons`;
-CREATE TABLE IF NOT EXISTS `lessons` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lessons` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `description` text,
-  `videoUrl` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `upload_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` text DEFAULT NULL,
+  `videoUrl` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `upload_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `coverPic` varchar(255) DEFAULT NULL,
-  `lecturer` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ;
+  `lecturer` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lessons`
@@ -135,15 +221,12 @@ INSERT INTO `lessons` (`id`, `title`, `description`, `videoUrl`, `upload_time`, 
 -- Table structure for table `options`
 --
 
-DROP TABLE IF EXISTS `options`;
-CREATE TABLE IF NOT EXISTS `options` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `question_id` int UNSIGNED DEFAULT NULL,
+CREATE TABLE `options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `question_id` int(10) UNSIGNED DEFAULT NULL,
   `option_text` varchar(500) NOT NULL,
-  `is_answer` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `question_id` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `is_answer` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `options`
@@ -217,14 +300,12 @@ INSERT INTO `options` (`id`, `question_id`, `option_text`, `is_answer`) VALUES
 -- Table structure for table `qr_details`
 --
 
-DROP TABLE IF EXISTS `qr_details`;
-CREATE TABLE IF NOT EXISTS `qr_details` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qr_details` (
+  `id` int(11) NOT NULL,
   `student_name` varchar(50) NOT NULL,
   `lesson_name` varchar(50) NOT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `qr_details`
@@ -241,14 +322,11 @@ INSERT INTO `qr_details` (`id`, `student_name`, `lesson_name`, `date`) VALUES
 -- Table structure for table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `quiz_id` int UNSIGNED DEFAULT NULL,
-  `question_text` varchar(1000) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `quiz_id` (`quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `quiz_id` int(10) UNSIGNED DEFAULT NULL,
+  `question_text` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `questions`
@@ -277,13 +355,10 @@ INSERT INTO `questions` (`id`, `quiz_id`, `question_text`) VALUES
 -- Table structure for table `quiz`
 --
 
-DROP TABLE IF EXISTS `quiz`;
-CREATE TABLE IF NOT EXISTS `quiz` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lesson_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `lesson_id` (`lesson_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `quiz` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `lesson_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `quiz`
@@ -300,16 +375,14 @@ INSERT INTO `quiz` (`id`, `lesson_id`) VALUES
 -- Table structure for table `quiz_results`
 --
 
-DROP TABLE IF EXISTS `quiz_results`;
-CREATE TABLE IF NOT EXISTS `quiz_results` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quiz_results` (
+  `id` int(11) NOT NULL,
   `student_name` varchar(255) NOT NULL,
   `lesson_name` varchar(255) NOT NULL,
   `result` decimal(5,2) NOT NULL,
   `grade` char(1) NOT NULL,
-  `submit_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `submit_time` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `quiz_results`
@@ -329,15 +402,13 @@ INSERT INTO `quiz_results` (`id`, `student_name`, `lesson_name`, `result`, `grad
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
-  `ROLE` int DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ROLE` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -350,6 +421,144 @@ INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
 (4, 'Kai Kiat', 'kaikiat@gmail.com', 'kaikiat123', 1),
 (5, 'Innis Yu', 'innis@gmail.com', 'innis123', 0),
 (6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `forums`
+--
+ALTER TABLE `forums`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `learner_lessons`
+--
+ALTER TABLE `learner_lessons`
+  ADD PRIMARY KEY (`user_id`,`lesson_id`),
+  ADD KEY `lesson_id` (`lesson_id`);
+
+--
+-- Indexes for table `lessons`
+--
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `options`
+--
+ALTER TABLE `options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Indexes for table `qr_details`
+--
+ALTER TABLE `qr_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Indexes for table `quiz`
+--
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `lesson_id` (`lesson_id`);
+
+--
+-- Indexes for table `quiz_results`
+--
+ALTER TABLE `quiz_results`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `forums`
+--
+ALTER TABLE `forums`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `options`
+--
+ALTER TABLE `options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT for table `qr_details`
+--
+ALTER TABLE `qr_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `quiz_results`
+--
+ALTER TABLE `quiz_results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

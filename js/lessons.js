@@ -25,7 +25,7 @@ export class Lesson {
 
         let template = `
           <div id="card" class="card card-compact w-full cursor-pointer border border-solid border-gray bg-white hover:bg-white hover:drop-shadow-md">
-            <div class="status"></div>
+            <div class="status rounded-t-xl"></div>
               <figure><img src="${this.coverPic}" alt="cover_pic" class="object-cover"/></figure>
               <div class="card-body">
                   <h4 class="card-title text-lg text-ellipsis">${this.title}</h4>

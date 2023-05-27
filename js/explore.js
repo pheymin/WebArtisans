@@ -67,9 +67,8 @@ function loadData(data) {
                 let cardElement = card.getCard();
 
                 let status = item.completed === "1" ? "Completed" : "Ongoing";
-                console.log(status);
 
-                cardElement.find('.status').addClass('bg-[#a38ffd] text-white rounded-t-md p-4').text(status);
+                cardElement.find('.status').addClass('bg-[#a38ffd] text-white p-4').text(status);
 
                 cardContainer.append(cardElement);
 

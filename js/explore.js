@@ -59,18 +59,24 @@ function cardEventHandler(id){
     } else if (pageContext === 'edit') {
         redirectUrl = `./upload-lesson.html?id=${id}`;
 
-        $.ajax({
-            url: '../php/explore.php',
-            method: 'GET',
-            data: { id: id },
-            dataType: 'json',
-            success: function (response) {
-                processData(response[0]);
-                window.location.href = redirectUrl;
-            },
-            error: function (xhr, status, error) {
-                console.error('Request failed. Status:', error);
-            }
+                    $.ajax({
+                        url: '../php/explore.php',
+                        method: 'GET',
+                        data: { id: card.id },
+                        dataType: 'json',
+                        success: function (response) {
+                            processData(response[0]);
+                            sessionStorage.removeItem('questions');
+                            window.location.href = redirectUrl;
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Request failed. Status:', error);
+                        }
+                    });
+                }
+
+
+            });
         });
     }
 }
@@ -84,7 +90,7 @@ function processData(data) {
 
 function getPageContext() {
     const currentPath = window.location.pathname;
-    
+
     // Check if the current path contains "edit-lesson.html"
     if (currentPath.includes("edit-lesson.html")) {
         return "edit";

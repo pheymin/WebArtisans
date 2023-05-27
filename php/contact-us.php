@@ -1,13 +1,13 @@
 <?php
 require_once ('database.php');
 
-if(isset($_POST['send'])){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $message = $_POST['message'];
+$method = $_SERVER['REQUEST_METHOD'];
 
-    $sql = "INSERT INTO feedback (MESSAGE, NAME, EMAIL, PHONE) VALUES ('$message', '$name', '$email', '$phone')";
-    createData($sql);   
+if ($method === 'POST'){
+    $postData = json_decode(file_get_contents('php://input'), true);
+
+    $query = "INSERT INTO feedback (MESSAGE, NAME, EMAIL, PHONE) VALUES ('".$postData['message']."', '".$postData['name']."', '".$postData['email']."', '".$postData['phone']."')";
+
+    createData($query);
 }
 ?>

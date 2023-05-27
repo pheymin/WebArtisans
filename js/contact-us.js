@@ -1,6 +1,8 @@
-import { getCurrentDateTime } from "./Tools.js";
+import { getCurrentDateTime, validateInput } from "./Tools.js";
 
-$("document").ready(function(){
+$("document").ready(function () {
+    $('body').find('.logo-img').attr('src', '../public/vite.svg');
+
     let noti2 = $('#noti2');
     let noti3 = $('#noti3');
     let notiContainer = $('#noti-container');
@@ -20,7 +22,7 @@ $("document").ready(function(){
         return msg[message];
     };
 
-    notiContainer.hover(function() {
+    notiContainer.hover(function () {
         noti2.addClass('animate');
         noti3.addClass('animate');
         fbMsg.text(getMsg('fbMsg'));
@@ -29,10 +31,10 @@ $("document").ready(function(){
         return;
     });
 
-    notiContainer.mouseleave(function() {
+    notiContainer.mouseleave(function () {
         noti2.removeClass('animate');
         noti3.removeClass('animate');
-        for (let i = 0; i < msgs.length; i++){
+        for (let i = 0; i < msgs.length; i++) {
             msgs[i].text("Notification");
         }
         return;
@@ -40,35 +42,96 @@ $("document").ready(function(){
 
     let btnSend = $('#btn-send');
 
-    btnSend.click(function() {
-        let name = $('#txt-name').val();
-        let email = $('#txt-email').val();
-        let phone = $('#txt-phone').val();
-        let message = $('#txt-message').val();
-        if (name == "" || email == "" || message == "") {
-            alert("Please fill in all fields!");
+    btnSend.on('click', function (e) {
+        e.preventDefault()
+        handleSubmit();
+    })
+});
+
+let name = $('#txt-name');
+let email = $('#txt-email');
+let phone = $('#txt-phone');
+let message = $('#txt-message');
+
+function handleSubmit() {
+    console.log("submit");
+
+    let textAlert = [$('#name-alert'), $('#email-alert'), $('#phone-alert'), $('#message-alert')];
+    for (let i = 0; i < txtAlert.length; i++) {
+        textAlert[i].text("");
+    }
+
+    let isValid = true;
+    
+
+    let nameT = name.val();
+    let emailT = email.val();
+    let phoneT = phone.val();
+    let messageT = message.val();
+
+    //var isValid = validation(txtValue)
+    if(!validateInput("username", nameT)){
+        isValid = false;
+        textAlert[0].text("Invalid name");
+    }
+
+    if(!validateInput("email", emailT)){
+        isValid = false;
+        textAlert[1].text("Format: xxx@mail.com");
+    }
+
+    if(!validateInput("phone", phoneT)){
+        isValid = false;
+        textAlert[2].text("Invalid phone number");
+    }
+
+    if (messageT == "") {
+        $('#message-alert').text("Please fill in this field");
+        isValid = false;
+    }
+
+
+    if (isValid) {
+        let data = {
+            name: name.val(),
+            email: email.val(),
+            phone: phone.val(),
+            message: message.val(),
+        };
+
+        sendFeedback(data);
+        console.log('submit');
+    }
+}
+
+let txtAlert = [$('#name-alert'), $('#email-alert'), $('#phone-alert'), $('#message-alert')];
+let txtBox = [name, email, phone, message];
+let txtName = ["username", "email", "phone", "message"];
+
+function sendFeedback(data) {
+    console.log("data: ",data);
+    // const query = `INSERT INFO feedback (MESSAGE, NAME, EMAIL, PHONE) VALUES ('${data.message}', '${data.name}', '${data.email}', '${data.phone}')`
+    $.ajax({
+        url: "../php/contact-us.php",
+        type: "POST",
+        data: JSON.stringify(data),
+        success: function (response) {
+            alert("Message sent!");
+            clearInput(txtBox);
+            clearAlert(txtAlert);
             return;
         }
-        $.ajax({
-            url: "../php/contact-us.php",
-            type: "POST",
-            data: {
-                "send": 1,
-                "name": name,
-                "email": email,
-                "message": message,
-                "phone": phone,
-            },
-            success: function(response) {
-                if (response == "success") {
-                    alert("Message sent!");
-                    name.val("");
-                    email.val("");
-                    phone.val("");
-                    message.val("");
-                    return;
-                }
-            }
-        });
     });
-});
+}
+
+function clearInput(txtBox) {
+    for (let i = 0; i < txtBox.length; i++) {
+        txtBox[i].val("");
+    }
+}
+
+function clearAlert(alerts) { 
+    for (let i = 0; i < alerts.length; i++) {
+        alerts[i].text("");
+    }
+}

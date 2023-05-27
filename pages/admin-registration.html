@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/tailwind.css">
+    <link rel="stylesheet" href="../less/main.less">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../styles/admin-registration.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body class="h-full">
+    <div id="nav"></div>
+        <div id="content">
+            <div id="content__design">
+                <!-- <div id="design-title" class="font-bold">JOIN US TODAY</div> -->
+                <div id="img-container"><img id="design-img"src="../images/registration.png" alt="registration"></div>
+            </div>
+            <div id="content__input">
+                <div id="input__container">
+                    <form class="w-full h-full">
+                        <div id="input__content">
+                            <div id="input__title" style="margin: 0px 0px -20px 0px;">
+                                <h3 class="text-2xl font-bold">Warm Welcome</h1>
+                                    <p>Looking forward to see you soon!</p>
+                            </div>
+                            <div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <div class="label-text text-sm">Your name</div>
+                                        <span id="name-alert" class="label-text-alt"></span>
+                                    </label>
+                                    <input type="text" name="name" id="txt-name" placeholder="Enter your name"
+                                        class="input input-bordered input-primary w-full max-w-xs" />
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <div class="label-text text-sm">Email address</div>
+                                        <span id="email-alert" class="label-text-alt"></span>
+                                    </label>
+                                    <input type="email" name="email" id="txt-email" placeholder="Enter your email address"
+                                        class="input input-bordered w-full max-w-xs" />
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <div class="label-text text-sm">Password</div>
+                                        <span id="phone-alert" class="label-text-alt"></span>
+                                    </label>
+                                    <input type="tel" name="password" id="txt-password" placeholder="Enter your phone number"
+                                        class="input input-bordered w-full max-w-xs" />
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <div class="label-text text-sm">Re-enter Password</div>
+                                        <span id="phone-alert" class="label-text-alt"></span>
+                                    </label>
+                                    <input type="tel" name="Rpassword" id="txt-Rpassword" placeholder="Enter your phone number"
+                                        class="input input-bordered w-full max-w-xs" />
+                                </div>
+                            </div>
+                            <div><button id="btn-send" class="btn btn-wide rounded-3xl">Submit</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <div id="footer"></div>
+    <script type="module" src="../main.js"></script>
+</body>
+</html>

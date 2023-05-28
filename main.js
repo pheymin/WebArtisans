@@ -1,8 +1,9 @@
 // import $ from 'jquery'
+import { getCurrentUser, getCurrentUserAvatar, logoutModal } from "./js/Tools.js";
 
 const nav = `
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a id="normal-nav-index" class="cursor-pointer flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <div class="w-10 h-10">
                 <img class="logo-img" src="./public/vite.svg"/>
             </div>
@@ -46,8 +47,8 @@ const userNav = `
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex flex-shrink-0 items-center">
-                        <img class="logo-img block h-10 w-auto lg:hidden" src="./public/vite.svg" alt="logo">
-                        <img class="logo-img hidden h-10 w-auto lg:block" src="./public/vite.svg" alt="logo">
+                        <img class="logo-img user-nav-index block h-10 w-auto lg:hidden cursor-pointer" src="./public/vite.svg" alt="logo">
+                        <img class="logo-img user-nav-index hidden h-10 w-auto lg:block cursor-pointer" src="./public/vite.svg" alt="logo">
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
@@ -61,14 +62,14 @@ const userNav = `
                     <div class="relative ml-3">
                         <div>
                             <button id="nav-profile-img" type="button" class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <img class="h-10 w-10 rounded-full" src="./public/random/avatar-0.svg" alt="">
+                                <img id="nav-profile-picture" class="h-10 w-10 rounded-full" src="${getCurrentUserAvatar()}" alt="">
                             </button>
                         </div>
                         <div id="nav-dropdown" class="absolute hidden right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-1">View Certificate</a>
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
+                            <a href="view-qr.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-1">View Certificate</a>
                             <a href="user-lesson.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-1">View My Lessons</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                            <a id="user-nav-logout" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-[#f4f2ff] hover:text-[#7a62d6]" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -77,9 +78,9 @@ const userNav = `
 
         <div class="sm:hidden" id="mobile-menu">
             <div id="sm-nav-menu-dropdown" class="space-y-1 px-2 pb-3 pt-2 hidden">
-                <a href="#" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium" aria-current="page">Contact Us</a>
-                <a href="#" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium">Explore</a>
-                <a href="#" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium">Forum</a>
+                <a href="contactus.html" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium" aria-current="page">Contact Us</a>
+                <a href="explore.html" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium">Explore</a>
+                <a href="forum.html" class="block rounded-md hover:bg-[#f4f2ff] px-3 py-2 font-medium">Forum</a>
             </div>
         </div>
     </nav>
@@ -120,17 +121,32 @@ const footer = `
     </div>
 `
 
-function getCurrentUser() {
-    return JSON.parse(sessionStorage.getItem('currentUser'));
-}
-
 $(document).ready(() => {
     var role = getCurrentUser() ? getCurrentUser().ROLE : null;
-    console.log(role);
+    // console.log(role);
 
-    if (role === '0' || role === '1') {
+    //if role is null and current page include forum.html or contactus.html or explore.html, then use nav
+    if (role === null && (window.location.href.includes('forum.html') || 
+            window.location.href.includes('contactus.html') || window.location.href.includes('explore.html') ||
+            window.location.href.includes('index.html'))) 
+    {
+        $('#nav').html(nav)
+
+        $('#normal-nav-index').on('click', () => {
+            directToIndex()
+        })
+    }
+
+    if (role === '1'){
+        replaceUrl('dashboard.html')
+        alert('If need to visit these pages, please login as user.')
+    }
+
+    if (role === '0') {
         $('#nav').html(userNav)
 
+        replaceProfileUrl()
+            
         $("#nav-profile-img").on('click', () => {
             $('#nav-dropdown').toggleClass('hidden');
         })
@@ -138,17 +154,18 @@ $(document).ready(() => {
         $("#sm-nav-menu-control").on('click', () => {
             $('#sm-nav-menu-dropdown').toggleClass('hidden');
         })
-    }
-    else {
-        $('#nav').html(nav)
+
+        $("#user-nav-logout").on('click', () => {
+            openLogoutModal()
+        })
     }
 
-    // $('#nav').html(nav)
-    // $('#nav').html(userNav)
     $('#footer').html(footer)
 
+    replaceWebLogo()
+
+
     $('#btn-register').on('click', () => {
-        // window.location.href = './pages/register.html'
         replaceUrl('register.html')
     })
 
@@ -156,6 +173,10 @@ $(document).ready(() => {
         e.preventDefault()
         if (!e.target.attributes.href) return;
         replaceUrl(e.target.attributes.href.value);
+    })
+
+    $(".user-nav-index").on('click', () => {
+        directToIndex()
     })
 })
 
@@ -171,4 +192,46 @@ function curIsIndex() {
 function replaceUrl(value) {
     const path = curIsIndex() ? `./pages/${value}` : `./${value}`;
     window.location.href = path;
+}
+
+function replaceProfileUrl(){
+    $('#nav-profile-picture').attr('src', getCurrentUserAvatar())
+}
+
+function replaceWebLogo(){
+    if(window.location.href.includes('pages')){
+        $('body').find('.logo-img').attr('src', '../public/vite.svg');
+    }
+}
+
+function directToIndex(){
+    const path = curIsIndex() ? `./index.html` : `../index.html`;
+    window.location.href = path;
+}
+
+$(document).on('click', '#logout-modal-backdrop', function () {
+    closeLogoutModal();
+});
+
+$(document).on('click', '#btn-cancel', function () {
+    closeLogoutModal();
+});
+
+$(document).on('click', '#btn-logout', function () {
+    confirmLogout();
+});
+
+function openLogoutModal() {
+    $('body').append(logoutModal);
+}
+
+function closeLogoutModal() {
+    $('#nav-dropdown').addClass('hidden');
+    $('#sm-nav-menu-dropdown').addClass('hidden');
+    $('#logout-modal-backdrop').remove();
+}
+
+function confirmLogout() {
+    sessionStorage.removeItem('currentUser');
+    replaceUrl('login.html');
 }

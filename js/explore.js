@@ -2,6 +2,7 @@ import { Lesson } from './lessons.js';
 
 // AJAX request
 $(document).ready(function () {
+    // $('body').find('.logo-img').attr('src', '../public/vite.svg');
     $('.menu-item').eq(4).addClass('menu-item-active');
 
     getAllData();

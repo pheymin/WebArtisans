@@ -2,6 +2,8 @@ import { Lesson } from './lessons.js';
 
 // AJAX request
 $(document).ready(function () {
+    $('.menu-item').eq(4).addClass('menu-item-active');
+
     getAllData();
 
     $('#search-btn').click(function () {

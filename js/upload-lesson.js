@@ -2,6 +2,7 @@ import { Lesson } from './lessons.js';
 import { getCurrentDateTime } from './Tools.js';
 
 $(document).ready(function () {
+    $('.menu-item').eq(2).addClass('menu-item-active');
     getCache();
 });
 

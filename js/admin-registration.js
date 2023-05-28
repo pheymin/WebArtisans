@@ -8,6 +8,7 @@ let textAlert = [$('#name-alert'), $('#email-alert'), $('#password-alert'), $('#
 let txtBox = [username, email, password, Rpassword];
 
 $(document).ready(function () {
+    $('.menu-item').eq(5).addClass('menu-item-active');
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
 
     let btnSubmit = $('#btn-submit');

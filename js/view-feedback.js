@@ -2,7 +2,7 @@ import { getRandomImageUrl } from "./Tools.js";
 
 $(document).ready(function () {
     // console.log("view-feedback.js ready!");
-
+    $('.menu-item').eq(3).addClass('menu-item-active');
     const query = `SELECT * FROM feedback ORDER BY POSTEDTIME DESC`;
 
     $.ajax({

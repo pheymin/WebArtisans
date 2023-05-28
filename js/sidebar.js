@@ -1,5 +1,5 @@
 var sideNav = `
-    <nav class="sidebar md:h-full h-auto w-auto bg-[#f8faff] z-50 py-4 px-6">
+    <nav class="sidebar md:h-full h-auto w-auto bg-[#f4f2ff] z-50 py-4 px-6">
         <header class="relative">
             <div class="flex 2xl:flex-row flex-col items-center">
                 <img class="w-10 h-10" src="../public/vite.svg" alt="logo">
@@ -11,8 +11,8 @@ var sideNav = `
             </div>
         </header>
 
-        <div class="menu-bar">
-            <div class="menu">
+        <div class="menu-sidebar">
+            <div class="menu-items-list">
                 <ul class=" mt-8">
                     <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 py-6">
                         <a href="./dashboard.html" class="">

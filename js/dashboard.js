@@ -7,6 +7,19 @@ var doughnutChartData = [];
 
 $(document).ready(function () {
 
+    $('.menu-item').first().addClass('menu-item-active');
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    // if (currentUser == null || currentUser.ROLE != "1") {
+    //     window.location.href = "login.html";
+    //     return;
+    // }
+
+    $('#admin-name').text(currentUser.NAME);
+    //remove the space in name and turn into lowercase
+    var name = currentUser.NAME.replace(/\s/g, '').toLowerCase();
+    var imgUrl = `../public/${name}.svg`
+    $('#admin-profile').attr('src', imgUrl);
+
     initObjCount();
     //console.log("dashboard.js ready!");
     initPopularChart();

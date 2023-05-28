@@ -21,6 +21,8 @@ $("document").ready(function(){
     layoutByRole(parseInt(user.ROLE));
     showInfo(parseInt(user.ID));
     changeTextColor();
+
+    $('.menu-item').eq(1).addClass('menu-item-active');
     
     editIcon.on("click", function(e){
         e.preventDefault();

@@ -1,8 +1,14 @@
-import { getRandomImageUrl } from "./Tools.js";
+import { getRandomImageUrl, getCurrentUser, getCurrentUserName, getCurrentUserAvatar } from "./Tools.js";
 
 $(document).ready(function () {
 
-    $('body').find('.logo-img').attr('src', '../public/vite.svg');
+    // $('body').find('.logo-img').attr('src', '../public/vite.svg');
+
+    if (getCurrentUser() != null) {
+        initUserArea();
+    }
+
+
     var query = `SELECT f.*, COUNT(c.FORUM_ID) AS COMMENT_COUNT FROM forums AS f LEFT JOIN comments AS c ON f.ID = c.FORUM_ID GROUP BY f.ID ORDER BY f.DATE`;
     $.ajax({
         url: "../php/forum.php",
@@ -58,6 +64,25 @@ function handleIconEvents()
         var count = parseInt(commentCount);
         appendCommentModal(id,count,$(this).children().last());
     });
+}
+
+function initUserArea(){
+    var userArea = `
+        <h2 class="font-semibold text-2xl tracking-wider">Welcome, <span class="text-[#4d2ec8]">${getCurrentUserName()}.</span></h2>
+        <h6 id="forum-datetime" class="my-1 text-[#272e3b]"></h6>
+        <div class="py-5 px-7 rounded-xl shadow-lg bg-[#f5e8ff] flex flex-col box-border my-6">
+            <div class="inline-flex items-start">
+                <img src="${getCurrentUserAvatar()}" id="user-profile" alt="profile"
+                    class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                <textarea id="txt-create-post" placeholder="Share your question here" class="ml-4 px-5 py-4 rounded-3xl text-sm box-border grow focus:outline-[#7f5be7] h-28 resize-none overflow-hidden"></textarea>
+            </div>
+            <div class="flex flex-row mt-4 justify-end">
+                <button id="btn-create-post" class="bg-[#a38ffd] px-5 py-2 text-white hover:bg-[#805be8] cursor-pointer rounded-md">+ New Post</button>
+            </div>
+        </div>
+    `
+
+    $('#forum-container').prepend(userArea);
 }
 
 var forumTextarea = $("#txt-create-post");
@@ -142,6 +167,27 @@ function appendPostOnTop(post){
     forumTextarea.val("");
 }
 
+function commentArea(){
+    var commentArea = `
+        <div class=" inline-flex items-start mt-4">
+            <img src="${getCurrentUserAvatar()}" id="user-profile" alt="profile" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+            <div class="overflow-hidden ml-4 flex-1">
+                <textarea rows="3" id="txt-comment" name="comment" class="w-full rounded-lg border-2 text-base border-gray-300 bg-white placeholder-gray-400 py-4 px-4 resize-none outline-none focus:border-blue-400" placeholder="Write a comment..."></textarea>
+                <div class="flex justify-end pb-2 ">
+                    <button id="btn-post-comment" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+                        Post comment
+                    </button>
+                </div>
+            </div>
+        </div>
+    `
+    if (getCurrentUser() != null){
+        return commentArea;
+    }
+    else
+        return "";
+}
+
 function appendCommentModal(id,count,ele){
 
     var data = getComments(id);
@@ -155,17 +201,7 @@ function appendCommentModal(id,count,ele){
                         <div class="flex flex-col">
                             <span class="flex justify-end"><i id="icon-close" class="fa-solid fa-xmark text-gray-500 hover:text-blue-500 text-lg cursor-pointer"></i></span>
                             <h1 id="comment-modal-count" class="font-semibold text-xl text-center">${count} Comments</h1>
-                            <div class=" inline-flex items-start mt-4">
-                                <img src="https://dummyimage.com/106x106" id="user-profile" alt="profile" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
-                                <div class="overflow-hidden ml-4 flex-1">
-                                    <textarea rows="3" id="txt-comment" name="comment" class="w-full rounded-lg border-2 text-base border-gray-300 bg-white placeholder-gray-400 py-4 px-4 resize-none outline-none focus:border-blue-400" placeholder="Write a comment..."></textarea>
-                                    <div class="flex justify-end pb-2 ">
-                                        <button id="btn-post-comment" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-                                            Post comment
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            ${commentArea()}
                             <div id="comment-board" class="flex flex-col mt-4"></div>
                         </div>
                     </div>
@@ -194,8 +230,7 @@ function appendCommentModal(id,count,ele){
 
         var data = {
             FORUM_ID: id,
-            NAME: "Vite",
-            // Name: sessionStorage.getItem("currentUser"),
+            NAME: getCurrentUserName(),
             COMMENT: comment,
             POSTEDTIME: datestring,
             THUMB: 0

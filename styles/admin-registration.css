@@ -63,9 +63,9 @@
     #content{
         flex-direction: column;
     }
-    #content > div{
+    /* #content > div{
         flex: 1 1 100%;
-    }
+    } */
     #content__design{
         margin: 0 auto;
     }

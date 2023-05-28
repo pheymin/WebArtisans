@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $('#search-btn').click(function () {
         let search = $('#search-bar').val();
-        console.log(search);
+        // console.log(search);
         $.ajax({
             url: '../php/explore.php',
             method: 'GET',
@@ -16,7 +16,7 @@ $(document).ready(function () {
                 loadData(response);
             },
             error: function (xhr, status, error) {
-                //console.error(xhr.responseText);
+                // console.error(xhr.responseText);
                 getNoResult("error");
             }
         });

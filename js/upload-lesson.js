@@ -92,10 +92,13 @@ function getFilePath(callback) {
 }
 
 function cardPreview(coverUrl) {
+    let lesson = sessionStorage.getItem('lesson');
+    lesson = JSON.parse(lesson);
+
     const title = $("#title").val() || "Title";
     const description = $("#description").val() || "Description";
     const lecturer = $("#lecturer").val() || "Lecturer";
-    const coverPic = coverUrl || "https://dummyimage.com/1280x720";
+    const coverPic = coverUrl || lesson.coverPic ||"https://dummyimage.com/1280x720";
 
     const data = {
         title: title,

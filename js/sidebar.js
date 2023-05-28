@@ -11,8 +11,8 @@ var sideNav = `
             </div>
         </header>
 
-        <div class="menu-bar">
-            <div class="menu">
+        <div class="menu-sidebar">
+            <div class="menu-items-list">
                 <ul class=" mt-8">
                     <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 py-6">
                         <a href="./dashboard.html" class="">

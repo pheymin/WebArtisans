@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$database = "webartisans1";
+$database = "webartisans";
 $db = mysqli_connect($host, "root", "", $database);
 
 // Check the database connection

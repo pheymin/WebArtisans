@@ -1,5 +1,5 @@
 var sideNav = `
-    <nav class="sidebar md:h-full h-auto w-auto bg-[#f8faff] z-50 py-4 px-6">
+    <nav class="sidebar md:h-full h-auto w-auto bg-[#f4f2ff] z-50 py-4 px-6">
         <header class="relative">
             <div class="flex 2xl:flex-row flex-col items-center">
                 <img class="w-10 h-10" src="../public/vite.svg" alt="logo">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 10:05 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: May 29, 2023 at 01:27 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -126,7 +126,8 @@ INSERT INTO `feedback` (`ID`, `MESSAGE`, `NAME`, `EMAIL`, `PHONE`, `POSTEDTIME`)
 (13, 'Note that the Outlet component should only be used in the parent component, and not in any of the child components. The child components should only define their own routes using the Route and Switch components.', 'Jia Hao', 'jiahao@bbq.com', '0125659412', '2023-05-24 03:38:07'),
 (14, 'Make sure that you have installed the react-router-dom module and that it is up-to-date. You can do this by running npm install react-router-dom in your terminal.', 'Toyzz Man', 'toyzzman@klia.bo', '0145328870', '2023-05-12 04:20:47'),
 (15, 'How to solve \"Uncaught SyntaxError: The requested module \'/node_modules/.vite/deps/react-router-dom.js?v=79b8a667\' does not provide an export named \'Switch\'\"', 'Wai Meng', 'waimeng@klcc.bo', '0121023307', '2023-05-17 15:04:34'),
-(16, 'Incorrect file path Double check that the file path in your HTML code is correct and matches the location of the CSS file on your server.', 'Ryan Buzz', 'ryanbuz@fake.co', '0153329800', '2023-05-16 12:16:17');
+(16, 'Incorrect file path Double check that the file path in your HTML code is correct and matches the location of the CSS file on your server.', 'Ryan Buzz', 'ryanbuz@fake.co', '0153329800', '2023-05-16 12:16:17'),
+(17, 'I love web development', 'yannis ', 'yannis@gmail.com', '0123456789', NULL);
 
 -- --------------------------------------------------------
 
@@ -397,12 +398,12 @@ CREATE TABLE `quiz_results` (
 --
 
 INSERT INTO `quiz_results` (`id`, `student_name`, `lesson_name`, `result`, `grade`, `submit_time`) VALUES
-(1, 'Lennon Tan', 'Furter Web Design and Development', '80.00', 'B', '2023-05-26 17:55:19'),
-(2, 'Lennon Tan', 'Data Structure', '40.00', 'F', '2023-05-26 17:55:48'),
-(3, 'Phey Min', 'Research Methods for Computing and Technology', '20.00', 'F', '2023-05-26 17:56:49'),
-(4, 'Phey Min', 'Furter Web Design and Development', '100.00', 'A', '2023-05-26 17:57:08'),
-(5, 'Innis Yu', 'Furter Web Design and Development', '20.00', 'F', '2023-05-26 17:57:59'),
-(6, 'Innis Yu', 'Data Structure', '60.00', 'D', '2023-05-26 17:58:16');
+(1, 'Lennon Tan', 'Furter Web Design and Development', 80.00, 'B', '2023-05-26 17:55:19'),
+(2, 'Lennon Tan', 'Data Structure', 40.00, 'F', '2023-05-26 17:55:48'),
+(3, 'Phey Min', 'Research Methods for Computing and Technology', 20.00, 'F', '2023-05-26 17:56:49'),
+(4, 'Phey Min', 'Furter Web Design and Development', 100.00, 'A', '2023-05-26 17:57:08'),
+(5, 'Innis Yu', 'Furter Web Design and Development', 20.00, 'F', '2023-05-26 17:57:59'),
+(6, 'Innis Yu', 'Data Structure', 60.00, 'D', '2023-05-26 17:58:16');
 
 -- --------------------------------------------------------
 
@@ -415,32 +416,35 @@ CREATE TABLE `users` (
   `NAME` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
-  `ROLE` int(11) DEFAULT NULL
+  `ROLE` int(11) DEFAULT NULL,
+  `PHONE` varchar(11) DEFAULT NULL,
+  `GENDER` int(11) DEFAULT NULL,
+  `OCCUPATION` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
-(1, 'Lennon Tan', 'lennon@gmail.com', 'lennontan123', 0),
-(2, 'Yannis Leng', 'yannis@gmail.com', 'yannisleng123', 1),
-(3, 'Phey Min', 'pheymin@gmail.com', 'pheymin123', 0),
-(4, 'Kai Kiat', 'kaikiat@gmail.com', 'kaikiat123', 1),
-(5, 'Innis Yu', 'innis@gmail.com', 'innis123', 0),
-(6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1),
-(7, 'Perry Lim', 'perrylim@mail.com', 'perry123', 0),
-(8, 'Mathieu', 'mathieu@mail.com', 'mathieu456', 0),
-(9, 'Bryan Lai', 'bryanlai@gmail.com', 'bryanlai123', 1),
-(10, 'John Doe', 'johndoe@klia.bo', 'johndoe123', 0),
-(11, 'Robert Fox', 'robertfox@bezza.bo', 'robertfox123', 0),
-(12, 'Marcus Mock', 'marcusmock@lagging.co', 'marcusmock123', 0),
-(13, 'William May', 'williammay@buzz.co', 'williammay123', 0),
-(14, 'Michael', 'michael@buzzer.coco', 'michael123', 0),
-(15, 'Henry', 'henry@buzz.bo', 'henry123', 0),
-(16, 'Vite', 'vite@javascript.co', 'vite123', 0),
-(17, 'Marched', 'marched@coconut.co', 'marched123', 0),
-(18, 'Halimathon', 'halimathon@next.co', 'halimathon123', 0);
+INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `ROLE`, `PHONE`, `GENDER`, `OCCUPATION`) VALUES
+(1, 'Lennon Tan', 'lennon@gmail.com', 'lennontan123', 0, '0162345678', 1, 'Student'),
+(2, 'Yannis Leng', 'yannis@gmail.com', 'yannisleng123', 1, '0125642467', 0, 'Student'),
+(3, 'Phey Min', 'pheymin@gmail.com', 'pheymin123', 0, NULL, NULL, NULL),
+(4, 'Kai Kiat', 'kaikiat@gmail.com', 'kaikiat123', 1, NULL, NULL, NULL),
+(5, 'Innis Yu', 'innis@gmail.com', 'innis123', 0, NULL, NULL, NULL),
+(6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1, NULL, NULL, NULL),
+(7, 'Perry Lim', 'perrylim@mail.com', 'perry123', 0, NULL, NULL, NULL),
+(8, 'Mathieu', 'mathieu@mail.com', 'mathieu456', 0, NULL, NULL, NULL),
+(9, 'Bryan Lai', 'bryanlai@gmail.com', 'bryanlai123', 1, NULL, NULL, NULL),
+(10, 'John Doe', 'johndoe@klia.bo', 'johndoe123', 0, NULL, NULL, NULL),
+(11, 'Robert Fox', 'robertfox@bezza.bo', 'robertfox123', 0, NULL, NULL, NULL),
+(12, 'Marcus Mock', 'marcusmock@lagging.co', 'marcusmock123', 0, NULL, NULL, NULL),
+(13, 'William May', 'williammay@buzz.co', 'williammay123', 0, NULL, NULL, NULL),
+(14, 'Michael', 'michael@buzzer.coco', 'michael123', 0, NULL, NULL, NULL),
+(15, 'Henry', 'henry@buzz.bo', 'henry123', 0, NULL, NULL, NULL),
+(16, 'Vite', 'vite@javascript.co', 'vite123', 0, NULL, NULL, NULL),
+(17, 'Marched', 'marched@coconut.co', 'marched123', 0, NULL, NULL, NULL),
+(18, 'Halimathon', 'halimathon@next.co', 'halimathon123', 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -530,7 +534,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `forums`

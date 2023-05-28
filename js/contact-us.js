@@ -57,7 +57,7 @@ function handleSubmit() {
     console.log("submit");
 
     let textAlert = [$('#name-alert'), $('#email-alert'), $('#phone-alert'), $('#message-alert')];
-    for (let i = 0; i < txtAlert.length; i++) {
+    for (let i = 0; i < textAlert.length; i++) {
         textAlert[i].text("");
     }
 

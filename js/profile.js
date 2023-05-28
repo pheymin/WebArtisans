@@ -14,11 +14,12 @@ let txtGender = $("#txtGender");
 let txtBox = [$("#txtEmail"), $("#txtName"), $("#txtOccupation"), $("#txtPhone"), $("#txtGender")];
 let textAlert = [$("#name-alert"), $("#occupation-alert"), $("#phone-alert"), $("#gender-alert")];
 let editIcon = $("#img-edit-icon");
+var user = JSON.parse(sessionStorage.getItem("currentUser"));
 
 $("document").ready(function(){
-    avatarByGender(1);
-    layoutByRole(1);
-    showInfo(1);
+    avatarByGender(parseInt(user.GENDER));
+    layoutByRole(parseInt(user.ROLE));
+    showInfo(parseInt(user.ID));
     changeTextColor();
     
     editIcon.on("click", function(e){
@@ -91,11 +92,20 @@ function layoutByRole(role) {
  }
 
  function identifyGender(gender) {
-    if (gender === 0 ) {
+    if (gender === "0" ) {
         return "Female";
     }
-    else{
+    else if (gender === "1") {
         return "Male";
+    }
+ }
+
+ function convertGenderToNumber(gender) {
+    if (gender === "Female") {
+        return "0";
+    }
+    else if (gender === "Male") {
+        return "1";
     }
  }
 
@@ -126,6 +136,9 @@ function layoutByRole(role) {
  }
 
  function handleModify() {
+    for (let i = 0; i < textAlert.length; i++) {
+        textAlert[i].text("");
+    }
     if (editIcon.attr("src") === "../images/edit-icon.png") {
         for (let i = 0; i < txtBox.length; i++) {
             if (i !== 0){
@@ -161,24 +174,39 @@ function layoutByRole(role) {
 
         if (isValid) {
             let data = {
-                "id" : 1,
-                "name" : $("#txtName").val(),
-                "occupation" : $("#txtOccupation").val(),
-                "phone" : $("#txtPhone").val(),
-                "gender" : $("#txtGender").val(),
+                "id" : parseInt(user.ID),
+                "name" : txtName.val(),
+                "occupation" : txtOccupation.val(),
+                "phone" : txtPhone.val(),
+                "gender" : convertGenderToNumber(txtGender.val()),
             }
-    
+
+            
             $.ajax({
                 url: "../php/profile.php", // Replace with your server endpoint URL
                 type: "POST",
-                data: data,
-                success: function(data) {
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log("Gender: " + data.gender);
+                    avatarByGender(parseInt(data.gender));
                     alert("Update successfully!");
                     for (let i = 0; i < txtBox.length; i++) {
                         if (i !== 0){
                             txtBox[i].attr("disabled", "disabled");
                         }
                     }
+                    data = {
+                        "ID": user.ID,
+                        "NAME": txtName.val(),
+                        "EMAIL": user.EMAIL,
+                        "PASSWORD": user.PASSWORD,
+                        "ROLE": user.ROLE,
+                        "PHONE": txtPhone.val(),
+                        "GENDER": convertGenderToNumber(txtGender.val()),
+                        "OCCUPATION": txtOccupation.val()
+                    }
+
+                    sessionStorage.setItem("currentUser", JSON.stringify(data));
                     changeTextColor();
                     editIcon.attr("src", "../images/edit-icon.png");
                     clearAlert(textAlert);

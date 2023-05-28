@@ -50,7 +50,7 @@ var sideNav = `
                         </a>
                     </li>
                     <li class="menu-item cursor-pointer h-10 text-[#4d2ec8] hover:bg-[#805be8] hover:text-white my-3 flex items-center px-3 py-6">
-                        <a href="#" class="">
+                        <a href="../pages/profile.html" class="">
                             <i class="fa-solid fa-address-card"></i>
                             <span class="ml-2">Profile</span>
                         </a>

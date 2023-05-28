@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2023 at 08:34 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 28, 2023 at 10:05 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `comments` (
   `POSTEDTIME` datetime NOT NULL DEFAULT current_timestamp(),
   `FORUM_ID` int(255) DEFAULT NULL,
   `THUMB` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `comments`
@@ -104,7 +104,7 @@ CREATE TABLE `feedback` (
   `EMAIL` varchar(255) DEFAULT NULL,
   `PHONE` varchar(255) DEFAULT NULL,
   `POSTEDTIME` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `feedback`
@@ -118,7 +118,15 @@ INSERT INTO `feedback` (`ID`, `MESSAGE`, `NAME`, `EMAIL`, `PHONE`, `POSTEDTIME`)
 (5, 'The cutoutPercentage option determines the size of the hole in the center of the doughnut. In this example, it\'s set to 75 to create a doughnut shape.', 'Sport Steve', 'steve@gmail.com', '0114869578', '2023-04-09 13:36:09'),
 (6, 'You can customize the styling of the data labels by modifying the datalabels configuration object.', 'Edna Lee', 'ednalee@gmail.com', '0186543920', '2023-05-21 08:04:28'),
 (7, 'By using these utility classes in Tailwind CSS, you can easily create transition effects and animate elements with predefined durations and transformations.', 'Yeader Gil', 'yeader@mail.com', '0135689251', '2023-05-07 16:05:38'),
-(8, 'Tailwind CSS provides a range of utility classes for borders, including different border widths, styles, and colors. ', 'Preeth Sing', 'preeth@mail.com', '0195685632', '2023-05-11 22:54:07');
+(8, 'Tailwind CSS provides a range of utility classes for borders, including different border widths, styles, and colors. ', 'Preeth Sing', 'preeth@mail.com', '0195685632', '2023-05-11 22:54:07'),
+(9, 'Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.', 'Shooting Stars', 'shootingstars@gmail.com', '0152698878', '2023-05-27 15:38:10'),
+(10, 'In this example, we have three routes: the root path /, the /about path, and the /contact path. Each route has a corresponding component that will be rendered when the path is matched.', 'Bryan Lim', 'bryanlim@mail.com', '0129889324', '2023-05-23 12:16:05'),
+(11, 'Now, when a user navigates to the root path /, the Home component will be rendered. When they navigate to the /about path, the About component will be rendered, and so on.', 'Mei Ying', 'meiying@mail.com', '018996345', '2023-05-10 06:10:17'),
+(12, 'How to use `Outlet` component in the parent component to render the child routes.', 'Yeoung Kim', 'yeoung@blazer.com', '0156667789', '2023-05-16 13:10:32'),
+(13, 'Note that the Outlet component should only be used in the parent component, and not in any of the child components. The child components should only define their own routes using the Route and Switch components.', 'Jia Hao', 'jiahao@bbq.com', '0125659412', '2023-05-24 03:38:07'),
+(14, 'Make sure that you have installed the react-router-dom module and that it is up-to-date. You can do this by running npm install react-router-dom in your terminal.', 'Toyzz Man', 'toyzzman@klia.bo', '0145328870', '2023-05-12 04:20:47'),
+(15, 'How to solve \"Uncaught SyntaxError: The requested module \'/node_modules/.vite/deps/react-router-dom.js?v=79b8a667\' does not provide an export named \'Switch\'\"', 'Wai Meng', 'waimeng@klcc.bo', '0121023307', '2023-05-17 15:04:34'),
+(16, 'Incorrect file path Double check that the file path in your HTML code is correct and matches the location of the CSS file on your server.', 'Ryan Buzz', 'ryanbuz@fake.co', '0153329800', '2023-05-16 12:16:17');
 
 -- --------------------------------------------------------
 
@@ -133,7 +141,7 @@ CREATE TABLE `forums` (
   `CONTENT` text DEFAULT NULL,
   `DATE` datetime NOT NULL DEFAULT current_timestamp(),
   `THUMB` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `forums`
@@ -165,7 +173,7 @@ CREATE TABLE `learner_lessons` (
   `user_id` int(11) NOT NULL,
   `lesson_id` int(11) NOT NULL,
   `completed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `learner_lessons`
@@ -201,7 +209,7 @@ CREATE TABLE `lessons` (
   `upload_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `coverPic` varchar(255) DEFAULT NULL,
   `lecturer` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lessons`
@@ -226,7 +234,7 @@ CREATE TABLE `options` (
   `question_id` int(10) UNSIGNED DEFAULT NULL,
   `option_text` varchar(500) NOT NULL,
   `is_answer` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `options`
@@ -305,7 +313,7 @@ CREATE TABLE `qr_details` (
   `student_name` varchar(50) NOT NULL,
   `lesson_name` varchar(50) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `qr_details`
@@ -326,7 +334,7 @@ CREATE TABLE `questions` (
   `id` int(10) UNSIGNED NOT NULL,
   `quiz_id` int(10) UNSIGNED DEFAULT NULL,
   `question_text` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `questions`
@@ -358,7 +366,7 @@ INSERT INTO `questions` (`id`, `quiz_id`, `question_text`) VALUES
 CREATE TABLE `quiz` (
   `id` int(10) UNSIGNED NOT NULL,
   `lesson_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `quiz`
@@ -382,7 +390,7 @@ CREATE TABLE `quiz_results` (
   `result` decimal(5,2) NOT NULL,
   `grade` char(1) NOT NULL,
   `submit_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `quiz_results`
@@ -408,7 +416,7 @@ CREATE TABLE `users` (
   `EMAIL` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
   `ROLE` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -420,7 +428,19 @@ INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `ROLE`) VALUES
 (3, 'Phey Min', 'pheymin@gmail.com', 'pheymin123', 0),
 (4, 'Kai Kiat', 'kaikiat@gmail.com', 'kaikiat123', 1),
 (5, 'Innis Yu', 'innis@gmail.com', 'innis123', 0),
-(6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1);
+(6, 'Seng Feng', 'sengfeng@gmail.com', 'sengfeng123', 1),
+(7, 'Perry Lim', 'perrylim@mail.com', 'perry123', 0),
+(8, 'Mathieu', 'mathieu@mail.com', 'mathieu456', 0),
+(9, 'Bryan Lai', 'bryanlai@gmail.com', 'bryanlai123', 1),
+(10, 'John Doe', 'johndoe@klia.bo', 'johndoe123', 0),
+(11, 'Robert Fox', 'robertfox@bezza.bo', 'robertfox123', 0),
+(12, 'Marcus Mock', 'marcusmock@lagging.co', 'marcusmock123', 0),
+(13, 'William May', 'williammay@buzz.co', 'williammay123', 0),
+(14, 'Michael', 'michael@buzzer.coco', 'michael123', 0),
+(15, 'Henry', 'henry@buzz.bo', 'henry123', 0),
+(16, 'Vite', 'vite@javascript.co', 'vite123', 0),
+(17, 'Marched', 'marched@coconut.co', 'marched123', 0),
+(18, 'Halimathon', 'halimathon@next.co', 'halimathon123', 0);
 
 --
 -- Indexes for dumped tables
@@ -510,7 +530,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `forums`
@@ -558,7 +578,7 @@ ALTER TABLE `quiz_results`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

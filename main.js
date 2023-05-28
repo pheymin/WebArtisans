@@ -128,7 +128,7 @@ $(document).ready(() => {
     //if role is null and current page include forum.html or contactus.html or explore.html, then use nav
     if (role === null && (window.location.href.includes('forum.html') || 
             window.location.href.includes('contactus.html') || window.location.href.includes('explore.html') ||
-            window.location.href.includes('index.html'))) 
+            window.location.href.includes('index.html')) || curIsIndex()) 
     {
         $('#nav').html(nav)
 
@@ -137,7 +137,7 @@ $(document).ready(() => {
         })
     }
 
-    if (role === '1'){
+    if (role === '1' && !window.location.href.includes('profile.html')){
         replaceUrl('dashboard.html')
         alert('If need to visit these pages, please login as user.')
     }

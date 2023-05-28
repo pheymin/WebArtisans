@@ -20,6 +20,8 @@ $("document").ready(function(){
     layoutByRole(1);
     showInfo(1);
     changeTextColor();
+
+    $('.menu-item').eq(1).addClass('menu-item-active');
     
     editIcon.on("click", function(e){
         e.preventDefault();

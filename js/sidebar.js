@@ -1,3 +1,32 @@
+
+$(document).ready(function () {
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (currentUser == null || currentUser.ROLE != "1") {
+        window.location.href = "login.html";
+        return;
+    }
+
+    $('#sidebar-nav').append(sideNav)
+
+    const menuItems = $('.menu-item');
+
+    //loop through the menu items
+    menuItems.each(function () {
+        //add click event listener to each menu item
+        $(this).click(function () {
+            //remove the active class from all the menu items
+            menuItems.removeClass('menu-item-active');
+            //add the active class to the clicked menu item
+            $(this).addClass('menu-item-active');
+        });
+    });
+
+    //last menu item click event
+    $('.menu-item').last().click(function () {
+        openLogoutModal();
+    });
+});
+
 var sideNav = `
     <nav class="sidebar md:h-full h-auto w-auto bg-[#f4f2ff] z-50 py-4 px-6">
         <header class="relative">
@@ -62,25 +91,25 @@ var sideNav = `
     </nav>
 `
 
-$('#sidebar-nav').append(sideNav)
+// $('#sidebar-nav').append(sideNav)
 
-const menuItems = $('.menu-item');
+// const menuItems = $('.menu-item');
 
-//loop through the menu items
-menuItems.each(function () {
-    //add click event listener to each menu item
-    $(this).click(function () {
-        //remove the active class from all the menu items
-        menuItems.removeClass('menu-item-active');
-        //add the active class to the clicked menu item
-        $(this).addClass('menu-item-active');
-    });
-});
+// //loop through the menu items
+// menuItems.each(function () {
+//     //add click event listener to each menu item
+//     $(this).click(function () {
+//         //remove the active class from all the menu items
+//         menuItems.removeClass('menu-item-active');
+//         //add the active class to the clicked menu item
+//         $(this).addClass('menu-item-active');
+//     });
+// });
 
-//last menu item click event
-$('.menu-item').last().click(function () {
-    openLogoutModal();
-});
+// //last menu item click event
+// $('.menu-item').last().click(function () {
+//     openLogoutModal();
+// });
 
 var logoutModal = `
     <div id="logout-modal-backdrop" class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">

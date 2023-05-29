@@ -132,6 +132,10 @@ function validateData() {
 
 $('#btn-add-lesson').on('click', function (e) {
     e.preventDefault();
+    if(coverPic === undefined){
+        coverPic = null;
+    }
+
     let lesson = sessionStorage.getItem('lesson');
     lesson = JSON.parse(lesson);
 
@@ -139,7 +143,7 @@ $('#btn-add-lesson').on('click', function (e) {
         const title = $("#title").val();
         const description = $("#description").val();
         const lecturer = $("#lecturer").val();
-        const coverPic = sessionStorage.getItem('coverPicUrl') || lesson.coverPic || "https://dummyimage.com/1280x720";
+        const coverPic = sessionStorage.getItem('coverPicUrl') || (lesson && lesson.coverPic) || "https://dummyimage.com/1280x720";
 
         // Retrieve lesson data from session storage
         const lessonData = JSON.parse(sessionStorage.getItem('lesson'));

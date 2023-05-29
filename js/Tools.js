@@ -56,7 +56,7 @@ function getRandomInt(min,max) {
 }
 
 function getRandomImageUrl() {
-    var randomInt = getRandomInt(0,80);
+    var randomInt = getRandomInt(0,100);
     return `../public/random/avatar-${randomInt}.svg`;
 }
 

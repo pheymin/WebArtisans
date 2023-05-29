@@ -1,5 +1,19 @@
 import { validateInput } from "./Tools.js";
 
+$(document).ready(function () {
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (currentUser != null) {
+        alert("You are already logged in!");
+        if (currentUser.ROLE == "1") {
+            window.location.href = "./dashboard.html";
+        }
+        else {
+            window.location.href = "./explore.html";
+        }
+        return;
+    }
+});
+
 function handleToggleIcon(){
     const icon = $('#input-area span i')
     const input = $('#input-area input[name="password"]')

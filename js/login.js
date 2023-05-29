@@ -1,6 +1,18 @@
 import { validateInput } from "./Tools.js";
-// import Modal from '../components/Modal';
-// import Alert from '../components/Alert';
+
+$(document).ready(function () {
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (currentUser != null) {
+        alert("You are already logged in!");
+        if (currentUser.ROLE == "1") {
+            window.location.href = "./dashboard.html";
+        }
+        else {
+            window.location.href = "./explore.html";
+        }
+        return;
+    }
+});
 
 function handleToggleIcon(){
     const icon = $('#input-area span i')

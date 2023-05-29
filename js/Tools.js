@@ -51,12 +51,12 @@ function getCurrentDateTime() {
 }
 
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+function getRandomInt(min,max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function getRandomImageUrl() {
-    var randomInt = getRandomInt(50);
+    var randomInt = getRandomInt(0,80);
     return `../public/random/avatar-${randomInt}.svg`;
 }
 

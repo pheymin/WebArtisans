@@ -202,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        echo "Lesson updated successfully. You will be directed to the edit lesson page.";
         mysqli_close($db);
     } else {
         // Display the error messages

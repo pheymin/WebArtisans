@@ -48,14 +48,14 @@ function handleRegister(){
         return;
     }
 
-    const emailQuery = `SELECT COUNT(*) AS count FROM users WHERE EMAIL = '${email}'`;
+    const emailQuery = `SELECT COUNT(*) AS count FROM users WHERE EMAIL = '${data.email}'`;
 
     $.ajax({
         url: "../php/authentication.php",
         type: "GET",
         data: {query: emailQuery},
         success: function (data) {
-            if(data.count > 0){
+            if((data[0].count)> 0){
                 alert("Email already exist!");
                 return;
             }

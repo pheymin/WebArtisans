@@ -1,8 +1,11 @@
 $(document).ready(function () {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    const name = currentUser.NAME;
     // Make an AJAX request to retrieve QR details
     $.ajax({
         url: '../php/view-qr.php',
-        type: 'GET',
+        type: 'POST',
+        data: { name },
         dataType: 'json',
         success: function (response) {
             if (response.error) {
@@ -11,8 +14,9 @@ $(document).ready(function () {
             } else {
                 // Loop through the QR details and append them to the HTML
                 $.each(response, function (index, qrData) {
+                    console.log(qrData);
                     // Generate the QR code URL
-                    var qrUrl = 'https://webartisans-4a3a2.web.app/certificate.html?name=' + qrData.studentName + '&lesson=' + qrData.lessonName + '&date=' + qrData.date;
+                    var qrUrl = 'https://webartisans-4a3a2.web.app/certificate.html?name=' + qrData.student_name + '&lesson=' + qrData.lesson_name + '&date=' + qrData.date;
 
                     // Create the qrcard HTML
                     var qrcard = `
@@ -21,13 +25,13 @@ $(document).ready(function () {
                                 <div class="w-28 h-28" id="qrcode${index}"></div>
                                 <div class="flex my-3 md:ml-5">
                                     <div>
-                                        <h6 class="text-xs opacity-80 mt-1">Course:</h6>
+                                        <h6 class="text-xs opacity-80 mt-1">Name:</h6>
                                         <h6 class="text-xs opacity-80 mt-4">Lesson:</h6>
                                         <h6 class="text-xs opacity-80 mt-4">Date:</h6>
                                     </div>
                                     <div class="ml-5">
-                                        <h5 class="mb-2">${qrData.studentName}</h5>
-                                        <h5 class="mb-2">${qrData.lessonName}</h5>
+                                        <h5 class="mb-2">${qrData.student_name}</h5>
+                                        <h5 class="mb-2">${qrData.lesson_name}</h5>
                                         <h5>${qrData.date}</h5>
                                     </div>
                                 </div>

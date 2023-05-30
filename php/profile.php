@@ -11,6 +11,15 @@ if (isset($_GET['id']) && count($_GET) === 1) {
     selectDataWithQuery($sql);
 }
 
+if(isset($_GET["lesson"])){
+    $id = $_GET['id'];
+
+    $sql = "SELECT COUNT(*) AS taken, SUM(completed) AS completed FROM learner_lessons WHERE user_id = $id";
+
+    selectDataWithQuery($sql);
+}
+
+
 if ($method === 'POST'){
     $postData = json_decode(file_get_contents('php://input'), true);
 

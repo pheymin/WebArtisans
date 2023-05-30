@@ -14,6 +14,8 @@ let txtGender = $("#txtGender");
 let txtBox = [$("#txtEmail"), $("#txtName"), $("#txtOccupation"), $("#txtPhone"), $("#txtGender")];
 let textAlert = [$("#name-alert"), $("#occupation-alert"), $("#phone-alert"), $("#gender-alert")];
 let editIcon = $("#img-edit-icon");
+let lessonTaken = $("#lesson-taken");
+let lessonCompleted = $("#lesson-completed");
 var user = JSON.parse(sessionStorage.getItem("currentUser"));
 
 $("document").ready(function(){
@@ -21,6 +23,7 @@ $("document").ready(function(){
     layoutByRole(parseInt(user.ROLE));
     showInfo(parseInt(user.ID));
     changeTextColor();
+    getLessonDetail(parseInt(user.ID));
 
     $('.menu-item').eq(1).addClass('menu-item-active');
     
@@ -29,6 +32,21 @@ $("document").ready(function(){
         handleModify();
     });
 }); 
+
+function getLessonDetail(id) {
+    $.ajax({
+        type: "GET",
+        url: "../php/profile.php",
+        data:{ 
+            "lesson": 1,
+            "id" : id 
+        },
+        success: function (response) {
+            lessonTaken.text(response[0].taken);
+            lessonCompleted.text(response[0].completed);
+        }
+    })
+}
 
 function changeTextColor() {
     for (let i = 0; i < txtBox.length; i++) {

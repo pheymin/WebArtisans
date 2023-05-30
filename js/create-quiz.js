@@ -95,13 +95,8 @@ $('#create-button').on('click', function (e) {
     data: formData,
     success: function (response) {
       alert(response);
-
-      // Clear select and textarea fields
-      $('.autoresize-textarea').val('');
-
-      // Clear options fields
-      $('.answer-icon').attr('src', '../images/tick.svg');
-
+      window.location.href = "edit-lesson.html";
+      
       // Clear the session storage
       sessionStorage.removeItem('coverPicUrl');
       sessionStorage.removeItem('lesson');

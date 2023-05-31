@@ -1,4 +1,4 @@
-import {validateInput} from "./Tools.js";
+import {validateInput, getCurrentUserAvatar} from "./Tools.js";
 
 let sidebar = $("#sidebar-nav");
 let nav = $("#nav");
@@ -14,13 +14,18 @@ let txtGender = $("#txtGender");
 let txtBox = [$("#txtEmail"), $("#txtName"), $("#txtOccupation"), $("#txtPhone"), $("#txtGender")];
 let textAlert = [$("#name-alert"), $("#occupation-alert"), $("#phone-alert"), $("#gender-alert")];
 let editIcon = $("#img-edit-icon");
+let lessonTaken = $("#lesson-taken");
+let lessonCompleted = $("#lesson-completed");
+let avatar = $("#imgAvatar");
 var user = JSON.parse(sessionStorage.getItem("currentUser"));
 
 $("document").ready(function(){
-    avatarByGender(parseInt(user.GENDER));
+    avatar.attr("src", getCurrentUserAvatar());
+    // avatarByGender(parseInt(user.GENDER));
     layoutByRole(parseInt(user.ROLE));
     showInfo(parseInt(user.ID));
     changeTextColor();
+    getLessonDetail(parseInt(user.ID));
 
     $('.menu-item').eq(1).addClass('menu-item-active');
     
@@ -29,6 +34,21 @@ $("document").ready(function(){
         handleModify();
     });
 }); 
+
+function getLessonDetail(id) {
+    $.ajax({
+        type: "GET",
+        url: "../php/profile.php",
+        data:{ 
+            "lesson": 1,
+            "id" : id 
+        },
+        success: function (response) {
+            lessonTaken.text(response[0].taken);
+            lessonCompleted.text(response[0].completed);
+        }
+    })
+}
 
 function changeTextColor() {
     for (let i = 0; i < txtBox.length; i++) {
@@ -83,15 +103,14 @@ function layoutByRole(role) {
     }
  }
 
- function avatarByGender(gender) {
-    let avatar = $("#imgAvatar");
-    if (gender === 0) {
-        avatar.attr("src", "../images/FemaleAvatar.png");
-    }
-    else{
-        avatar.attr("src", "../images/MaleAvatar.png");
-    }
- }
+//  function avatarByGender(gender) {
+//     if (gender === 0) {
+//         avatar.attr("src", "../images/FemaleAvatar.png");
+//     }
+//     else{
+//         avatar.attr("src", "../images/MaleAvatar.png");
+//     }
+//  }
 
  function identifyGender(gender) {
     if (gender === "0" ) {
@@ -190,7 +209,7 @@ function layoutByRole(role) {
                 data: JSON.stringify(data),
                 success: function(response) {
                     console.log("Gender: " + data.gender);
-                    avatarByGender(parseInt(data.gender));
+                    // avatarByGender(parseInt(data.gender));
                     alert("Update successfully!");
                     for (let i = 0; i < txtBox.length; i++) {
                         if (i !== 0){

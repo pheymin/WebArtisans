@@ -78,3 +78,31 @@
     background-color: #E2E2E2;
     border-radius: 20px;
 }
+
+@media screen and (max-width: 1189px) {
+    .basic-detail-user{
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    .basic-detail-admin {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .detail-title-admin{
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0px 75% 0px 10%;
+    }
+
+    #picture-container{
+        margin: 2% 0px 2% 0px;
+    }
+}

@@ -172,7 +172,7 @@ function subscribeAction() {
         }
     });
 
-    alert('subscribe');
+    alert('Thank you for subscribing to this lesson! We appreciate your interest and participation. You can now track this lesson in your "View Lessons" section. Enjoy your learning experience!');
 
     $('#subscribe-box').fadeOut(400, function () {
         $(this).remove();

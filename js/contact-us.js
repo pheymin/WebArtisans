@@ -3,6 +3,7 @@ import { getCurrentDateTime, validateInput } from "./Tools.js";
 $("document").ready(function () {
     $('body').find('.logo-img').attr('src', '../public/vite.svg');
 
+    let noti1 = $('#noti1');
     let noti2 = $('#noti2');
     let noti3 = $('#noti3');
     let notiContainer = $('#noti-container');
@@ -38,6 +39,16 @@ $("document").ready(function () {
             msgs[i].text("Notification");
         }
         return;
+    });
+
+    noti1.on('click', function () {
+        openNewTab("https://instagram.com/web____artisans?igshid=MzRlODBiNWFlZA==");
+    });
+    noti2.on('click', function () { 
+        openNewTab("https://www.facebook.com/lennon.tan.5872/");
+    });
+    noti3.on('click', function () {
+        openNewTab("https://twitter.com/Web___Artisans");
     });
 
     let btnSend = $('#btn-send');
@@ -135,3 +146,8 @@ function clearAlert(alerts) {
         alerts[i].text("");
     }
 }
+
+function openNewTab(url) {
+    var url = url; // Replace with your desired URL
+    window.open(url, "_blank");
+  }

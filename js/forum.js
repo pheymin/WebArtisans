@@ -101,7 +101,7 @@ function handleCreatePostEvent(){
             return;
         }
     
-        var content = forumTextarea.val();
+        var content = $("#txt-create-post").val();
         var title = content.split("\n")[0];
         content = content.replace(title, "");
         content = content.replaceAll("\n", "");
@@ -119,7 +119,7 @@ function createNewPost(title, content) {
     let datestring = date.toISOString().slice(0, 19).replace("T", " ");
 
     var post = {
-        NAME: "Vite",
+        NAME: getCurrentUserName(),
         TITLE: title,
         CONTENT: content,
         DATE: datestring,

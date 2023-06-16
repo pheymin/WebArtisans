@@ -138,7 +138,6 @@ function createNewPost(title, content) {
         success: function (result) {
             //console.log(result);
             appendPostOnTop(post);
-            $("#txt-create-post").val("");
         }
     });
 }
@@ -177,7 +176,7 @@ function appendPostOnTop(post){
     `
 
     cardContainer.prepend(newPost);
-    forumTextarea.val("");
+    $("#txt-create-post").val("");
 }
 
 function commentArea(){

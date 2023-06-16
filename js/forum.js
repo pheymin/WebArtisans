@@ -83,19 +83,31 @@ function initUserArea(){
     `
 
     $('#forum-container').prepend(userArea);
+
+    handleCreatePostEvent();
 }
 
 var forumTextarea = $("#txt-create-post");
-var createButton = $("#btn-create-post");
 
-createButton.on("click", function (e) {
-    e.preventDefault();
-    var content = forumTextarea.val();
-    var title = content.split("\n")[0];
-    content = content.replace(title, "");
-    content = content.replaceAll("\n", "");
-    createNewPost(title, content);
-});
+function handleCreatePostEvent(){
+    
+    var createButton = $("#btn-create-post");
+
+    createButton.on("click", function (e) {
+        e.preventDefault();
+    
+        if ($("#txt-create-post").val().length == 0){
+            alert("Please enter your question.");
+            return;
+        }
+    
+        var content = forumTextarea.val();
+        var title = content.split("\n")[0];
+        content = content.replace(title, "");
+        content = content.replaceAll("\n", "");
+        createNewPost(title, content);
+    });
+}
 
 const cardContainer = $(".forum-card-container");
 var cardNum = cardContainer.children().length;
@@ -238,6 +250,7 @@ function appendCommentModal(id,count,ele){
         postComment(data);
         $('#comment-modal-count').text(`${count+1} Comments`);
         ele.text(`${count+1} comments`);
+        $('#txt-comment').val() = "";
     });
 
 

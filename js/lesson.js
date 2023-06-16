@@ -17,9 +17,6 @@ $(document).ready(function () {
         }
     });
 
-    let user = sessionStorage.getItem('currentUser');
-    user = JSON.parse(user);
-
     // user subscribe request
     $.ajax({
         url: '../php/lesson.php',
@@ -42,6 +39,30 @@ $(document).ready(function () {
 
     // Set the href attribute of the 'Quizz' link
     $('#quiz-link').attr('href', quizUrl);
+
+    $('#lesson-info-container').html(lessonInfo);
+
+    $('#overview').on('click', function () {
+        $('#lesson-info-container').empty().append(lessonInfo);
+
+        let lesson = sessionStorage.getItem('lesson');
+        lesson = JSON.parse(lesson);
+
+        $('#lesson-des').text(lesson.description);
+        $('#lesson-info').prepend(`
+        <p>Lecturer   : ${lesson.lecturer}</p>
+        <p>Upload Time: ${lesson.upload_time}</p>
+    `)
+        secNavStyle($(this));
+    });
+    ;
+
+    $('#code-simulator').on('click', function () {
+        $('#notification').remove();
+        $('#lesson-info-container').empty().append(codeSimulator);
+
+        secNavStyle($(this));
+    });
 
     $(document).on('click', '#btn-subscribe', function () {
         $('#subscribe-box').fadeOut(400, function () {
@@ -71,7 +92,7 @@ $(document).ready(function () {
 
         if (isChecked) {
             let sql = `UPDATE learner_lessons SET completed = 1 WHERE user_id = ${data.user_id} AND lesson_id = ${data.id}`;
-            
+
             $.ajax({
                 url: '../php/lesson.php',
                 method: 'POST',
@@ -85,10 +106,24 @@ $(document).ready(function () {
             });
 
             $('#nav-progress-dropdown').empty().append(lessonCompleted);
-            
+
         }
     })
 });
+
+$(window).on('beforeunload', function () {
+    sessionStorage.removeItem('lesson');
+});
+
+function secNavStyle(element) {
+    // Remove border and text color from all sec-nav elements
+    $('.sec-nav').removeClass('border-2 border-black');
+    $('.sec-nav a').removeClass('text-black');
+
+    // Add border and text color to the clicked sec-nav element
+    element.parent('.sec-nav').addClass('border-b-2 border-black');
+    element.addClass('text-black');
+}
 
 // user id & lesson id
 function getCurrentStatus() {
@@ -111,10 +146,10 @@ function userSubscribe(data) {
         $('#notification').empty().append(subscribeNotification);
         $('#action-bar').empty().append(`<button id="nav-btn-subscribe" class="text-white border border-solid border-white px-3 py-2">Subscribe</button>`);
     } else {
-        if(data[0].completed === "1"){
+        if (data[0].completed === "1") {
             $('#action-bar').empty().append(progressTracking);
             $('#nav-progress-dropdown').empty().append(lessonCompleted);
-        }else if(data[0].completed === "0"){
+        } else if (data[0].completed === "0") {
             $('#action-bar').empty().append(progressTracking);
             $('#nav-progress-dropdown').empty().append(lessonNotCompleted);
         }
@@ -137,7 +172,7 @@ function subscribeAction() {
         }
     });
 
-    alert('subscribe');
+    alert('Thank you for subscribing to this lesson! We appreciate your interest and participation. You can now track this lesson in your "View Lessons" section. Enjoy your learning experience!');
 
     $('#subscribe-box').fadeOut(400, function () {
         $(this).remove();
@@ -148,8 +183,8 @@ function subscribeAction() {
 }
 
 function loadData(data) {
+    sessionStorage.setItem('lesson', JSON.stringify(data));
     const lesson = new Lesson(data);
-    // console.log(data);
 
     $('#lesson-title').text(lesson.title);
     $('#lesson-des').text(lesson.description);
@@ -162,7 +197,6 @@ function loadData(data) {
 
     $.each(videos, function (index, item) {
         if (index === 0) {
-            console.log(item.url);
             $('#lesson-video iframe').attr('src', item.url);
         }
 
@@ -183,8 +217,6 @@ function loadData(data) {
 }
 
 function getsideBar(lesson) {
-    //let duration = getVideoDuration(lesson);
-
     let template = `
     <div class="side-bar-item px-4 py-3 space-y-2 border-b-2 cursor-pointer hover:bg-[#d1d7dc]">
         <h2 class="text-lg">${lesson.title}</h2>
@@ -243,3 +275,35 @@ const lessonNotCompleted = `
             <input id="check-complete" type="checkbox" class="checkbox checkbox-primary" />
         </label>
     </div>`;
+
+const lessonInfo = `
+<div class="ml-3 border-b-2 h-fit p-6">
+<div class="flex flex-row items-start">
+    <div class="w-1/4">
+        <h2 class="font-semibold">Information</h2>
+    </div>
+    <div id="lesson-info" class="w-3/4">
+        <h2>Language : English</h2>
+        <h2>Caption : Yes</h2>
+    </div>
+</div>
+</div>
+
+<div class="ml-3 border-b-2 h-fit p-6">
+<div class="flex flex-row items-start">
+    <div class="w-1/4">
+        <h2 class="font-semibold">Description</h2>
+    </div>
+    <div id="lesson-des" class="w-3/4"></div>
+</div>
+</div>
+`
+
+const codeSimulator = `
+<p class="codepen" data-height="500" data-default-tab="html,result" data-slug-hash="ZEpxeYm" data-editable="true" data-user="TurkAysenur" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/TurkAysenur/pen/ZEpxeYm">
+  Glassmorphism Creative Cloud App Redesign</a> by Aysenur Turk (<a href="https://codepen.io/TurkAysenur">@TurkAysenur</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+    `

@@ -29,39 +29,56 @@ const email = $('#input-area input[name="email"]');
 const password = $('#input-area input[name="password"]');
 
 function handleRegister(){
-    const data = {
+    const userData = {
         name: name.val(),
         email: email.val(),
         password: password.val(),
         role: 0
     }
 
-    if(data.username === '' || data.email === '' || data.password === '') {
+    if(userData.username === '' || userData.email === '' || userData.password === '') {
         alert("Don't leave any field blank!");
         return false;
     }
 
-    let isValid = validateInput('username', data.username) && validateInput('email', data.email) && validateInput('password', data.password);
+    let isValid = validateInput('username', userData.username) && validateInput('email', userData.email) && validateInput('password', userData.password);
 
     if(!isValid){
         alert("Invalid input!");
         return;
     }
 
-    const emailQuery = `SELECT COUNT(*) AS count FROM users WHERE EMAIL = '${email}'`;
+    const emailQuery = `SELECT COUNT(*) AS count FROM users WHERE EMAIL = '${userData.email}'`;
 
     $.ajax({
         url: "../php/authentication.php",
         type: "GET",
         data: {query: emailQuery},
         success: function (data) {
-            if(data.count > 0){
+            if((data[0].count)> 0){
                 alert("Email already exist!");
                 return;
             }
+            else if (data[0].count == 0){
+                createUser(userData);
+            }
         }
     });
-    
+}
+
+
+function handleEvents(){
+    handleToggleIcon();
+
+    $('#btn-register').on('click', (e) => {
+        e.preventDefault();
+        handleRegister();
+    })
+}
+
+handleEvents();
+
+function createUser(data){
     const query = `INSERT INTO users (NAME, EMAIL, PASSWORD, ROLE) VALUES ('${data.name}', '${data.email}', '${data.password}', '${data.role}')`;
 
     $.ajax({
@@ -76,17 +93,4 @@ function handleRegister(){
             password.val('');
         }
     });
-
 }
-
-
-function handleEvents(){
-    handleToggleIcon();
-
-    $('#btn-register').on('click', (e) => {
-        e.preventDefault();
-        handleRegister();
-    })
-}
-
-handleEvents();

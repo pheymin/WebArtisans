@@ -138,6 +138,7 @@ function createNewPost(title, content) {
         success: function (result) {
             //console.log(result);
             appendPostOnTop(post);
+            $("#txt-create-post").val("");
         }
     });
 }

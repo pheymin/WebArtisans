@@ -39,16 +39,24 @@ function handleSubmit() {
         textAlert[1].text("Format: xxx@mail.com");
     }
 
-    if (password.val() === Rpassword.val()) {
-        if(!validateInput("password", password.val())){
+    if(!validateInput("password", password.val())){
+        isValid = false;
+        textAlert[2].text("Enter Strong Password");
+    }
+
+    if(validateInput("password", password.val())){
+        if(password.val() !== Rpassword.val()){
             isValid = false;
-            textAlert[2].text("Enter Strong Password");
+            textAlert[2].text("Password not match");
+            textAlert[3].text("Password not match");
         }
     }
-    else{
-        isValid = false;
-        textAlert[2].text("Password not match");
-    }
+    // if (password.val() === Rpassword.val()) {
+    // }
+    // else{
+    //     isValid = false;
+    //     textAlert[2].text("Password not match");
+    // }
 
     if (isValid) {
         let data = {

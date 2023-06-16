@@ -2,7 +2,7 @@ let regexUsername = /^[a-zA-Z0-9_ ]{6,20}$/;
 let regexPassword = /^[a-zA-Z0-9_@]{6,20}$/;
 let regexEmail = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/;
 let regexPhone = /^[0-9]{10,11}$/;
-let regexOccupation = /^[A-Za-z]+$/;
+let regexOccupation = /^[A-Za-z ]+$/;
 
 //type: username, password, email
 function validateInput(type, value) {

@@ -96,26 +96,26 @@ const footer = `
                 <span class="ml-3 text-2xl tracking-wider font-semibold">WèbArtisáns</span>
             </a>
             <p class="text-sm text-[#86909c] sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 WèbArtisáns —
-                <a href="https://github.com/pheymin/WebArtisans" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@FWDD-WèbArtisáns-Cluster</a>
+                <span data-url="https://github.com/pheymin/WebArtisans" class="text-gray-600 ml-1 cursor-pointer hover:text-[#6aa1ff] tab-link" rel="noopener noreferrer">@FWDD-WèbArtisáns-Cluster</span>
             </p>
             <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                <a class="ml-3 text-[#86909c]">
+                <span class="ml-3 text-[#86909c] cursor-pointer hover:text-[#4e5969]">
                     <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                         <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
                     </svg>
-                </a>
-                <a class="ml-3 text-[#86909c]">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                </span>
+                <span class="ml-3 text-[#86909c] cursor-pointer hover:text-[#4e5969]">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 tab-link" viewBox="0 0 24 24" data-url="https://instagram.com/web____artisans/" rel="noopener noreferrer">
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
-                </a>
-                <a class="ml-3 text-[#86909c]">
-                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                </span>
+                <span class="ml-3 text-[#86909c] cursor-pointer hover:text-[#4e5969]">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5 tab-link" viewBox="0 0 24 24" data-url="https://github.com/pheymin/WebArtisans" rel="noopener noreferrer">
                         <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.2-1.8-1.2-1.8-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3.1.9.1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.5 3.2-1.2 3.2-1.2.7 1.5.2 2.7.1 3 1.1.7 1.1 1.8 1.1 3.1 0 4.6-2.8 5.5-5.5 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 0z" />
                         <circle cx="4" cy="4" r="2" stroke="none"></circle>
                     </svg>
-                </a>
+                </span>
             </span>
         </div>
     </div>
@@ -177,6 +177,11 @@ $(document).ready(() => {
     $(".user-nav-index").on('click', () => {
         directToIndex()
     })
+
+    $(document).on('click', '.tab-link', (e) => {
+        console.log(e.target.dataset.url);
+        openNewTab(e.target.dataset.url)
+    })
 })
 
 function getCurrentUrl() {
@@ -233,4 +238,9 @@ function closeLogoutModal() {
 function confirmLogout() {
     sessionStorage.removeItem('currentUser');
     replaceUrl('login.html');
+}
+
+function openNewTab(url){
+    var url = url; // Replace with your desired URL
+    window.open(url, "_blank");
 }

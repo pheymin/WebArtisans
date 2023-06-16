@@ -17,7 +17,7 @@ $tableQuery = "CREATE TABLE IF NOT EXISTS $tableName (
 $db->query($tableQuery);
 
 // Check if the same row already exists
-$checkQuery = "SELECT COUNT(*) AS count FROM qr_details WHERE student_name = ? AND lesson_name = ? AND date = ?";
+$checkQuery = "SELECT COUNT(*) AS count FROM qr_details WHERE student_name = ? AND lesson_name = ?";
 $stmt = $db->prepare($checkQuery);
 $stmt->bind_param("sss", $studentName, $lessonName, $date);
 $stmt->execute();

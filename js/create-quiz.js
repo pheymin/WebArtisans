@@ -94,13 +94,17 @@ $('#create-button').on('click', function (e) {
     method: 'POST',
     data: formData,
     success: function (response) {
-      alert(response);
-      window.location.href = "edit-lesson.html";
-      
-      // Clear the session storage
-      sessionStorage.removeItem('coverPicUrl');
-      sessionStorage.removeItem('lesson');
-      sessionStorage.removeItem('questions');
+      if (response === "1") {
+        alert("Lesson updated successfully. You will be directed to the edit lesson page.");
+        window.location.href = "edit-lesson.html";
+
+        // Clear the session storage
+        sessionStorage.removeItem('coverPicUrl');
+        sessionStorage.removeItem('lesson');
+        sessionStorage.removeItem('questions');
+      } else {
+        alert(response);
+      }
     },
     error: function (xhr, status, error) {
       // Handle the error

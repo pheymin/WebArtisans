@@ -51,8 +51,14 @@ $(document).ready(function () {
 
                     // Add click event listener to the download button
                     $(document).on('click', `#downloadButton${index}`, function () {
+                        // Store the correct name, lesson, and date values
+                        var currentQRData = response[index];
+                        var studentName = currentQRData.student_name;
+                        var lessonName = currentQRData.lesson_name;
+                        var date = currentQRData.date;
+
                         // Open a new window with the URL to download the PDF
-                        var pdfUrl = 'https://webartisans-4a3a2.web.app/certificate.html?name=' + qrData.studentName + '&lesson=' + qrData.lessonName + '&date=' + qrData.date;
+                        var pdfUrl = 'https://webartisans-4a3a2.web.app/certificate.html?name=' + studentName + '&lesson=' + lessonName + '&date=' + date;
                         window.open(pdfUrl, '_blank');
                     });
                 });

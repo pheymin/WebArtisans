@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lesson = $_POST['lesson'];
     $lessonTitle = $lesson['title'];
     $lessonDescription = $lesson['description'];
-    $videoURL = json_encode($lesson['videoUrl']);
+    $videoURL = isset($lesson['videoUrl']) ? json_encode($lesson['videoUrl']) : null;
     $coverPic = $lesson['coverPic'];
     $lecturer = $lesson['lecturer'];
     $questions = $_POST['questions'];
@@ -59,37 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once('dbConfig.php');
 
     // Store the error message
-    $error = [];
-
-    if (empty($lessonTitle)) {
-        $errors[] = "Lesson title is required.";
-    }
-
-    if (empty($lessonDescription)) {
-        $errors[] = "Lesson description is required.";
-    }
+    $error = "";
 
     if (empty($videoURL)) {
-        $errors[] = "Lesson video URL is required.";
-    }
-
-    if (empty($coverPic)) {
-        $errors[] = "Lesson cover picture is required.";
-    }
-
-    if (empty($lecturer)) {
-        $errors[] = "Lecturer is required.";
-    }
-
-    if (empty($questions)) {
-        $errors[] = "At least one question is required.";
+        $error = "Lesson video is required.";
+    } elseif (empty($questions[0]['question'])) {
+        $error = "At least one question is required.";
     } else {
         foreach ($questions as $index => $question) {
             $questionText = $question['question'];
             $options = $question['options'];
 
             if (empty($questionText)) {
-                $errors[] = "Question $index is required.";
+                $errors[] = "Question " . ($index + 1) . " is required.";
+                break;
             }
 
             $hasCorrectAnswer = false;
@@ -98,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $isAnswer = $option['is_answer'] === "true";
 
                 if (empty($optionText)) {
-                    $errors[] = "Option $optionIndex of question $index is required.";
+                    $error = "Option " . ($optionIndex + 1) . " of question " . ($index + 1) . " is required.";
+                    break 2;
                 }
 
                 if ($isAnswer) {
@@ -107,25 +91,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (!$hasCorrectAnswer) {
-                $errors[] = "Correct answer is required for question $index.";
+                $error = "Correct answer is required for question " . ($index+1) . ".";
+                break;
             }
         }
     }
 
-    if (empty($errors)) {
+    if (empty($error)) {
         if ($id) {
             // Update existing lesson
             $updateQuery = "UPDATE lessons SET title = '$lessonTitle', description = '$lessonDescription', videoURL = '$videoURL', coverPic = '$coverPic', lecturer = '$lecturer' WHERE id = $id";
 
             if (!mysqli_query($db, $updateQuery)) {
-                $error[] = "Error updating lesson: " . mysqli_error($db);
+                $error = "Error updating lesson: " . mysqli_error($db);
             }
         } else {
             // Insert new lesson
             $insertQuery = "INSERT INTO lessons (title, description, videoURL, coverPic, lecturer) VALUES ('$lessonTitle', '$lessonDescription', '$videoURL', '$coverPic', '$lecturer')";
 
             if (!mysqli_query($db, $insertQuery)) {
-                $error[] = "Error inserting lesson: " . mysqli_error($db);
+                $error = "Error inserting lesson: " . mysqli_error($db);
             } else {
                 $id = mysqli_insert_id($db); // Retrieve the generated ID
             }
@@ -140,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insertQuizQuery = "INSERT INTO quiz (lesson_id) VALUES ($id)";
 
             if (!mysqli_query($db, $insertQuizQuery)) {
-                $error[] = "Error inserting quiz: " . mysqli_error($db);
+                $error = "Error inserting quiz: " . mysqli_error($db);
             } else {
                 $quizId = mysqli_insert_id($db); // Retrieve the generated ID
             }
@@ -158,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Delete options for each question
                 $deleteOptionsQuery = "DELETE FROM options WHERE question_id = $questionId";
                 if (!mysqli_query($db, $deleteOptionsQuery)) {
-                    $error[] = "Error deleting options: " . mysqli_error($db);
+                    $error = "Error deleting options: " . mysqli_error($db);
                     break; // Stop the loop if an error occurs
                 }
             }
@@ -166,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Delete questions for the quiz
             $deleteQuestionsQuery = "DELETE FROM questions WHERE quiz_id = $quizId";
             if (!mysqli_query($db, $deleteQuestionsQuery)) {
-                $error[] = "Error deleting questions: " . mysqli_error($db);
+                $error = "Error deleting questions: " . mysqli_error($db);
             }
         }
 
@@ -188,12 +173,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $insertOptionQuery = "INSERT INTO options (question_id, option_text, is_answer) VALUES ($questionId, '$optionText', $isAnswer)";
 
                     if (!mysqli_query($db, $insertOptionQuery)) {
-                        $error[] = "Error inserting option: " . mysqli_error($db);
+                        $error = "Error inserting option: " . mysqli_error($db);
                         break; // Stop the loop if an error occurs
                     }
                 }
             } else {
-                $error[] = "Error inserting question: " . mysqli_error($db);
+                $error = "Error inserting question: " . mysqli_error($db);
             }
 
             // Check if an error occurred during the iteration
@@ -202,13 +187,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        echo "Lesson updated successfully. You will be directed to the edit lesson page.";
+        echo "1";
         mysqli_close($db);
     } else {
-        // Display the error messages
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
+        // Display the error message
+        echo $error;
     }
 }
 ?>
